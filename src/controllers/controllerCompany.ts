@@ -1,8 +1,10 @@
 import { Request, Response } from "express"
-import companyCode from "../helpers/generateCompanyCode";
 const { consultProfile } = require("./controllerUserProfile");
+import companyCode from "../helpers/generateCompanyCode";
+const {getUser} = require( "../middleware/verifyToken");
+const {getDataCompany} = require( "../helpers/helperCompany");
+const {encriptPassword} = require("./helperUser")
 
-const encript = require('bcryptjs')
 const Company = require('../models/modelCompany')
 const User = require('../models/modelUser')
 
@@ -37,8 +39,8 @@ const insertCompany = async(req:Request, res:Response) =>{
                     status:500,
                     message: err.message});
             } else if(product) {
-                const salt = encript.genSaltSync();
-                user_password = encript.hashSync(user_password, salt);
+                
+                user_password = encriptPassword(user_password);
                 const data = {
                     user_name,
                     user_password,
@@ -70,10 +72,9 @@ const insertCompany = async(req:Request, res:Response) =>{
 
 const getCompanyUser = async(req:Request, res:Response) =>{
 
-    const {com_id, _id } = req.body.user;
-    const query = req.query;
+    const {com_id, _id } = getUser();
     const {user_id} = req.query;
-    console.log(query, com_id);
+    console.log( com_id);
     
     try {
         let users:any;
@@ -84,14 +85,10 @@ const getCompanyUser = async(req:Request, res:Response) =>{
         }
         if (users){
 
-            return res.json({
-                status:200,
-                message:users})
+            return res.json({status:200, message:users})
         }
         
-        return res.json({
-            status:602,
-            message:"usuario de compañia no existe"})
+        return res.json({status:602, message:"usuario de compañia no existe"})
     } catch (error:any) {
         console.log(error)
         return res.json({
@@ -101,7 +98,7 @@ const getCompanyUser = async(req:Request, res:Response) =>{
 }
 
 const generateCompanyCode = async(req:Request, res:Response) =>{
-    const {com_id} = req.body.user;
+    const {com_id} = getUser();
     try {
         const company = await Company.findById({_id:com_id, com_status:true});
         if (!company){
@@ -131,7 +128,8 @@ const generateCompanyCode = async(req:Request, res:Response) =>{
 }
 
 const deleteCompanyUser = async(req:Request, res:Response) =>{
-    let {ids, user} = req.body;
+    let {ids} = req.body;
+    const user = getUser();
     console.log("eliminar",ids)
     console.log(user)
     try {
@@ -172,27 +170,13 @@ const deleteCompanyUser = async(req:Request, res:Response) =>{
 
 
 const updateCompanyUser = async(req:Request, res:Response) => {
-    const {user, user_password} = req.body;
+    let data = req.body;
     const {user_id} = req.query;
-    console.log("daa",user_password);
+    
     try {
-        // console.log(data, user_id)
-        // for (const key in data) {
-        //     //console.log(data[key])
-        //     if(key == "pro_name"){
-        //         const idProfile = await consultProfile(data[key]);
-        //         if (idProfile == null){
-        //             return res.json({
-        //                 status:800,
-        //                 message:"perfil de usuario no existe"})
-        //         }
-        //         data[key] = idProfile;
-        //     }
-        // }
-        
-        const salt = encript.genSaltSync();
-        let password = encript.hashSync(user_password, salt);
-        const updateUser = await User.findOneAndUpdate({_id:user_id, user_status:true}, {$set:{user_password:password}}, {new:true});
+        data = await getDataCompany(req, res, data);
+        console.log("data compme", data)
+        const updateUser = await User.findOneAndUpdate({_id:user_id, user_status:true}, {$set:data}, {new:true});
         if (!updateUser){
             return res.json({
                 status:602,

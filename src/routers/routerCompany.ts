@@ -1,5 +1,5 @@
 
-import verifiyJWT from "../middleware/verifyToken";
+const {verifiyJWT} = require( "../middleware/verifyToken");
 const {validRol, 
     validCompanyName,
     validUserName,

@@ -1,5 +1,6 @@
 const { getCategories, deletecategory, insertCategory } = require( "../controllers/controllerCategory");
-import verifiyJWT from "../middleware/verifyToken";
+const {verifiyJWT} = require( "../middleware/verifyToken");
+
 
 const {Router} = require('express');
 

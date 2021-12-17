@@ -1,4 +1,4 @@
-import verifiyJWT from "../middleware/verifyToken";
+const {verifiyJWT} = require( "../middleware/verifyToken");
 const {validRol} = require( "../middleware/validateFields");
 const {insertProfile, getProfiles} = require('../controllers/controllerUserProfile')
 

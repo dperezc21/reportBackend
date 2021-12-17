@@ -6,7 +6,8 @@ const { insertReport,
         deleteReportByCode 
     } = require("../controllers/controllerReport");
 import validRol from "../middleware/validateFields";
-import verifiyJWT from "../middleware/verifyToken";
+const {verifiyJWT} = require( "../middleware/verifyToken");
+
 
 const {Router} = require('express');
 
