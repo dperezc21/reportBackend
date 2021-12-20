@@ -28,8 +28,15 @@ const modelReport = Schema({
         type: String,
         required: true,
     },
+    longitude:{
+        type:Number
+    },
+    latitude:{
+        type:Number
+    },
     rep_create_date:{
         type: Date,
+        default:Date.now
     },
     rep_status:{
         type: Boolean,

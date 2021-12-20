@@ -24,7 +24,6 @@ class JWT {
             if (!user){
                 return res.json({status:401,message:'access invalid'});
             }
-            req.body.user = user;
             this.user = user;
             console.log("body",req.body);
             next();

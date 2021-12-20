@@ -1,4 +1,6 @@
-const { getCategories, deletecategory, insertCategory } = require( "../controllers/controllerCategory");
+const { getCategories,
+    deleteCategory, 
+    insertCategory } = require( "../controllers/controllerCategory");
 const {verifiyJWT} = require( "../middleware/verifyToken");
 
 
@@ -8,6 +10,6 @@ const router = Router();
 
 router.post('/insertCategory', insertCategory)
 router.get('/getCategory', getCategories);
-router.delete('/deleteCategory' , deletecategory);
+router.delete('/deleteCategory' , deleteCategory);
 
 export = router;

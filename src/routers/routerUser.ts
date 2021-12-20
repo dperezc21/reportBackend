@@ -1,8 +1,7 @@
 
-const  {loginUser}  =require( "../auth/loginUser");
-import validNumberUser from "../middleware/validNumUser";
+const validNumberUser = require("../middleware/validNumUser");
 const {validUserName, validPassword} = require( "../middleware/validateFields");
-const {insertUser} = require('../controllers/controllerUser')
+const {insertUser, loginUser} = require('../controllers/controllerUser');
 
 const {Router} = require('express');
 

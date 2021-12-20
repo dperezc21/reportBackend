@@ -22,7 +22,7 @@ const modelFile = Schema({
     },
     
     file_size:{
-        type: Number,
+        type:Number,
         default:true
     },
     file_status:{

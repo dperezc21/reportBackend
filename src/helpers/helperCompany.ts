@@ -4,15 +4,15 @@ const {encriptPassword} = require("./helperUser")
 
 class HelperCompany{
 
-    getDataCompany = async(req:Request, res:Response, data?:any) => {
+    getDataCompanyValid = async(data?:any) => {
         for (const key in data) {
             //console.log(data[key])
             if(key == "pro_name"){
                 const idProfile = await consultProfile(data[key]);
                 if (idProfile == null){
-                    return res.json({
+                    return {
                         status:800,
-                        message:"perfil de usuario no existe"})
+                        message:"perfil de usuario no existe"}
                 }
                 data[key] = idProfile;
             }
