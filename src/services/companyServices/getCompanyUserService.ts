@@ -1,10 +1,10 @@
-const {getUser} = require( "../../middleware/verifyToken");
+const {getAuthUser} = require( "../../middleware/verifyToken");
 const User = require('../../models/modelUser')
 
 
 const getCompanyUserRepository = async(query:any) =>{
 
-    const {com_id, _id } = getUser();
+    const {com_id, _id } = getAuthUser();
     const {user_id} = query;
     console.log( com_id);
     

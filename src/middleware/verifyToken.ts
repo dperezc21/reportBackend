@@ -30,7 +30,7 @@ class JWT {
         })
     }
 
-    getUser = () =>{
+    getAuthUser = () =>{
         return this.user;
     }
 

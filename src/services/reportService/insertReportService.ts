@@ -5,8 +5,8 @@ import Report from "../../models/modelReport";
 import User from "../../models/modelUser";
 import insertFilesRepository from "../fileService/insertFileService";
 
-const insertReportRepository = async(dataReport:any) =>{
-    const {cat_code, files, ...data} = dataReport;
+const insertReportRepository = async(dataReport:any) => {
+    const {cat_code, ...data} = dataReport;
     try {
         const searchUser = await User.findOne({_id:data.user_code, user_status:true});
         
@@ -42,8 +42,10 @@ const insertReportRepository = async(dataReport:any) =>{
             }
         
         });
-        const response = await insertFilesRepository(report.rep_code, files);
-        return response;
+        return {
+            status:200,
+            message:"reporte insertado"
+        };
         
     } catch (error) {
         return {

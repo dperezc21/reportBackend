@@ -1,10 +1,10 @@
 
 import companyCode from "../../helpers/generateCompanyCode";
-const {getUser} = require( "../../middleware/verifyToken");
+const {getAuthUser} = require( "../../middleware/verifyToken");
 const Company = require('../../models/modelCompany')
 
 const generateCompanyCodeRepository = async() =>{
-    const {com_id} = getUser();
+    const {com_id} = getAuthUser();
     try {
         const company = await Company.findById({_id:com_id, com_status:true});
         if (!company){

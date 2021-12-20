@@ -11,6 +11,7 @@ app.use(require('./routers/routerUser'));
 app.use(require('./routers/routerReport'));
 app.use(require('./routers/routerUserProfile'));
 app.use(require('./routers/routerCategory'));
+app.use(require('./routers/routerFile'));
 app.get('/', (req:Request, res:Response) => {
   res.send('The sedulous hyena ate the antelope!');
 });

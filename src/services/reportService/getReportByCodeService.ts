@@ -18,6 +18,7 @@ const getReportByCodeRepository = async(rep_code:any) =>{
     } catch (error) {
         console.log(error);
         return {
+            status:500,
             message:error
         }
     }

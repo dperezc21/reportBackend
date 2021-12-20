@@ -1,5 +1,35 @@
 import {  Request, Response } from "express";
 const Profile = require('../models/modelUserProfile');
+import getProfileService from "../services/profileService/getProfilesService"
+import insertProfileService from "../services/profileService/insertProfileService"
+
+class ControllerProfile {
+    getProfiles = async(req:Request, res:Response) => {
+        try {
+            const response = await getProfileService();
+            return res.json(response);
+        } catch (error) {
+            return res.json({
+                status:500,
+                message:error
+            })
+        }
+    }
+
+    insertProfile = async(req:Request, res:Response) =>{
+        const {pro_name} = req.query;
+        try {
+            const response = await insertProfileService(pro_name);
+            return res.json(response);
+        } catch (error) {
+            return res.json({
+                status:500,
+                message:error
+            })
+        }
+    }
+}
+
 
 const consultProfile = async(pro_name:string) =>{
     try {
@@ -14,55 +44,5 @@ const consultProfile = async(pro_name:string) =>{
     }
 }
 
-const getProfiles = async(req:Request, res:Response) =>{
-    try {
-        const profiles = await Profile.find({pro_status:true});
-        if(profiles){
-            return res.json({
-                status:200,
-                message: profiles
-            })
-        }
-        
-        return res.json({
-            status:802,
-            message: "no hay perfiles de usuarios"
-        })
-    } catch (error) {
-        console.log(error);
-    }
-}
 
-const insertProfile = async( req:Request, res:Response) =>{
-    try {
-        const {pro_name} = req.query;
-        console.log(pro_name)
-        const profile = await Profile({pro_name});
-        profile.save((err:any, profileInserted:any) => {
-            if (err){
-                return res.json({
-                    status:500,
-                    message:err.message
-                });
-            }
-
-            return res.json({
-                status: 200,
-                message:"profile inserted"
-            })
-        });
-        
-    } catch (error) {
-        return res.json({
-            status: 500,
-            message: error
-        })
-    }
-}
-
-export = {
-    consultProfile,
-    insertProfile,
-    getProfiles
-}
-
+export = new ControllerProfile;

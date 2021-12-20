@@ -1,4 +1,4 @@
-import { Request, response, Response } from "express";
+import { Request, Response } from "express";
 import insertReportService from "../services/reportService/insertReportService";
 import getReportByUserCodeService from "../services/reportService/getReportByUserCodeService";
 import getReportByCodeService from "../services/reportService/getReportByCodeService";
@@ -14,8 +14,8 @@ class ControllerReport {
             return res.json(response);
         } catch (error) {
             return res.json({
-                status:500,
-                message:error
+                status: 500,
+                message: error
             })
         }
     }
@@ -26,7 +26,7 @@ class ControllerReport {
             const response = await getReportByUserCodeService(user_code);
             return res.json(response);
         } catch (error) {
-            return response.json({
+            return res.json({
                 status:500,
                 message:error
             })
@@ -37,9 +37,9 @@ class ControllerReport {
         const {rep_code} = req.query;
         try {
             const response = await getReportByCodeService(rep_code);
-            return res.json(response);  
+            return res.json(response);
         } catch (error) {
-            return response.json({
+            return res.json({
                 status:500,
                 message:error
             })
@@ -85,7 +85,5 @@ class ControllerReport {
     }
     
 }
-
-
 
 export = new ControllerReport;

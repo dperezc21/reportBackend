@@ -1,11 +1,11 @@
 
-const {getUser} = require( "../../middleware/verifyToken");
+const {getAuthUser} = require( "../../middleware/verifyToken");
 const User = require('../../models/modelUser')
 const Company = require('../../models/modelCompany')
 
 const deleteCompanyUserRepository = async(ids:[]) =>{
     
-    const user = getUser();
+    const user = getAuthUser();
     console.log("eliminar",ids)
     console.log(user)
     try {

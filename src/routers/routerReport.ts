@@ -13,7 +13,7 @@ const {Router} = require('express');
 const router = Router();
 
 router.post('/insertReport', insertReport);
-router.get('/getReportByCode', [verifiyJWT, validRol], getReportByCode);
+router.get('/getReportByCode', verifiyJWT, getReportByCode);
 router.get('/getReports',verifiyJWT, getReports);
 router.get('/getReportUserCode', verifiyJWT, getReportByUserCode);
 router.get('/getReportByDate',verifiyJWT, getReportByDate)

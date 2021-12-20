@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 const Company = require('../models/modelCompany')
-const {getUser} = require('../middleware/verifyToken')
+const {getAuthUser} = require('../middleware/verifyToken')
 
 
 const validRol = (req:Request, res:Response, next:any) =>{
-    const {pro_code} = getUser();
+    const {pro_code} = getAuthUser();
     
     const rol = pro_code["pro_name"];
     
