@@ -1,6 +1,6 @@
 import Category from '../../models/modelCategory';
 
-const deleteCategoryRepository = async (cat_name:string) => {
+const deleteCategoryRepository = async (cat_name:any) => {
     try {
         const category = await Category.findOneAndUpdate({cat_name, cat_status:true}, {cat_status:false}, {new:true});
         console.log("categoria eleimnar", cat_name)
@@ -12,7 +12,7 @@ const deleteCategoryRepository = async (cat_name:string) => {
         }
         return {
             status:200,
-            message:category
+            message:"categoria eliminada"
         }
 
     } catch (error) {

@@ -34,7 +34,7 @@ class ControllerCategory {
 
     deleteCategory = async(req: Request, res:Response) => {
         try {
-            const {cat_name} =  req.body;
+            const {cat_name} =  req.query;
             const response = await deleteCategoryService(cat_name);
             return res.json(response);
         } catch (error) {

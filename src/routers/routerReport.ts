@@ -12,10 +12,10 @@ const {Router} = require('express');
 
 const router = Router();
 
-router.post('/insertReport', insertReport);
+router.post('/insertReport',verifiyJWT, insertReport);
 router.get('/getReportByCode', verifiyJWT, getReportByCode);
 router.get('/getReports',verifiyJWT, getReports);
 router.get('/getReportUserCode', verifiyJWT, getReportByUserCode);
-router.get('/getReportByDate',verifiyJWT, getReportByDate)
+router.get('/getReportByDate',verifiyJWT, getReportByDate);
 router.delete('/deleteReportByCode',verifiyJWT, deleteReportByCode)
 export = router;

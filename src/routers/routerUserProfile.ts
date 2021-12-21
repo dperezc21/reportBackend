@@ -5,7 +5,7 @@ const {insertProfile, getProfiles} = require('../controllers/controllerUserProfi
 const {Router} = require('express');
 
 const router = Router();
-router.post('/insertUserProfile', insertProfile);
-router.get('/getProfiles', getProfiles)
+router.post('/insertUserProfile', [verifiyJWT, validRol], insertProfile);
+router.get('/getProfiles',verifiyJWT, getProfiles);
 
 export = router;

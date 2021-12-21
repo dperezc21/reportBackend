@@ -2,20 +2,12 @@
 
 import modelCategory from "../../models/modelCategory";
 import Report from "../../models/modelReport";
-import User from "../../models/modelUser";
-import insertFilesRepository from "../fileService/insertFileService";
+const {getAuthUser} = require( "../../middleware/verifyToken");
 
 const insertReportRepository = async(dataReport:any) => {
     const {cat_code, ...data} = dataReport;
     try {
-        const searchUser = await User.findOne({_id:data.user_code, user_status:true});
-        
-        if(!searchUser){
-            return {
-                status: 602,
-                message:"usuario no existe"
-            }
-        }
+        const {_id } = getAuthUser();
 
         const searchCategory = await modelCategory.findById({_id:cat_code, cat_status:true});
         if (!searchCategory){
@@ -24,15 +16,9 @@ const insertReportRepository = async(dataReport:any) => {
                 message:"categoria no existe"
             }
         }
-
-        const searchReport = await Report.findOne({rep_code:data.rep_code, rep_status:true});
-        if(searchReport){
-            return {
-                status:806,
-                message:"codigo de reporte existe en base de datos"
-            }
-        }
+       
         data.cat_code = searchCategory._id;
+        data.user_code = _id;
         const report = new Report(data);
         report.save((error:any) =>{
             if (error){

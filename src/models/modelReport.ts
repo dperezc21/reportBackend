@@ -28,11 +28,14 @@ const modelReport = Schema({
         type: String,
         required: true,
     },
-    longitude:{
-        type:Number
-    },
-    latitude:{
-        type:Number
+    // longitude:{
+    //     type:Number
+    // },
+    // latitude:{
+    //     type:Number
+    // },
+    coordinate:{
+        type: JSON
     },
     rep_create_date:{
         type: Date,

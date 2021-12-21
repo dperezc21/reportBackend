@@ -25,7 +25,7 @@ const getReportByUserCodeRepository = async(user_code:any) => {
         for (let report of reports){
             console.log(report.rep_code)
             //let archivos = await File.find({rep_code:report.rep_code, file_status:true});
-            const archivos= await File.find({rep_code:report.rep_code, file_status:true});
+            const archivos= await File.find({rep_code:report.rep_code});
             console.log(archivos)
             list_reports.push({report, archivos});
         }

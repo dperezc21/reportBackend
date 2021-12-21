@@ -13,7 +13,8 @@ app.use(require('./routers/routerUserProfile'));
 app.use(require('./routers/routerCategory'));
 app.use(require('./routers/routerFile'));
 app.get('/', (req:Request, res:Response) => {
-  res.send('The sedulous hyena ate the antelope!');
+  res.send('Bienvenida');
 });
+
 
 app.listen(app.get('port'), () =>console.log(`server is listening on ${app.get('port')}`));

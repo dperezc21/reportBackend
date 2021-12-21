@@ -1,11 +1,12 @@
 
-
+const {getAuthUser} = require( "../../middleware/verifyToken");
 import Report from "../../models/modelReport";
 
 const deleteReportByCodeRepository = async(rep_code:any) =>{
 
     try {
-        const report = await Report.findOneAndUpdate({rep_code, rep_status:true}, {rep_status:false}, {new:true});
+        const {_id } = getAuthUser();
+        const report = await Report.findOneAndUpdate({user_code:_id, rep_code, rep_status:true}, {rep_status:false}, {new:true});
     
         console.log(report)
         if(!report) {
