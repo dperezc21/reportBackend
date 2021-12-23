@@ -1,25 +1,33 @@
 import File from "../../models/modelFile";
 import Report from "../../models/modelReport";
+import modelUser from "../../models/modelUser";
 const {getAuthUser} = require( "../../middleware/verifyToken");
 
 const getReportsRepository = async() =>{
     
     try {
-        const {_id } = getAuthUser();
-        const reports = await Report.find({user_code:_id, rep_status:true}).limit(10);
+        console.log(getAuthUser())
+        const {_id, pro_code, com_id } = getAuthUser();
+        let reports:any =undefined;
+        if (pro_code.pro_name == "admin"){
+            reports = await getReportsAdmin(com_id);
+        }else{
+
+            reports = await Report.find({user_code:_id, rep_status:true})
+                                  .populate('cat_code', ['cat_name'])
+                                  .limit(10);
+        }
         if(!reports){
             return {
                 status:805,
-                message:"reporte no existe"
+                message:"no existen reportes"
             }
         }
-        // console.log(reports)
+        console.log(reports)
         let list_reports:any = []
         
         for (let report of reports){
-            console.log(report.rep_code)
             let archivos = await File.find({rep_code:report.rep_code});
-            console.log(archivos)
             list_reports.push({report, archivos});
         }
             
@@ -35,6 +43,23 @@ const getReportsRepository = async() =>{
         }
     }
 
+}
+
+
+const getReportsAdmin = async(com_id:Number) => {
+    try {
+        const users = await modelUser.find({com_id, user_status:true});
+        // console.log(users);
+        const ids_user = users.map((datos:any) => {
+            return datos._id;
+        })
+        console.log(ids_user);
+        return await Report.find({user_code:ids_user, rep_status:true})
+                           .populate('user_code',['user_name', 'pro_code'])
+                           .populate('cat_code', ['cat_name']);
+    } catch (error) {
+        
+    }
 }
 
 export = getReportsRepository;

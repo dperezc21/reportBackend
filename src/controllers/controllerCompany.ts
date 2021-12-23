@@ -65,10 +65,10 @@ class ControllerCompany {
 
     updateCompanyUser = async(req:Request, res:Response) =>{
         let data = req.body;
-        const {user_id} = req.query;
+        const query = req.query;
 
         try {
-            const response = await updateCompanyUserRepository(data, user_id);
+            const response = await updateCompanyUserRepository(query);
             return res.json(response);
         } catch (error) {
             return res.json({

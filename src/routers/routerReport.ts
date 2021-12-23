@@ -5,7 +5,7 @@ const { insertReport,
         getReportByDate,
         deleteReportByCode 
     } = require("../controllers/controllerReport");
-import validRol from "../middleware/validateFields";
+const {validRol} =require("../middleware/validateFields");
 const {verifiyJWT} = require( "../middleware/verifyToken");
 
 const {Router} = require('express');
@@ -17,5 +17,5 @@ router.get('/getReportByCode', verifiyJWT, getReportByCode);
 router.get('/getReports',verifiyJWT, getReports);
 router.get('/getReportUserCode', verifiyJWT, getReportByUserCode);
 router.get('/getReportByDate',verifiyJWT, getReportByDate);
-router.delete('/deleteReportByCode',verifiyJWT, deleteReportByCode)
+router.delete('/deleteReportByCode',[verifiyJWT, validRol], deleteReportByCode)
 export = router;

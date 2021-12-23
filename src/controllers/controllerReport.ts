@@ -72,9 +72,9 @@ class ControllerReport {
     }
 
     deleteReportByCode = async(req:Request, res:Response) =>{ 
-        const {rep_code} = req.query;
+        const {ids} = req.body;
         try {
-            const response = await deleteReportByCodeService(rep_code);
+            const response = await deleteReportByCodeService(ids);
             return res.json(response);
         } catch (error) {
             return res.json({
