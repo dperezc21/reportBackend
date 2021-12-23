@@ -1,15 +1,15 @@
 
 
-const routerCompnay = require('./routers/routerCompany');
-const routerUser = require('./routers/routerUser');
-const routerReport = require('./routers/routerReport');
-const routerProfile = require('./routers/routerUserProfile');
-const routerCategory = require('./routers/routerCategory');
-const routerFile = require('./routers/routerFile');
+const routerCompany = require('./routerCompany');
+const routerUser = require('./routerUser');
+const routerReport = require('./routerReport');
+const routerProfile = require('./routerUserProfile');
+const routerCategory = require('./routerCategory');
+const routerFile = require('./routerFile');
 
 export = {
     routerCategory,
-    routerCompnay,
+    routerCompany,
     routerFile,
     routerProfile,
     routerReport,

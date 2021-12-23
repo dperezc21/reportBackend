@@ -25,6 +25,7 @@ const deleteReportByCodeRepository = async(ids:[]) =>{
             status:805, 
             message:"reporte(s) no existen"
         }
+        
     } catch (error) {
         return {
             status:500,

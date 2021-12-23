@@ -37,7 +37,7 @@ const getReportByUserCodeRepository = async(user_code:any) => {
             list_reports
         }
     } catch (error) {
-        console.log(error);
+        console.log(error); 
         return {
             status:500,
             message:error

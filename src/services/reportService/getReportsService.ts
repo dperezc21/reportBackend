@@ -6,7 +6,6 @@ const {getAuthUser} = require( "../../middleware/verifyToken");
 const getReportsRepository = async() =>{
     
     try {
-        console.log(getAuthUser())
         const {_id, pro_code, com_id } = getAuthUser();
         let reports:any =undefined;
         if (pro_code.pro_name == "admin"){
@@ -23,7 +22,7 @@ const getReportsRepository = async() =>{
                 message:"no existen reportes"
             }
         }
-        console.log(reports)
+        
         let list_reports:any = []
         
         for (let report of reports){
@@ -49,16 +48,18 @@ const getReportsRepository = async() =>{
 const getReportsAdmin = async(com_id:Number) => {
     try {
         const users = await modelUser.find({com_id, user_status:true});
-        // console.log(users);
+        
         const ids_user = users.map((datos:any) => {
             return datos._id;
         })
-        console.log(ids_user);
         return await Report.find({user_code:ids_user, rep_status:true})
                            .populate('user_code',['user_name', 'pro_code'])
                            .populate('cat_code', ['cat_name']);
     } catch (error) {
-        
+        return {
+            status:500,
+            message:error
+        }
     }
 }
 

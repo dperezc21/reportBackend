@@ -43,7 +43,7 @@ const modelReport = Schema({
 
 modelReport.plugin(autoIncrement.plugin, {model:'report', startAt:1});
 modelReport.methods.toJSON = function(){
-    const {__v, _id, rep_status,  user_code, cat_code, ...report} = this.toObject();
+    const {__v, _id, rep_status, user_code, cat_code, ...report} = this.toObject();
     report.user = user_code;
     report.category = cat_code;
     return report;

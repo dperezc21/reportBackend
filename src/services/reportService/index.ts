@@ -1,11 +1,9 @@
-
-
-const insertReportService = require( "../services/reportService/insertReportService");
-const getReportByUserCodeService = require( "../services/reportService/getReportByUserCodeService");
-const getReportByCodeService = require( "../services/reportService/getReportByCodeService");
-const getReportsService = require( "../services/reportService/getReportsService");
-const getReportByDateService = require( "../services/reportService/getReportByDateService");
-const deleteReportByCodeService = require( "../services/reportService/deleteReportByCodeService");
+const insertReportService = require( "./insertReportService");
+const getReportByUserCodeService = require( "./getReportByUserCodeService");
+const getReportByCodeService = require( "./getReportByCodeService");
+const getReportsService = require( "./getReportsService");
+const getReportByDateService = require( "./getReportByDateService");
+const deleteReportByCodeService = require( "./deleteReportByCodeService");
 
 export = {
     insertReportService,
