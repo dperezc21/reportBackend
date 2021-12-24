@@ -13,7 +13,7 @@ const getReportByDateRepository = async(dataReport:any) =>{
                         {rep_create_date:start_date}
                     ],
                     rep_status:true
-        }).populate('cat_code', ['cat_name'])
+        }).populate('cat_code', ['cat_name']);
 
         if(!reports){
             return {

@@ -17,7 +17,7 @@ const insertReportRepository = async(dataReport:any) => {
             }
         }
        
-        data.cat_code = searchCategory._id;
+        data.cat_code = searchCategory?._id;
         data.user_code = _id;
         const report = new Report(data);
         report.save((error:any) =>{

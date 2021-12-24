@@ -1,10 +1,9 @@
 import { Request, Response } from "express"
-const {
-    getCompanyUserRepository,
-    generateCompanyCode,
-    deleteCompanyUserRepository,
-    insertCompanyRepository,
-    updateCompanyUserRepository} = require('../services/companyServices')
+const getCompanyUserRepository = require( "../services/companyServices/getCompanyUserService");
+const generateCompanyCode = require( "../services/companyServices/generateCompanyCodeService");
+const deleteCompanyUserRepository = require( "../services/companyServices/deleteCompanyUserService");
+const insertCompanyRepository =require( "../services/companyServices/insertCompanyService");
+const updateCompanyUserRepository =require( "../services/companyServices/updateCompanyUserService");
 
 class ControllerCompany {
     insertCompany = async(req:Request, res:Response) =>{
@@ -12,12 +11,14 @@ class ControllerCompany {
         try {
             const response =await insertCompanyRepository(data);
             return res.json(response);
+            
         } catch (error) {
             return res.json({
                 status:500,
                 message:error
             })
         }
+        
     }
 
     getCompanyUser = async(req:Request, res:Response) =>{
@@ -25,6 +26,7 @@ class ControllerCompany {
         try {
             const response = await getCompanyUserRepository(query);
             return res.json(response);
+            
         } catch (error) {
             return res.json({
                 status:500,
@@ -34,6 +36,7 @@ class ControllerCompany {
     }
 
     generateCode = async(req:Request, res:Response) =>{
+
         try {
             const response = await generateCompanyCode();
             return res.json(response);
@@ -43,6 +46,7 @@ class ControllerCompany {
                 message:error
             })
         }
+
     }
 
     deleteCompanyUser = async(req:Request, res:Response) => {
@@ -56,13 +60,15 @@ class ControllerCompany {
                 message:error
             })
         }
+
     } 
 
     updateCompanyUser = async(req:Request, res:Response) =>{
         let data = req.body;
-        const query = req.query;
+        const {user_id} = req.query;
+
         try {
-            const response = await updateCompanyUserRepository(query);
+            const response = await updateCompanyUserRepository({user_id, data});
             return res.json(response);
         } catch (error) {
             return res.json({
@@ -74,4 +80,6 @@ class ControllerCompany {
     
 }
 
-export = new ControllerCompany();    
+
+export = new ControllerCompany();
+    

@@ -20,14 +20,11 @@ class JWT {
                     message:err.message});
             }
             const {uid, user_name} = payload;
-            const user = await User.findOne({_id:uid, user_name})
-                                   .populate('pro_code')
-                                   
+            const user = await User.findOne({_id:uid, user_name}).populate('pro_code');
             if (!user){
                 return res.json({status:401,message:'access invalid'});
             }
             this.user = user;
-          
             console.log("body",req.body);
             next();
         })

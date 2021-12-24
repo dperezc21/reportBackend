@@ -5,10 +5,10 @@ import File from "../../models/modelFile";
 const insertFilesRepository = async(dataFiles:any) =>{
     const {rep_code, files} = dataFiles;
     try {
-        const report = await Report.findOne({rep_code, rep_status:true});
+        const report = await Report.findOne({rep_code});
         if(!report){
             return {
-                status:805,
+                status:2,
                 message:"reporte no existe"
             }
         }

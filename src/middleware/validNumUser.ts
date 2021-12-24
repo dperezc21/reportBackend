@@ -14,7 +14,7 @@ const validNumberUser = async(req:Request, res:Response, next:any) => {
         const user =await modelUser.find({com_id:company._id,user_status:true}).count();
         console.log(user)
         if(user >= 6){
-            return res.json({status: 705,message:"numero de usuarios exedidos"});
+            return res.json({status:705,message:"numero de usuarios exedidos"});
         }    
         next();
     } catch (error) {

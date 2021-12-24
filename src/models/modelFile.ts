@@ -25,6 +25,10 @@ const modelFile = Schema({
         type:Number,
         default:true
     },
+    file_status:{
+        type:Boolean,
+        default:false
+    },
     file_type:{
         type: String,
     }
@@ -32,7 +36,7 @@ const modelFile = Schema({
 
 modelFile.plugin(autoIncrement.plugin, {model:'file', startAt:1});
 modelFile.methods.toJSON = function(){
-    const {__v, _id, ...file} = this.toObject();
+    const {__v, _id, file_status, ...file} = this.toObject();
     file.file_code = _id;
     return file;
 }

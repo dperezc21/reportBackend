@@ -1,3 +1,4 @@
+import { Request, Response } from "express"
 const generate_token = require("../../helpers/createToken");
 const encript = require('bcryptjs')
 const User = require('../../models/modelUser')
@@ -23,7 +24,6 @@ const loginUserRepository = async(data:any) =>{
                                    .populate('pro_code')
                                    .populate('com_id',['com_name', 'com_code']);
             }
-            
             const validPassword = encript.compareSync(data.user_password, user.user_password);
             if (!validPassword){
                 return {status:424, message:'contraseña incorrecta'

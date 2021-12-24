@@ -1,13 +1,11 @@
 import { Request, Response } from "express";
+import insertReportService from "../services/reportService/insertReportService";
+import getReportByUserCodeService from "../services/reportService/getReportByUserCodeService";
+import getReportByCodeService from "../services/reportService/getReportByCodeService";
+import getReportsService from "../services/reportService/getReportsService";
+import getReportByDateService from "../services/reportService/getReportByDateService";
+import deleteReportByCodeService from "../services/reportService/deleteReportByCodeService";
 
-const {
-    insertReportService,
-    getReportByUserCodeService,
-    getReportByCodeService,
-    getReportsService,
-    getReportByDateService,
-    deleteReportByCodeService
-} = require('../services/reportService')
 class ControllerReport {
     insertReport = async(req:Request, res:Response) => {
         const body = req.body;

@@ -6,8 +6,6 @@ connectionToDB();
 app.set('port', process.env.PORT || 3000);
 app.use(express.json())
 app.use(cors());
-// const routers=require('./routers');
-// app.use(routers.routerReport);
 app.use(require('./routers/routerCompany'));
 app.use(require('./routers/routerUser'));
 app.use(require('./routers/routerReport'));
