@@ -14,7 +14,6 @@ const getReportByUserCodeRepository = async(user_code:any) => {
 
         const reports = await Report.find({user_code, rep_status:true})
                                     .populate('cat_code', ['cat_name'])
-                                    .limit(10);
         if(!reports){
             return {
                 status:805,

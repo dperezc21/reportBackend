@@ -1,6 +1,6 @@
-const { consultProfile } = require("../../controllers/controllerUserProfile");
 import companyCode from "../../helpers/generateCompanyCode";
 const {encriptPassword} = require("../../helpers/helperUser")
+const UserProfile = require('../../models/modelUserProfile');
 
 const Company = require('../../models/modelCompany')
 const User = require('../../models/modelUser')
@@ -12,21 +12,14 @@ const insertCompanyRepository = async(dataCampany: any) =>{
     let com_code = await companyCode(dataCampany.com_name);
     dataCampany.com_code = com_code; 
     
-    let {user_name, user_password,  ...companyData} = dataCampany
+    let {user_name, user_password, pro_name="admin", ...companyData} = dataCampany
 
     try { 
         const company = await Company(companyData);
-        const searchUser = await User.findOne({user_name, user_status:true})
-        if(searchUser){
-            return {
-                status:601,
-                message:"usuario de compañia ya existe"
-            };
-        }
-        const pro_name="admin";
-        const idProfile = await consultProfile(pro_name);
-
-        if (idProfile == null){
+        
+        const profile = await UserProfile.findOne({pro_name, pro_status:true});
+        const idProfile = profile._id;
+        if (!idProfile){
             return {
                 status:800,
                 message:"perfil de usuario no existe"

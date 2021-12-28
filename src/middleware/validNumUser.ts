@@ -12,10 +12,11 @@ const validNumberUser = async(req:Request, res:Response, next:any) => {
                 message:"codigo de compañia invalido"});
         }
         const user =await modelUser.find({com_id:company._id,user_status:true}).count();
-        console.log(user)
+        //console.log("Numero de usuarios",user)
         if(user >= 6){
             return res.json({status:705,message:"numero de usuarios exedidos"});
-        }    
+        } 
+        req.body.com_id = company._id
         next();
     } catch (error) {
         console.log(error)

@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
+const getCompanyUserRepository = require( "../services/userServices/getCompanyUserService");
+const deleteCompanyUserRepository = require( "../services/userServices/deleteCompanyUserService");
+const updateCompanyUserRepository =require( "../services/userServices/updateCompanyUserService");
 const insertUserRepository = require('../services/userServices/insertUserService');
 const login = require('../services/userServices/loginUserService');
+
 class ControllerUser{
     
     insertUser = async(req:Request, res:Response) => {
@@ -30,9 +34,50 @@ class ControllerUser{
                 message:error
             })
         }
-
-
     }
+
+    getCompanyUser = async(req:Request, res:Response) =>{
+        const query = req.query;
+        try {
+            const response = await getCompanyUserRepository(query);
+            return res.json(response);
+            
+        } catch (error) {
+            return res.json({
+                status:500,
+                message:error
+            })
+        }
+    }
+    deleteCompanyUser = async(req:Request, res:Response) => {
+        const {ids} = req.body;
+        try {
+            const response =  await deleteCompanyUserRepository(ids);
+            return res.json(response);
+        } catch (error) {
+            return res.json({
+                status:500,
+                message:error
+            })
+        }
+
+    } 
+
+    updateCompanyUser = async(req:Request, res:Response) =>{
+        let data = req.body;
+        const {user_id} = req.query;
+
+        try {
+            const response = await updateCompanyUserRepository({user_id, data});
+            return res.json(response);
+        } catch (error) {
+            return res.json({
+                status:500,
+                message:error
+            })
+        }
+    }
+
 }
 
 

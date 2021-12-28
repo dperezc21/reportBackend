@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 const Company = require('../models/modelCompany')
+const User = require('../models/modelUser');
 const {getAuthUser} = require('../middleware/verifyToken')
 
 
@@ -30,6 +31,7 @@ const validCompanyName = async(req:Request, res:Response, next:any) =>{
                 status:603,
                 message:"compañia existe en la base de datos"});
         }
+        req.body.com_name = com_name.toLowerCase();
         next();
         
     } catch (error) {
@@ -47,6 +49,17 @@ const validUserName = async(req:Request, res:Response, next:any) =>{
                 status:423,
                 message:"nombre de usuario requerido"})
         }
+
+        const searchUser = await User.findOne({user_name, user_status:true});
+        //console.log("usuario",searchUser.user_name)
+            
+        if(searchUser){
+            return res.json({
+                status:701,
+                message:"nombre de usuario ya existe"});
+        }
+        //console.log(req.body)
+        req.body.user_name = user_name.toLowerCase();
         next();
         
     } catch (error) {

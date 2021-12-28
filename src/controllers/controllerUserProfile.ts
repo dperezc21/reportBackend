@@ -1,5 +1,4 @@
 import {  Request, Response } from "express";
-const Profile = require('../models/modelUserProfile');
 import getProfileService from "../services/profileService/getProfilesService"
 import insertProfileService from "../services/profileService/insertProfileService"
 
@@ -27,20 +26,6 @@ class ControllerProfile {
                 message:error
             })
         }
-    }
-}
-
-
-const consultProfile = async(pro_name:string) =>{
-    try {
-        const profile = await Profile.findOne({pro_name, pro_status:true});
-        if(profile){
-            return profile._id;
-        }
-        
-        return null;
-    } catch (error) {
-        console.log(error);
     }
 }
 

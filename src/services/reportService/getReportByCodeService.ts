@@ -2,11 +2,9 @@ import File from "../../models/modelFile";
 import Report from "../../models/modelReport";
 
 const getReportByCodeRepository = async(rep_code:any) =>{
-    
     try {
         const report = await Report.findOne({rep_code, rep_status:true})
                                    .populate('cat_code', ['cat_name'])
-                                   .limit(10);
         if(!report){
             return {
                 status:805,
