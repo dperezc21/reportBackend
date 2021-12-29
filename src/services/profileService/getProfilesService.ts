@@ -10,7 +10,6 @@ const getProfilesRepository = async() =>{
                 message: profiles
             }
         }
-        
         return {
             status:802,
             message: "no hay perfiles de usuarios"

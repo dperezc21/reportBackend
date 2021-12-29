@@ -15,8 +15,16 @@ const insertFilesRepository = async(dataFiles:any) =>{
         for (let file of files){
             file.rep_code = rep_code;
             console.log(file)
-            const insertFile = await File(file);
-            insertFile.save()
+            try {
+                const insertFile = await File(file);
+                insertFile.save()
+                
+            } catch (error) {
+                return {
+                    status:500,
+                    message:`error al guardar el archivo ${file.file_name}`
+                }
+            }
         }
         return {
             status:200,

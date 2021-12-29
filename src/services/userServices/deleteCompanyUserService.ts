@@ -1,13 +1,14 @@
 
 const {getAuthUser} = require( "../../middleware/verifyToken");
-const User = require('../../models/modelUser')
 const Company = require('../../models/modelCompany')
+const User = require('../../models/modelUser')
 
-const deleteCompanyUserRepository = async(ids:[]) =>{
+const deleteCompanyUserRepository = async(ids:number[]) =>{
     
     const user = getAuthUser();
-    console.log("eliminar",ids)
-    console.log(user)
+    //console.log("id eliminar",ids)
+    //console.log(user)
+    
     try {
         const company = await Company.findOne({_id: user.com_id, com_status:true});
         if(!company){
@@ -15,23 +16,16 @@ const deleteCompanyUserRepository = async(ids:[]) =>{
                 status:605,
                 message:"compañia no existe"};
         }
-        let deleteUser:any = undefined;
-        let deleted:any = [];
-        if(ids){
-
-             for(let id of ids){
-                if (id != user._id){
-                    deleteUser = await User.findOneAndUpdate({_id:id, user_status:true}, {user_status:false}, {new:true});
-                    if(deleteUser) deleted.push(deleteUser.user_name);
-                    console.log(deleteUser);
-                }
-             }  
-        }
+        let deleted:any;
         
-        if (company && deleted.length>0){
+        if(ids){
+            deleted = await User.updateMany({_id:ids}, {user_status:false})
+        }
+        if (company && deleted.modifiedCount>0){
+            
             return {
                 status:200,
-                message:deleted};
+                message:`registros eliminados: ${deleted.modifiedCount}`};
         }
         return {
             status:602,
@@ -43,5 +37,28 @@ const deleteCompanyUserRepository = async(ids:[]) =>{
             message:error}
     }
 }
+
+
+// const eliminar = (ids:number[]):Promise<string[]> => {
+//     const user = getAuthUser();
+    
+//     console.log( user._id)
+//     return new Promise( (resolve:any, reject:any) => {
+//         let deleteUser: object | any = {};
+//         let deleted:string[] =[];
+//         ids.forEach(async (id: number) => {
+//             //for(const id of ids){
+//             if (id != user._id){
+                
+//                 deleteUser = await User.findOneAndUpdate({_id:id, user_status:true}, {user_status:false}, {new:true});
+//                 if(deleteUser) deleted.push(deleteUser.user_name);
+//             }
+//             //}
+//         })
+//         console.log(deleted)
+//         resolve(deleted)
+//     })
+
+// }
 
 export = deleteCompanyUserRepository;

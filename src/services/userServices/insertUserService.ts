@@ -1,10 +1,10 @@
 const User = require('../../models/modelUser');
-const Company = require('../../models/modelCompany');
 const UserProfile = require('../../models/modelUserProfile');
 const encript = require('bcryptjs');
+const {configUser} = require('../../helpers/dataConfig');
 
 const insertUserRepository = async(dataUser: any) => {
-    let {com_id, user_name, user_password, pro_name="user"} = dataUser;
+    let {com_id, user_name, user_password, pro_name=configUser.pro_name} = dataUser;
     //console.log("datos de usuario", dataUser)
     try {
         const profile = await UserProfile.findOne({pro_name, pro_status:true});
@@ -15,7 +15,7 @@ const insertUserRepository = async(dataUser: any) => {
             };
         }
 
-        const salt = encript.genSaltSync();
+        const salt: string = encript.genSaltSync();
         user_password = encript.hashSync(user_password, salt); 
         const pro_code = profile._id;
         const user = await User({com_id, user_name, user_password, pro_code});

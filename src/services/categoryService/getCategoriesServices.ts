@@ -2,7 +2,7 @@ import Category from '../../models/modelCategory';
 
 const getCategoriesService = async() => {
     try {
-        const categories = await Category.find({cat_status:true});
+        const categories: object[] = await Category.find({cat_status:true});
         console.log("categorias",categories);
         if (!categories){
             return {

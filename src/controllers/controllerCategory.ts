@@ -9,7 +9,7 @@ class ControllerCategory {
     insertCategory = async(req: Request, res:Response) =>{
         try {
             const {cat_name} = req.body;
-            const response = await insertCategoryRepositpory(cat_name);
+            const response: object = await insertCategoryRepositpory(cat_name);
             return res.json(response);
         } catch (error) {
             return res.json({
@@ -22,7 +22,7 @@ class ControllerCategory {
 
     getCategories = async(req: Request, res:Response) => {
         try {
-            const response = await getCategoriesService();
+            const response: object = await getCategoriesService();
             return res.json(response);
         } catch (error) {
             return response.json({

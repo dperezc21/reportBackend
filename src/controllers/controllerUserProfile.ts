@@ -5,7 +5,7 @@ import insertProfileService from "../services/profileService/insertProfileServic
 class ControllerProfile {
     getProfiles = async(req:Request, res:Response) => {
         try {
-            const response = await getProfileService();
+            const response: object = await getProfileService();
             return res.json(response);
         } catch (error) {
             return res.json({
@@ -18,7 +18,7 @@ class ControllerProfile {
     insertProfile = async(req:Request, res:Response) =>{
         const {pro_name} = req.query;
         try {
-            const response = await insertProfileService(pro_name);
+            const response: object = await insertProfileService(pro_name);
             return res.json(response);
         } catch (error) {
             return res.json({

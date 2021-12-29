@@ -21,17 +21,24 @@ class HelperUser{
                 }
                 data[key] = idProfile;
             }
-
             if (key =="user_password"){
-                
                 data.user_password = this.encriptPassword(data.user_password);
             }
-
             if (key == "user_name") {
                 data.user_name = data.user_name.toLowerCase();
             }
         }
         return data;
+    }
+
+    validIdsDelete = (ids:any[]) => {
+
+        ids.forEach((id:any, index:number) => {
+            if(typeof(id) != "number") {
+                ids.splice(index)
+            }
+        });
+        return ids
     }
 
 }

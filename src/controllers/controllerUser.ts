@@ -1,16 +1,18 @@
 import { Request, Response } from "express";
-const getCompanyUserRepository = require( "../services/userServices/getCompanyUserService");
-const deleteCompanyUserRepository = require( "../services/userServices/deleteCompanyUserService");
-const updateCompanyUserRepository =require( "../services/userServices/updateCompanyUserService");
-const insertUserRepository = require('../services/userServices/insertUserService');
-const login = require('../services/userServices/loginUserService');
+const {
+    getCompanyUserRepository,
+    deleteCompanyUserRepository,
+    updateCompanyUserRepository,
+    insertUserRepository,
+    login
+} = require('../services/userServices')
 
 class ControllerUser{
     
     insertUser = async(req:Request, res:Response) => {
         try {
-            let Uobject = req.body;
-            let response = await insertUserRepository(Uobject);
+            let Uobject: object = req.body;
+            let response: object = await insertUserRepository(Uobject);
             console.log("log", response)
             return res.json(response);
             
@@ -24,9 +26,9 @@ class ControllerUser{
     }
 
     loginUser = async(req:Request, res:Response) =>{
-        const data = req.body;
+        const data: object = req.body;
         try {
-            const response = await login(data);
+            const response: object = await login(data);
             return res.json(response);
         } catch (error) {
             return res.json({
@@ -37,9 +39,9 @@ class ControllerUser{
     }
 
     getCompanyUser = async(req:Request, res:Response) =>{
-        const query = req.query;
+        const query: object = req.query;
         try {
-            const response = await getCompanyUserRepository(query);
+            const response: object = await getCompanyUserRepository(query);
             return res.json(response);
             
         } catch (error) {
@@ -50,9 +52,9 @@ class ControllerUser{
         }
     }
     deleteCompanyUser = async(req:Request, res:Response) => {
-        const {ids} = req.body;
+        let {ids} = req.body;
         try {
-            const response =  await deleteCompanyUserRepository(ids);
+            const response: object =  await deleteCompanyUserRepository(ids);
             return res.json(response);
         } catch (error) {
             return res.json({
@@ -64,7 +66,7 @@ class ControllerUser{
     } 
 
     updateCompanyUser = async(req:Request, res:Response) =>{
-        let data = req.body;
+        let data: object = req.body;
         const {user_id} = req.query;
 
         try {

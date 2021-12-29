@@ -4,7 +4,7 @@ const insertCategoryRepositpory = async(cat_name:string) =>{
     try {
         console.log("nombre de categoria",cat_name);
        
-    const searchCategory = await Category.findOne({cat_name, cat_status:true});
+    const searchCategory:object = await Category.findOne({cat_name, cat_status:true});
     
     if (searchCategory){
         return {

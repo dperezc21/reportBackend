@@ -1,7 +1,7 @@
 
 const Profile = require('../../models/modelUserProfile');
 
-const consultProfileByName = async(pro_name:string) =>{
+const consultProfileByNameRepository = async(pro_name:string) =>{
     try {
         const profile = await Profile.findOne({pro_name, pro_status:true});
         if(profile){
@@ -24,4 +24,4 @@ const consultProfileByName = async(pro_name:string) =>{
 }
 
 
-export = consultProfileByName;
+export = consultProfileByNameRepository;

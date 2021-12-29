@@ -10,7 +10,7 @@ const {Router} = require('express');
 
 const router = Router();
 router.post('/insertUser',[validUserName, validPassword, validNumberUser], insertUser);
-router.post('/loginUser', [validUserName, validPassword], loginUser);
+router.post('/loginUser', validPassword, loginUser);
 router.get('/companyUser', [verifiyJWT, validRol], getCompanyUser);
 router.delete('/deleteCompanyUser', [verifiyJWT,validRol] , deleteCompanyUser);
 router.put('/updateUser',[verifiyJWT,validRol], updateCompanyUser);

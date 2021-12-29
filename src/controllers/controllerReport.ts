@@ -1,16 +1,18 @@
 import { Request, Response } from "express";
-import insertReportService from "../services/reportService/insertReportService";
-import getReportByUserCodeService from "../services/reportService/getReportByUserCodeService";
-import getReportByCodeService from "../services/reportService/getReportByCodeService";
-import getReportsService from "../services/reportService/getReportsService";
-import getReportByDateService from "../services/reportService/getReportByDateService";
-import deleteReportByCodeService from "../services/reportService/deleteReportByCodeService";
+const {
+    insertReportService,
+    getReportByUserCodeService,
+    getReportByCodeService,
+    getReportsService,
+    getReportByDateService,
+    deleteReportByCodeService
+} = require('../services/reportService')
 
 class ControllerReport {
     insertReport = async(req:Request, res:Response) => {
-        const body = req.body;
+        const body: object = req.body;
         try {
-            const response = await insertReportService(body);
+            const response: object = await insertReportService(body);
             return res.json(response);
         } catch (error) {
             return res.json({
@@ -23,7 +25,7 @@ class ControllerReport {
     getReportByUserCode = async(req:Request, res:Response) => {
         const {user_code} = req.query;
         try {
-            const response = await getReportByUserCodeService(user_code);
+            const response: object = await getReportByUserCodeService(user_code);
             return res.json(response);
         } catch (error) {
             return res.json({
@@ -36,7 +38,7 @@ class ControllerReport {
     getReportByCode = async(req:Request, res:Response) =>{
         const {rep_code} = req.query;
         try {
-            const response = await getReportByCodeService(rep_code);
+            const response: object = await getReportByCodeService(rep_code);
             return res.json(response);
         } catch (error) {
             return res.json({
@@ -48,7 +50,7 @@ class ControllerReport {
 
     getReports = async(req:Request, res:Response) =>{
         try {
-            const response = await getReportsService();
+            const response: object = await getReportsService();
             return res.json(response);
         } catch (error) {
             return res.json({
@@ -59,9 +61,9 @@ class ControllerReport {
     }
 
     getReportByDate = async(req:Request, res:Response) => {
-        const body = req.body;
+        const body: object = req.body;
         try {
-            const response = await getReportByDateService(body);
+            const response: object | undefined = await getReportByDateService(body);
             return res.json(response);
         } catch (error) {
             return res.json({
@@ -72,9 +74,9 @@ class ControllerReport {
     }
 
     deleteReportByCode = async(req:Request, res:Response) =>{ 
-        const {ids} = req.body;
+        let {ids} = req.body;
         try {
-            const response = await deleteReportByCodeService(ids);
+            const response: object = await deleteReportByCodeService(ids);
             return res.json(response);
         } catch (error) {
             return res.json({

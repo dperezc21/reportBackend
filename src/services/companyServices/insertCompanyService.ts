@@ -4,6 +4,7 @@ const UserProfile = require('../../models/modelUserProfile');
 
 const Company = require('../../models/modelCompany')
 const User = require('../../models/modelUser')
+const {configCompany} = require('../../helpers/dataConfig');
 
 
 const insertCompanyRepository = async(dataCampany: any) =>{
@@ -12,7 +13,7 @@ const insertCompanyRepository = async(dataCampany: any) =>{
     let com_code = await companyCode(dataCampany.com_name);
     dataCampany.com_code = com_code; 
     
-    let {user_name, user_password, pro_name="admin", ...companyData} = dataCampany
+    let {user_name, user_password, pro_name=configCompany.pro_name, ...companyData} = dataCampany
 
     try { 
         const company = await Company(companyData);

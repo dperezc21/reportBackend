@@ -15,7 +15,7 @@ const generateCompanyCodeRepository = async() =>{
         }
         const {com_name} = company; 
         console.log(company);
-        const code = await companyCode(com_name);
+        const code: string | Error = await companyCode(com_name);
         await Company.findByIdAndUpdate({
             _id:com_id, com_status:true
         }, 

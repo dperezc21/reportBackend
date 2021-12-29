@@ -2,7 +2,7 @@ import Category from '../../models/modelCategory';
 
 const deleteCategoryRepository = async (cat_name:any) => {
     try {
-        const category = await Category.findOneAndUpdate({cat_name, cat_status:true}, {cat_status:false}, {new:true});
+        const category: object = await Category.findOneAndUpdate({cat_name, cat_status:true}, {cat_status:false}, {new:true});
         console.log("categoria eleimnar", cat_name)
         if (!category){
             return {

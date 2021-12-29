@@ -9,7 +9,7 @@ const getCompanyUserRepository = async(query:any) =>{
     console.log( com_id);
     
     try {
-        let users:any;
+        let users:object | object[];
         if(!user_id){
             users = await User.find({com_id, _id:{$ne:_id},user_status:true}).populate('pro_code');
         }else{

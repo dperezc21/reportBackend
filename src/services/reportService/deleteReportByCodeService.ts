@@ -1,24 +1,23 @@
 
-const {getAuthUser} = require( "../../middleware/verifyToken");
 import Report from "../../models/modelReport";
 
-const deleteReportByCodeRepository = async(ids:[]) =>{
+const deleteReportByCodeRepository = async(ids:string[]) =>{
 
     try {
-        let report:any= undefined;
-        let deleted:any = 0;
+        let reportDeleted:any={};
         if(ids){
-             for(let id of ids){
-                report = await Report.findOneAndUpdate({rep_code:id, rep_status:true}, {rep_status:false}, {new:true});
-                if(report) deleted+=1;
-                console.log(deleted);
-             }  
+            //  for(let id of ids){
+            //     report = await Report.findOneAndUpdate({rep_code:id, rep_status:true}, {rep_status:false}, {new:true});
+            //     if(report) deleted+=1;
+            //     console.log(deleted);
+            //  } 
+            reportDeleted = await Report.updateMany({rep_code:ids}, {rep_status:false}) 
         }
-        console.log(report)
-        if(deleted > 0) {
+        console.log(reportDeleted)
+        if(reportDeleted.modifiedCount > 0) {
             return {
                 status:200,
-                message:"reporte(s) eliminados"
+                message:`reporte(s) eliminados ${reportDeleted.modifiedCount}`
             };
         }
         return {
