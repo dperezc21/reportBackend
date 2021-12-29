@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 const {
-    getCompanyUserRepository,
-    deleteCompanyUserRepository,
-    updateCompanyUserRepository,
-    insertUserRepository,
+    deleteCompanyUserService,
+    getCompanyUserService,
+    updateCompanyUserService,
+    insertUserService,
     login
 } = require('../services/userServices')
 
@@ -12,7 +12,7 @@ class ControllerUser{
     insertUser = async(req:Request, res:Response) => {
         try {
             let Uobject: object = req.body;
-            let response: object = await insertUserRepository(Uobject);
+            let response: object = await insertUserService(Uobject);
             console.log("log", response)
             return res.json(response);
             
@@ -41,7 +41,7 @@ class ControllerUser{
     getCompanyUser = async(req:Request, res:Response) =>{
         const query: object = req.query;
         try {
-            const response: object = await getCompanyUserRepository(query);
+            const response: object = await getCompanyUserService(query);
             return res.json(response);
             
         } catch (error) {
@@ -54,7 +54,7 @@ class ControllerUser{
     deleteCompanyUser = async(req:Request, res:Response) => {
         let {ids} = req.body;
         try {
-            const response: object =  await deleteCompanyUserRepository(ids);
+            const response: object =  await deleteCompanyUserService(ids);
             return res.json(response);
         } catch (error) {
             return res.json({
@@ -70,7 +70,7 @@ class ControllerUser{
         const {user_id} = req.query;
 
         try {
-            const response = await updateCompanyUserRepository({user_id, data});
+            const response = await updateCompanyUserService({user_id, data});
             return res.json(response);
         } catch (error) {
             return res.json({

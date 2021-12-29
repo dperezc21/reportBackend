@@ -4,7 +4,9 @@ const encript = require('bcryptjs');
 const {configUser} = require('../../helpers/dataConfig');
 
 const insertUserRepository = async(dataUser: any) => {
-    let {com_id, user_name, user_password, pro_name=configUser.pro_name} = dataUser;
+    console.log(dataUser)
+    let {com_id, user_name, user_password, pro_name="user"} = dataUser;
+    
     //console.log("datos de usuario", dataUser)
     try {
         const profile = await UserProfile.findOne({pro_name, pro_status:true});
