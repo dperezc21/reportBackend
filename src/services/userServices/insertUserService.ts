@@ -5,7 +5,7 @@ const {configUser} = require('../../helpers/dataConfig');
 
 const insertUserRepository = async(dataUser: any) => {
     console.log(dataUser)
-    let {com_id, user_name, user_password, pro_name="user"} = dataUser;
+    let {com_id, user_name, user_password, pro_name=configUser.pro_name} = dataUser;
     
     //console.log("datos de usuario", dataUser)
     try {
