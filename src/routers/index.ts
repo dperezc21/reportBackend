@@ -1,11 +1,11 @@
 
 
-const routerCompnay = require('./routers/routerCompany');
-const routerUser = require('./routers/routerUser');
-const routerReport = require('./routers/routerReport');
-const routerProfile = require('./routers/routerUserProfile');
-const routerCategory = require('./routers/routerCategory');
-const routerFile = require('./routers/routerFile');
+import routerCompnay from './routerCompany';
+import routerUser from'./routerUser';
+import routerReport from'./routerReport';
+import routerProfile from'./routerUserProfile';
+import routerCategory from'./routerCategory';
+import routerFile from'./routerFile';
 
 export = {
     routerCategory,
