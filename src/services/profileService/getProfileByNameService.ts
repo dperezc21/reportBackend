@@ -1,9 +1,10 @@
+import UserProfileInterface from "../../interfaces/userProfileInterface";
 
 const Profile = require('../../models/modelUserProfile');
 
 const consultProfileByNameRepository = async(pro_name:string) =>{
     try {
-        const profile = await Profile.findOne({pro_name, pro_status:true});
+        const profile: UserProfileInterface = await Profile.findOne({pro_name, pro_status:true});
         if(profile){
             return {
                 status:200,

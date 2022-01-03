@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
+import CompanyInterface from "../interfaces/companyInterface";
 import modelCompany from "../models/modelCompany";
 import modelUser from "../models/modelUser";
 
 const validNumberUser = async(req:Request, res:Response, next:any) => {
     try {
         const {com_code} = req.body;
-        const company = await modelCompany.findOne({com_code,user_status:true});
+        const company: CompanyInterface = await modelCompany.findOne({com_code,com_status:true});
         if(!company){
             return res.json({
                 status:604,

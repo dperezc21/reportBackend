@@ -1,11 +1,13 @@
 import Report from "../../models/modelReport";
 import File from "../../models/modelFile";
+import ReportInterface from "../../interfaces/reportInterface";
+import FileInterface from "../../interfaces/fileInterface";
 
 
 const insertFilesRepository = async(dataFiles:any) =>{
     const {rep_code, files} = dataFiles;
     try {
-        const report = await Report.findOne({rep_code});
+        const report: ReportInterface = await Report.findOne({rep_code});
         if(!report){
             return {
                 status:2,
@@ -16,7 +18,7 @@ const insertFilesRepository = async(dataFiles:any) =>{
             file.rep_code = rep_code;
             console.log(file)
             try {
-                const insertFile = await File(file);
+                const insertFile: FileInterface = await File(file);
                 insertFile.save()
                 
             } catch (error) {

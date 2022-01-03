@@ -1,9 +1,11 @@
+import UserProfileInterface from "../../interfaces/userProfileInterface";
+
 const Profile = require('../../models/modelUserProfile');
 
 
 const getProfilesRepository = async() =>{
     try {
-        const profiles = await Profile.find({pro_status:true});
+        const profiles:UserProfileInterface[] = await Profile.find({pro_status:true});
         if(profiles){
             return {
                 status:200,

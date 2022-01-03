@@ -1,3 +1,5 @@
+import UserProfileInterface from "../../interfaces/userProfileInterface";
+
 const Profile = require('../../models/modelUserProfile');
 
 
@@ -5,7 +7,7 @@ const insertProfileRepository = async( pro_name:any) =>{
     try {
         
         console.log(pro_name)
-        const profile = await Profile({pro_name});
+        const profile: UserProfileInterface = await Profile({pro_name});
         profile.save((err:any, profileInserted:any) => {
             if (err){
                 return {

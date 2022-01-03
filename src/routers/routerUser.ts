@@ -1,7 +1,11 @@
 
 const validNumberUser = require("../middleware/validNumUser");
 const {validUserName, validPassword, validRol} = require( "../middleware/validateFields");
-const {insertUser, loginUser, getCompanyUser, deleteCompanyUser,updateCompanyUser} = require('../controllers/controllerUser');
+const {insertUser,
+    loginUser,
+    getCompanyUser,
+    deleteCompanyUser,
+    updateCompanyUser} = require('../controllers/controllerUser');
 
 const {verifiyJWT} = require( "../middleware/verifyToken");
 

@@ -1,21 +1,23 @@
 
+import modelFile from "../../models/modelFile";
 import Report from "../../models/modelReport";
 
 const deleteReportByCodeRepository = async(ids:string[]) =>{
-
+    
     try {
         let reportDeleted:any={};
-        if(ids){
-            //  for(let id of ids){
-            //     report = await Report.findOneAndUpdate({rep_code:id, rep_status:true}, {rep_status:false}, {new:true});
-            //     if(report) deleted+=1;
-            //     console.log(deleted);
-            //  } 
-            reportDeleted = await Report.updateMany({rep_code:ids}, {rep_status:false}) 
+        let filesDeleted: any ={};
+        if(ids){ 
+            reportDeleted = await Report.updateMany({
+                rep_code:ids,
+                rep_status:true
+            }, {rep_status:false}) 
+            filesDeleted = await modelFile.updateMany({rep_code:ids, file_status:true},{file_status:false})
         }
+        
         console.log(reportDeleted)
         if(reportDeleted.modifiedCount > 0) {
-            return {
+        return {
                 status:200,
                 message:`reporte(s) eliminados ${reportDeleted.modifiedCount}`
             };

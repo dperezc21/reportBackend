@@ -1,15 +1,17 @@
+import UserInterface from "../../interfaces/userInterface";
+
 const {getAuthUser} = require( "../../middleware/verifyToken");
 const User = require('../../models/modelUser')
 
 
-const getCompanyUserRepository = async(query:any) =>{
+const getCompanyUserRepository = async(user_id:number) =>{
 
     const {com_id, _id } = getAuthUser();
-    const {user_id} = query;
+    
     console.log( com_id);
     
     try {
-        let users:object | object[];
+        let users:UserInterface | UserInterface[];
         if(!user_id){
             users = await User.find({com_id, _id:{$ne:_id},user_status:true}).populate('pro_code');
         }else{

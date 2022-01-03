@@ -1,37 +1,38 @@
-
+import CompanyInterface from "../../interfaces/companyInterface";
 const {getAuthUser} = require( "../../middleware/verifyToken");
 const Company = require('../../models/modelCompany')
 const User = require('../../models/modelUser')
 
 const deleteCompanyUserRepository = async(ids:number[]) =>{
     
-    const user = getAuthUser();
-    //console.log("id eliminar",ids)
-    //console.log(user)
+    const userAuth = getAuthUser();
     
     try {
-        const company = await Company.findOne({_id: user.com_id, com_status:true});
+        const company: CompanyInterface = await Company.findOne({_id: userAuth.com_id, com_status:true});
         if(!company){
             return {
                 status:605,
-                message:"compañia no existe"};
+                message:"compañia no existe"
+            };
         }
         let deleted:any;
-        
+                
         if(ids){
-            deleted = await User.updateMany({_id:ids}, {user_status:false})
+            deleted = await User.updateMany({_id:ids, com_id:company._id, user_status:true}, {user_status:false})
         }
+        console.log(deleted)
         if (company && deleted.modifiedCount>0){
-            
             return {
                 status:200,
-                message:`registros eliminados: ${deleted.modifiedCount}`};
+                message:`registros eliminados: ${deleted.modifiedCount}`
+            };
         }
         return {
             status:602,
-            message:"usuario de compañia no existe"}
+            message:"usuario de compañia no existe"
+        }
     } catch (error:any) {
-        console.log(error);
+        console.log(error.message);
         return {
             status:500,
             message:error}

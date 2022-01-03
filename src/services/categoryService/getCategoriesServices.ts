@@ -1,8 +1,9 @@
+import CategoryInterface from '../../interfaces/categoryInterface';
 import Category from '../../models/modelCategory';
 
 const getCategoriesService = async() => {
     try {
-        const categories: object[] = await Category.find({cat_status:true});
+        const categories: CategoryInterface[] = await Category.find({cat_status:true});
         console.log("categorias",categories);
         if (!categories){
             return {

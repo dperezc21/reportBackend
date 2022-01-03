@@ -4,8 +4,7 @@
   "description": "app service para realizar solicitudes para app de reportes",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node dist/app.js",
-    "dev": "tsc && nodemon dist/app.js"
+    "start": "tsc && node dist/app.js"
   },
   "author": "davier perez",
   "license": "ISC",
@@ -21,6 +20,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.14",
-    "mongoose-auto-increment": "^5.0.1"
+    "mongoose-auto-increment": "^5.0.1",
+    "nodemon": "^2.0.15"
   }
 }

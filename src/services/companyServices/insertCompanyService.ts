@@ -1,4 +1,6 @@
 import companyCode from "../../helpers/generateCompanyCode";
+import CompanyInterface from "../../interfaces/companyInterface";
+import UserProfileInterface from "../../interfaces/userProfileInterface";
 const {encriptPassword} = require("../../helpers/helperUser")
 const UserProfile = require('../../models/modelUserProfile');
 
@@ -10,15 +12,15 @@ const {configCompany} = require('../../helpers/dataConfig');
 const insertCompanyRepository = async(dataCampany: any) =>{
     
     console.log("datos de compañia",dataCampany);
-    let com_code = await companyCode(dataCampany.com_name);
+    let com_code: string | Error = await companyCode(dataCampany.com_name);
     dataCampany.com_code = com_code; 
     
     let {user_name, user_password, pro_name=configCompany.pro_name, ...companyData} = dataCampany
 
     try { 
-        const company = await Company(companyData);
+        const company: CompanyInterface = await Company(companyData);
         
-        const profile = await UserProfile.findOne({pro_name, pro_status:true});
+        const profile: UserProfileInterface = await UserProfile.findOne({pro_name, pro_status:true});
         const idProfile = profile._id;
         if (!idProfile){
             return {

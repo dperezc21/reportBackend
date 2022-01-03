@@ -1,5 +1,7 @@
+import UserProfileInterface from "../interfaces/userProfileInterface";
+import modelUserProfile from "../models/modelUserProfile";
+
 const encript = require('bcryptjs');
-const { consultProfile } = require("../controllers/controllerUserProfile");
 
 class HelperUser{
 
@@ -13,13 +15,13 @@ class HelperUser{
         for (const key in data) {
             //console.log(data[key])
             if(key == "pro_name"){
-                const idProfile = await consultProfile(data[key]);
-                if (idProfile == null){
+                const profile: UserProfileInterface = await modelUserProfile.findOne({pro_name:data[key], pro_status:true});
+                if (profile.pro_name == null){
                     return {
                         status:800,
                         message:"perfil de usuario no existe"}
                 }
-                data[key] = idProfile;
+                data[key] = profile._id;
             }
             if (key =="user_password"){
                 data.user_password = this.encriptPassword(data.user_password);
@@ -39,6 +41,12 @@ class HelperUser{
             }
         });
         return ids
+    }
+
+    listIds = ( model: object[] ) => {
+        return model.map((datos:any) => {
+            return datos._id;
+        })
     }
 
 }

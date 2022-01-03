@@ -1,9 +1,11 @@
+import FileInterface from "../../interfaces/fileInterface";
+import ReportInterface from "../../interfaces/reportInterface";
 import File from "../../models/modelFile";
 import Report from "../../models/modelReport";
 
 const getReportByCodeRepository = async(rep_code:any) =>{
     try {
-        const report = await Report.findOne({rep_code, rep_status:true})
+        const report: ReportInterface = await Report.findOne({rep_code, rep_status:true})
                                    .populate('cat_code', ['cat_name'])
                                    .populate('user_code',['user_name', 'pro_code'])
         if(!report){
@@ -12,7 +14,7 @@ const getReportByCodeRepository = async(rep_code:any) =>{
                 message:"reporte no existe"
             }
         }
-        const archivos= await File.find({rep_code});
+        const archivos: FileInterface[] = await File.find({rep_code});
         return {
             report, archivos
         }

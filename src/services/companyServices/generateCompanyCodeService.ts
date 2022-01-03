@@ -1,12 +1,13 @@
 
 import companyCode from "../../helpers/generateCompanyCode";
+import CompanyInterface from "../../interfaces/companyInterface";
 const {getAuthUser} = require( "../../middleware/verifyToken");
 const Company = require('../../models/modelCompany')
 
 const generateCompanyCodeRepository = async() =>{
     const {com_id} = getAuthUser();
     try {
-        const company = await Company.findById({_id:com_id, com_status:true});
+        const company: CompanyInterface = await Company.findById({_id:com_id, com_status:true});
         if (!company){
             return {
                 status: 605,

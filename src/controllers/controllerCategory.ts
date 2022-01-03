@@ -6,9 +6,10 @@ import deleteCategoryService from '../services/categoryService/deleteCategorySer
 
 class ControllerCategory {
 
+    //controllador para insertar categoria
     insertCategory = async(req: Request, res:Response) =>{
+        const {cat_name} = req.body;//nombre de la categoria obtenido de la request
         try {
-            const {cat_name} = req.body;
             const response: object = await insertCategoryRepositpory(cat_name);
             return res.json(response);
         } catch (error) {
@@ -19,7 +20,7 @@ class ControllerCategory {
         }
     }
 
-
+    //controllador para obtener todas la categorias categoria
     getCategories = async(req: Request, res:Response) => {
         try {
             const response: object = await getCategoriesService();
@@ -32,9 +33,10 @@ class ControllerCategory {
         }
     }
 
+    //controllador para eliminar categoria por el nombre
     deleteCategory = async(req: Request, res:Response) => {
+        const {cat_name} =  req.query;//nombre categoria obtenido de la request
         try {
-            const {cat_name} =  req.query;
             const response = await deleteCategoryService(cat_name);
             return res.json(response);
         } catch (error) {

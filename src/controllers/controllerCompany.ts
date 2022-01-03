@@ -3,8 +3,10 @@ const generateCompanyCode = require( "../services/companyServices/generateCompan
 const insertCompanyRepository =require( "../services/companyServices/insertCompanyService");
 
 class ControllerCompany {
+
+    //controlador para insertar compañia
     insertCompany = async(req:Request, res:Response) =>{
-        let data: object = req.body;
+        let data: object = req.body;//datos para insertar obtenidos de la request
         try {
             const response: object = await insertCompanyRepository(data);
             return res.json(response);
@@ -18,7 +20,7 @@ class ControllerCompany {
         
     }
 
-    
+    //controlador para generar nuevo codigo de la compañia
     generateCode = async(req:Request, res:Response) =>{
         
         try {

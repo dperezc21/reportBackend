@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 
+//metodo para generar json web token
 const generateJWT = (uid:string, user_name:string) =>{
 
     return new Promise((resolve, reject) =>{

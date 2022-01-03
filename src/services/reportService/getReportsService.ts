@@ -1,20 +1,22 @@
+import reportInterface from "../../interfaces/reportInterface";
 import Report from "../../models/modelReport";
-import modelUser from "../../models/modelUser";
 const {getAuthUser} = require( "../../middleware/verifyToken");
+const {getInquiryForAdmin} = require( "../../helpers/helperCompany");
 
 const getReportsRepository = async() =>{
     
     try {
         //console.log(getAuthUser())
         const {_id, pro_code, com_id } = getAuthUser();
-        let reports:any =undefined;
+        let reports: reportInterface[];
         if (pro_code.pro_name == "admin"){
-            reports = await getReportsAdmin(com_id);
+            reports = await getInquiryForAdmin(com_id);
         }else{
             reports = await Report.find({user_code:_id, rep_status:true})
                                   .populate('cat_code', ['cat_name'])
                                   .limit(10);
         }
+        
         if(!reports){
             return {
                 status:805,
@@ -36,21 +38,5 @@ const getReportsRepository = async() =>{
 
 }
 
-
-const getReportsAdmin = async(com_id:Number) => {
-    try {
-        const users = await modelUser.find({com_id, user_status:true});
-        // console.log(users);
-        const ids_user = users.map((datos:any) => {
-            return datos._id;
-        })
-        console.log(ids_user);
-        return await Report.find({user_code:ids_user, rep_status:true})
-                           .populate('user_code',['user_name', 'pro_code'])
-                           .populate('cat_code', ['cat_name']);
-    } catch (error:any) {
-        return new Error(error.message)
-    }
-}
 
 export = getReportsRepository;

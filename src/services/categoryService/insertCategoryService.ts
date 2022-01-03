@@ -1,10 +1,11 @@
+import CategoryInterface from '../../interfaces/categoryInterface';
 import Category  from '../../models/modelCategory';
 
 const insertCategoryRepositpory = async(cat_name:string) =>{
     try {
         console.log("nombre de categoria",cat_name);
        
-    const searchCategory:object = await Category.findOne({cat_name, cat_status:true});
+    const searchCategory: CategoryInterface = await Category.findOne({cat_name, cat_status:true});
     
     if (searchCategory){
         return {

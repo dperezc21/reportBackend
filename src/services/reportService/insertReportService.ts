@@ -1,5 +1,7 @@
 
 
+import CategoryInterface from "../../interfaces/categoryInterface";
+import ReportInterface from "../../interfaces/reportInterface";
 import modelCategory from "../../models/modelCategory";
 import Report from "../../models/modelReport";
 const {getAuthUser} = require( "../../middleware/verifyToken");
@@ -9,7 +11,7 @@ const insertReportRepository = async(dataReport:any) => {
     try {
         const {_id } = getAuthUser();
 
-        const searchCategory = await modelCategory.findById({_id:cat_code, cat_status:true});
+        const searchCategory:CategoryInterface = await modelCategory.findById({_id:cat_code, cat_status:true});
         if (!searchCategory){
             return {
                 status: 803,
@@ -19,7 +21,7 @@ const insertReportRepository = async(dataReport:any) => {
        
         data.cat_code = searchCategory?._id;
         data.user_code = _id;
-        const report = new Report(data);
+        const report: ReportInterface = new Report(data);
         report.save((error:any) =>{
             if (error){
                 return {

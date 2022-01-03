@@ -1,17 +1,19 @@
+import ReportInterface from "../../interfaces/reportInterface";
+import UserInterface from "../../interfaces/userInterface";
 import Report from "../../models/modelReport";
 import User from "../../models/modelUser";
 
 const getReportByUserCodeRepository = async(user_code:any) => {
     
     try {
-        const user = await User.findById({_id:user_code, user_status:true})
+        const user: UserInterface = await User.findById({_id:user_code, user_status:true})
         if(!user){
             return {
                 status:602, message:"usuario no existe"
             };
         }
 
-        const reports = await Report.find({user_code, rep_status:true})
+        const reports: ReportInterface[] = await Report.find({user_code, rep_status:true})
                                     .populate('cat_code', ['cat_name'])
         if(!reports){
             return {

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import UserInterface from "../interfaces/userInterface";
 const {
     deleteCompanyUserService,
     getCompanyUserService,
@@ -6,12 +7,14 @@ const {
     insertUserService,
     login
 } = require('../services/userServices')
+const {validIdsDelete} = require('../helpers/helperUser');
 
 class ControllerUser{
     
+    //controlador para insertar los usuarios de una compañia
     insertUser = async(req:Request, res:Response) => {
         try {
-            let Uobject: object = req.body;
+            let Uobject: UserInterface = req.body;//datos del usuario obtenidos de la request
             let response: object = await insertUserService(Uobject);
             console.log("log", response)
             return res.json(response);
@@ -25,8 +28,9 @@ class ControllerUser{
         
     }
 
+    //controlador para inicio de sesion de un usuario
     loginUser = async(req:Request, res:Response) =>{
-        const data: object = req.body;
+        const data: object = req.body;//datos de inicio de seseion obtenidos de la request
         try {
             const response: object = await login(data);
             return res.json(response);
@@ -38,10 +42,11 @@ class ControllerUser{
         }
     }
 
+    //controlador para consultar los usuario de una compañia
     getCompanyUser = async(req:Request, res:Response) =>{
-        const query: object = req.query;
+        const {user_id} = req.query;//identificador de usuario obtenido de la request
         try {
-            const response: object = await getCompanyUserService(query);
+            const response: object = await getCompanyUserService(user_id);
             return res.json(response);
             
         } catch (error) {
@@ -51,9 +56,12 @@ class ControllerUser{
             })
         }
     }
+
+    // controlador para eliminar un usuario
     deleteCompanyUser = async(req:Request, res:Response) => {
-        let {ids} = req.body;
+        let {ids} = req.body;//lista de identicadores de usuarios obtenidos de la request
         try {
+            ids = validIdsDelete(ids);//metodo para ignorar el tipo de dato diferente a entero
             const response: object =  await deleteCompanyUserService(ids);
             return res.json(response);
         } catch (error) {
@@ -65,9 +73,11 @@ class ControllerUser{
 
     } 
 
+    //controlador para actualizar datos del usuario
     updateCompanyUser = async(req:Request, res:Response) =>{
+        //datos del usuario obtenidos de la request
         let data: object = req.body;
-        const {user_id} = req.query;
+        const {user_id} = req.query;//id del usuario para actualizar
 
         try {
             const response = await updateCompanyUserService({user_id, data});
@@ -84,43 +94,3 @@ class ControllerUser{
 
 
 export = new ControllerUser();
-        
-// const getUsers = async(req:Request, res:Response) => {
-        //     const {pro_code} = req.body.user;
-        //     try {
-        //         const users = await User.find({user_status:true, pro_code}).limit(5).populate('com_id').populate('pro_code')
-        //         if (!users){
-        //             return res.json({message:"there is not users"})
-        //         }else{ 
-        //             Object.keys(users).forEach(key => {
-        //                 users[key].user_password = null;
-        //             })
-        //             return res.json({users});
-        //         }
-        //     } catch (error) {
-        //         return res.json({message:error})
-        //     }
-        // }
-        
-        // const deleteUser = async(req:Request, res:Response) =>{
-//     const data = req.body;
-//     data.user_status = true
-//     try {
-//         const user = await User.findOneAndUpdate(data, {user_status:false},{new:true})
-//         if (user){
-//             return res.json({
-//                 status:200,
-//                 message:"user deleted"})
-//         }
-//         return res.json({
-//             status:400,
-//             message:"user don't exists"})
-        
-//     } catch (error) {
-//         console.log(error);
-//         return res.json({
-//             status:500,
-//             message:error})
-//     }
-
-// }

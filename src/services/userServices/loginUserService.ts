@@ -1,6 +1,10 @@
+const {configUser} = require('../../helpers/dataConfig');
+import Userinterface from "../../interfaces/userInterface";
+
 const generate_token = require("../../helpers/createToken");
 const encript = require('bcryptjs')
 const User = require('../../models/modelUser')
+// const companyInterface = require('../../interfaces/userInterface')
 
     
 const loginUserRepository = async(data:any) =>{
@@ -8,8 +12,7 @@ const loginUserRepository = async(data:any) =>{
         console.log(data);
         data.user_name = data.user_name.toLowerCase();
         try {
-            let user = undefined;
-            user = await User.findOne({user_name:data.user_name, user_status:true})
+            let user: Userinterface = await User.findOne({user_name:data.user_name, user_status:true})
                                    .populate('pro_code')
                                    .populate('com_id',['com_name']);
             if (!user){
@@ -18,7 +21,8 @@ const loginUserRepository = async(data:any) =>{
                 }
             }
 
-            if(user.pro_code.pro_name != "user"){
+            console.log("user", user)
+            if(user.pro_code.pro_name != configUser.pro_name){
                 user = await User.findOne({user_name:data.user_name, user_status:true})
                                    .populate('pro_code')
                                    .populate('com_id',['com_name', 'com_code']);

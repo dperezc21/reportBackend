@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
+import UserInterface from "../interfaces/userInterface";
 const User = require("../models/modelUser");
 const jwt = require('jsonwebtoken');
 
 class JWT {
-    user = "";
 
+    user = {};
     verifiyJWT = (req:Request, res:Response, next:any) =>{
         const token = req.headers.authorization?.split(' ')[1] || req.header('token');
         console.log("headers",req.headers);
@@ -20,11 +21,11 @@ class JWT {
                     message:err.message});
             }
             const {uid, user_name} = payload;
-            const user = await User.findOne({_id:uid, user_name}).populate('pro_code');
-            if (!user){
+            const userLogin: UserInterface = await User.findOne({_id:uid, user_name}).populate('pro_code');
+            if (!userLogin){
                 return res.json({status:401,message:'access invalid'});
             }
-            this.user = user;
+            this.user = userLogin;
             console.log("body",req.body);
             next();
         })
