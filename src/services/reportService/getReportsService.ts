@@ -13,6 +13,7 @@ const getReportsRepository = async() =>{
             reports = await getInquiryForAdmin(com_id);
         }else{
             reports = await Report.find({user_code:_id, rep_status:true})
+                                  .populate('user_code',['user_name', 'pro_code'])
                                   .populate('cat_code', ['cat_name'])
                                   .limit(10);
         }
