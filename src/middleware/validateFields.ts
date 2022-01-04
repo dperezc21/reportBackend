@@ -50,15 +50,13 @@ class ValidFiels {
                     message:"nombre de usuario requerido"})
             }
     
-            const searchUser = await User.findOne({user_name, user_status:true});
-            //console.log("usuario",searchUser.user_name)
+            const searchUser = await User.findOne({user_name});
                 
             if(searchUser){
                 return res.json({
                     status:701,
                     message:"nombre de usuario ya existe"});
             }
-            //console.log(req.body)
             req.body.user_name = user_name.toLowerCase();
             next();
             
