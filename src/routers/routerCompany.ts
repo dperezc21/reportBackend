@@ -1,5 +1,6 @@
 const {insertCompany,
-        generateCode,} = require( "../controllers/controllerCompany");
+        generateCode,
+        getCompanyCode} = require( "../controllers/controllerCompany");
 
 const {verifiyJWT} = require( "../middleware/verifyToken");
 const {validRol, 
@@ -13,5 +14,6 @@ const router = Router();
 
 router.post('/insertCompany',[validCompanyName, validUserName, validPassword], insertCompany);
 router.put('/newCode',[verifiyJWT,validRol], generateCode);
+router.get('/getCompanyCode',[verifiyJWT,validRol], getCompanyCode )
 
 export = router;
