@@ -23,7 +23,7 @@ const modelCompany = Schema({
         default:true
     },
     com_create_date:{
-        type:Date,
+        type:Number,
         default:Date.now
     }
 });

@@ -40,26 +40,4 @@ const deleteCompanyUserRepository = async(ids:number[]) =>{
 }
 
 
-// const eliminar = (ids:number[]):Promise<string[]> => {
-//     const user = getAuthUser();
-    
-//     console.log( user._id)
-//     return new Promise( (resolve:any, reject:any) => {
-//         let deleteUser: object | any = {};
-//         let deleted:string[] =[];
-//         ids.forEach(async (id: number) => {
-//             //for(const id of ids){
-//             if (id != user._id){
-                
-//                 deleteUser = await User.findOneAndUpdate({_id:id, user_status:true}, {user_status:false}, {new:true});
-//                 if(deleteUser) deleted.push(deleteUser.user_name);
-//             }
-//             //}
-//         })
-//         console.log(deleted)
-//         resolve(deleted)
-//     })
-
-// }
-
 export = deleteCompanyUserRepository;

@@ -24,7 +24,7 @@ const modelUser = Schema({
         required: true
     },
     user_create_date:{
-        type: Date,
+        type: Number,
         default:Date.now
     },
     user_status:{

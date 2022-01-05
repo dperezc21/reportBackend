@@ -1,11 +1,16 @@
 import { Request, Response } from "express";
+const {configCompany} = require('../helpers/dataConfig');
+const {getAuthUser} = require( "../middleware/verifyToken");
+
 const {
     insertReportService,
     getReportByUserCodeService,
     getReportByCodeService,
     getReportsService,
     getReportByDateService,
-    deleteReportByCodeService
+    deleteReportByCodeService,
+    getReportForGraficService,
+    getReportsForAdminService
 } = require('../services/reportService')
 
 class ControllerReport {
@@ -54,8 +59,15 @@ class ControllerReport {
 
     // controlador para obtener todos los reportes 
     getReports = async(req:Request, res:Response) =>{
+        const { pro_code, com_id } = getAuthUser();
         try {
-            const response: object = await getReportsService();
+            let response: object;
+            if (pro_code.pro_name == configCompany.pro_name){
+                response = await getReportsForAdminService(com_id);
+            }else{
+                response = await getReportsService();
+            }
+            
             return res.json(response);
         } catch (error) {
             return res.json({
@@ -67,9 +79,16 @@ class ControllerReport {
 
     //controlador para consultar reportes por fecha
     getReportByDate = async(req:Request, res:Response) => {
+        const {_id, pro_code, com_id } = getAuthUser();
         const body: object = req.body;//fechas obtenidas de la request
         try {
-            const response: object | undefined = await getReportByDateService(body);
+            let response: object | undefined;
+
+            if (pro_code.pro_name == configCompany.pro_name){
+                response = await getReportForGraficService(body);
+            }else{
+                response = await getReportByDateService(body);
+            }
             return res.json(response);
         } catch (error) {
             return res.json({

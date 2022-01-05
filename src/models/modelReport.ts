@@ -32,8 +32,7 @@ const modelReport = Schema({
         type: JSON
     },
     rep_create_date:{
-        type: Date,
-        default:Date.now
+        type: Number
     },
     rep_status:{
         type: Boolean,

@@ -12,12 +12,11 @@ const getReportByDateRepository = async(dataReport:any) =>{
         const reports: ReportInterface[] = await Report.find({
                 user_code:userAuth._id,
                 $or: [
-                        {rep_create_date: {$gte:start_date, $lte:final_date}},
-                        {rep_create_date:start_date}
-                    ],
+                    {rep_create_date: {$gte:start_date, $lte:final_date}},
+                    {rep_create_date:start_date}
+                ],
                     rep_status:true
         }).populate('cat_code', ['cat_name']);
-
         if(!reports){
             return {
                 status:805,

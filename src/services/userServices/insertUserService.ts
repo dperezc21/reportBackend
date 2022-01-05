@@ -25,14 +25,14 @@ const insertUserRepository = async(dataUser: UserInterface) => {
         user_password = encript.hashSync(user_password, salt); 
         const pro_code = profile._id;
         const user: UserInterface = await User({com_id, user_name, user_password, pro_code});
-        // user.save((error:any, product:UserInterface) => {
-        //     if(error){
-        //         return {
-        //             status:500,
-        //             message:error.message
-        //         };
-        //     }
-        // });
+        user.save((error:any, product:UserInterface) => {
+            if(error){
+                return {
+                    status:500,
+                    message:error.message
+                };
+            }
+        });
         return {
             status:200,
             message:"user inserted"

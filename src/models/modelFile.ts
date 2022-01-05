@@ -25,10 +25,6 @@ const modelFile = Schema({
         type:Number,
         default:true
     },
-    file_status:{
-        type:Boolean,
-        default:false
-    },
     file_type:{
         type: String,
     }

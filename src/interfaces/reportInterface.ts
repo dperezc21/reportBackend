@@ -1,10 +1,11 @@
 import CategoryInterface from "./categoryInterface";
+import UserInterface from "./userInterface";
 
 
 interface ReportInterface {
     _id: number,
     rep_code: string,
-    user_code: number,
+    user_code: UserInterface,
     cat_code: CategoryInterface,
     rep_description: string,
     rep_address: string,
