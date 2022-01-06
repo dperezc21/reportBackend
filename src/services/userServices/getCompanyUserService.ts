@@ -8,8 +8,6 @@ const getCompanyUserRepository = async(user_id:number) =>{
 
     const {com_id, _id } = getAuthUser();
     
-    console.log( com_id);
-    
     try {
         let users:UserInterface | UserInterface[];
         if(!user_id){

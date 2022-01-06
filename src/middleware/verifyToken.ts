@@ -9,6 +9,9 @@ class JWT {
     verifiyJWT = (req:Request, res:Response, next:any) =>{
         const token = req.headers.authorization?.split(' ')[1] || req.header('token');
         console.log("headers",req.headers);
+        console.log("body",req.body);
+	    console.log("parametros", req.params);
+	    console.log("queries", req.query)
         
         if(!token){
             return res.json({status:401,message:"required token"});
@@ -26,7 +29,6 @@ class JWT {
                 return res.json({status:401,message:'access invalid'});
             }
             this.user = userLogin;
-            console.log("body",req.body);
             next();
         })
     }

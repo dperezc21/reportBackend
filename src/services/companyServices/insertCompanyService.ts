@@ -11,7 +11,6 @@ const {configCompany} = require('../../helpers/dataConfig');
 
 const insertCompanyRepository = async(dataCampany: any) =>{
     
-    console.log("datos de compañia",dataCampany);
     let com_code: string | Error = await companyCode(dataCampany.com_name);
     dataCampany.com_code = com_code; 
     

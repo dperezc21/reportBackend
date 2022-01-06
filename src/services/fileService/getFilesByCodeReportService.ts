@@ -11,6 +11,7 @@ const getFilesByCodeReportRepository = async(rep_code:any) => {
         }
         
     } catch (error: any) {
+        console.log(error);
         return {
             status:500,
             message:error

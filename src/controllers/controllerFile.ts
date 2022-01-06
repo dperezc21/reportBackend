@@ -12,6 +12,7 @@ class ControllerFile {
             const response: object = await insertFilesService(data);
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message:error
@@ -26,6 +27,7 @@ class ControllerFile {
             const response: object = await updateStatusFileService(body);
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message:error
@@ -40,6 +42,7 @@ class ControllerFile {
             const response:object = await getFilesByCodeReportService(rep_code)
             return res.json(response)
         } catch (error) {
+            console.log(error);
             return res.json({
                 status: 500,
                 message: error

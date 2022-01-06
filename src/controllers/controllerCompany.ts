@@ -12,6 +12,7 @@ class ControllerCompany {
             return res.json(response);
             
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message:error
@@ -40,6 +41,7 @@ class ControllerCompany {
             const response: object = await getCompanyCodeService();
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message: error

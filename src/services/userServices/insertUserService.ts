@@ -9,9 +9,7 @@ const {configUser} = require('../../helpers/dataConfig');
 const insertUserRepository = async(dataUser: UserInterface) => {
     console.log(dataUser)
     let {com_id, user_name, user_password} = dataUser;
-    console.log(com_id)
-    
-    //console.log("datos de usuario", dataUser)
+  
     try {
         const profile:UserProfileInterface = await UserProfile.findOne({pro_name:configUser.pro_name, pro_status:true});
         if (!profile){
@@ -38,6 +36,7 @@ const insertUserRepository = async(dataUser: UserInterface) => {
             message:"user inserted"
         };
     } catch (error) {
+        console.log(error);
         return {
             status:500,
             message:error

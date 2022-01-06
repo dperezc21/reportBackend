@@ -35,6 +35,7 @@ class ValidFiels {
             next();
             
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message:error});
@@ -61,6 +62,7 @@ class ValidFiels {
             next();
             
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message:error});

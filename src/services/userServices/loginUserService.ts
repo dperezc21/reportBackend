@@ -21,7 +21,6 @@ const loginUserRepository = async(data:any) =>{
                 }
             }
 
-            console.log("user", user)
             if(user.pro_code.pro_name != configUser.pro_name){
                 user = await User.findOne({user_name:data.user_name, user_status:true})
                                    .populate('pro_code')

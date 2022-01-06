@@ -3,7 +3,6 @@ import Category  from '../../models/modelCategory';
 
 const insertCategoryRepositpory = async(cat_name:string) =>{
     try {
-        console.log("nombre de categoria",cat_name);
        
     const searchCategory: CategoryInterface = await Category.findOne({cat_name, cat_status:true});
     
@@ -16,6 +15,7 @@ const insertCategoryRepositpory = async(cat_name:string) =>{
     const c = await Category({cat_name});
     c.save((error:any, cat:any) =>{
         if (error){
+            console.log(error);
             return {
                 status:500,
                 message:error.message
@@ -28,6 +28,7 @@ const insertCategoryRepositpory = async(cat_name:string) =>{
         message:"category inserted"
     }
     } catch (error) {
+        console.log(error);
         return {
             status:500,
             message:error

@@ -16,7 +16,6 @@ const insertFilesRepository = async(dataFiles:any) =>{
         }
         for (let file of files){
             file.rep_code = rep_code;
-            console.log(file)
             try {
                 const insertFile: FileInterface = await File(file);
                 insertFile.save()
@@ -34,6 +33,7 @@ const insertFilesRepository = async(dataFiles:any) =>{
         };
         
     } catch (error) {
+        console.log(error);
         return {
             status:500,
             message:error

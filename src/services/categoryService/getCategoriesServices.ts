@@ -4,7 +4,7 @@ import Category from '../../models/modelCategory';
 const getCategoriesService = async() => {
     try {
         const categories: CategoryInterface[] = await Category.find({cat_status:true});
-        console.log("categorias",categories);
+        
         if (!categories){
             return {
                 status:803,
@@ -16,6 +16,7 @@ const getCategoriesService = async() => {
             message:categories
         }
     } catch (error) {
+        console.log(error);
         return {
             status:500,
             message:error

@@ -10,6 +10,7 @@ class ControllerProfile {
             const response: object = await getProfileService();
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message:error
@@ -24,6 +25,7 @@ class ControllerProfile {
             const response: object = await insertProfileService(pro_name);
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message:error

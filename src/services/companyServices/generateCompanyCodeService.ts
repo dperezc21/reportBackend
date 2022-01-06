@@ -14,8 +14,7 @@ const generateCompanyCodeRepository = async() =>{
                 message:"compañia no existe"
             }
         }
-        const {com_name} = company; 
-        console.log(company);
+        const {com_name} = company;
         const code: string | Error = await companyCode(com_name);
         await Company.findByIdAndUpdate({
             _id:com_id, com_status:true
@@ -27,6 +26,7 @@ const generateCompanyCodeRepository = async() =>{
         }
         
     } catch (error) {
+        console.log(error);
         return {
             status:500,
             message:error

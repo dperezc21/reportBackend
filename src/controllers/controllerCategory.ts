@@ -13,6 +13,7 @@ class ControllerCategory {
             const response: object = await insertCategoryRepositpory(cat_name);
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message:error
@@ -26,6 +27,7 @@ class ControllerCategory {
             const response: object = await getCategoriesService();
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return response.json({
                 status:500,
                 message:error
@@ -40,6 +42,7 @@ class ControllerCategory {
             const response = await deleteCategoryService(cat_name);
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return response.json({
                 status:500,
                 message:error

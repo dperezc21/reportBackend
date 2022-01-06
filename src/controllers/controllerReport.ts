@@ -22,6 +22,7 @@ class ControllerReport {
             const response: object = await insertReportService(body);
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return res.json({
                 status: 500,
                 message: error
@@ -36,6 +37,7 @@ class ControllerReport {
             const response: object = await getReportByUserCodeService(user_code);
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message:error
@@ -50,6 +52,7 @@ class ControllerReport {
             const response: object = await getReportByCodeService(rep_code);
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message:error
@@ -70,6 +73,7 @@ class ControllerReport {
             
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message:error
@@ -80,7 +84,7 @@ class ControllerReport {
     //controlador para consultar reportes por fecha
     getReportByDate = async(req:Request, res:Response) => {
         const {_id, pro_code, com_id } = getAuthUser();
-        const body: object = req.body;//fechas obtenidas de la request
+        const body: object = req.query;//fechas obtenidas de la request
         try {
             let response: object | undefined;
 
@@ -91,6 +95,7 @@ class ControllerReport {
             }
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message:error
@@ -105,6 +110,7 @@ class ControllerReport {
             const response: object = await deleteReportByCodeService(ids);
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 mesaage:error

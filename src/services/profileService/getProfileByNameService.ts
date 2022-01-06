@@ -17,6 +17,7 @@ const consultProfileByNameRepository = async(pro_name:string) =>{
             message:null
         };
     } catch (error) {
+        console.log(error);
         return {
             status:500,
             message:error

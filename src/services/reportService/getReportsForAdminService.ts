@@ -20,12 +20,12 @@ const getInquiryForAdminRepository = async(com_id:Number) => {
                 message:"no existen reportes"
             }
         }
-            
         return {
             status:200,
             reports
         }
     } catch (error:any) {
+        console.log(error);
         return {
             status:500,
             message: error

@@ -65,6 +65,7 @@ class ControllerUser{
             const response: object =  await deleteCompanyUserService(ids);
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message:error
@@ -83,6 +84,7 @@ class ControllerUser{
             const response = await updateCompanyUserService({user_id, data});
             return res.json(response);
         } catch (error) {
+            console.log(error);
             return res.json({
                 status:500,
                 message:error

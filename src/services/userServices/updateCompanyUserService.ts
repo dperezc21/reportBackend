@@ -8,7 +8,6 @@ const updateCompanyUserRepository = async(dataUser:any) => {
     let {user_id, data} = dataUser;
     try {
         data = await getDataUserValid(data);
-        console.log("data company", dataUser);
         const updateUser: UserInterface = await User.findOneAndUpdate({_id:user_id, user_status:true}, {$set:data}, {new:true});
         if (!updateUser){
             return {

@@ -20,7 +20,6 @@ const deleteCompanyUserRepository = async(ids:number[]) =>{
         if(ids){
             deleted = await User.updateMany({_id:ids, com_id:company._id, user_status:true}, {user_status:false})
         }
-        console.log(deleted)
         if (company && deleted.modifiedCount>0){
             return {
                 status:200,

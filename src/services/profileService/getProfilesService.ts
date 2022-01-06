@@ -17,6 +17,7 @@ const getProfilesRepository = async() =>{
             message: "no hay perfiles de usuarios"
         }
     } catch (error) {
+        console.log(error);
         return {
             status:500,
             message:error

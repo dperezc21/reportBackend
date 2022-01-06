@@ -4,7 +4,6 @@ import Category from '../../models/modelCategory';
 const deleteCategoryRepository = async (cat_name:any) => {
     try {
         const category: CategoryInterface = await Category.findOneAndUpdate({cat_name, cat_status:true}, {cat_status:false}, {new:true});
-        console.log("categoria eleimnar", cat_name)
         if (!category){
             return {
                 status:803,
@@ -17,6 +16,7 @@ const deleteCategoryRepository = async (cat_name:any) => {
         }
 
     } catch (error) {
+        console.log(error);
         return {
             status:500,
             message:error

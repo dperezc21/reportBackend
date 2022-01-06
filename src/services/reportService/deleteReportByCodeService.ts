@@ -15,7 +15,6 @@ const deleteReportByCodeRepository = async(ids:string[]) =>{
             filesDeleted = await modelFile.updateMany({rep_code:ids, file_status:true},{file_status:false})
         }
         
-        console.log(reportDeleted)
         if(reportDeleted.modifiedCount > 0) {
         return {
                 status:200,
@@ -27,6 +26,7 @@ const deleteReportByCodeRepository = async(ids:string[]) =>{
             message:"reporte(s) no existen"
         }
     } catch (error) {
+        console.log(error);
         return {
             status:500,
             message:error
