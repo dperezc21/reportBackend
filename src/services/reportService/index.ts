@@ -4,9 +4,9 @@ import insertReportService from "./insertReportService";
 import getReportByUserCodeService from "./getReportByUserCodeService";
 import getReportByCodeService from"./getReportByCodeService";
 import getReportsService from "./getReportsService";
-import getReportByDateService from "./getReportByDateService";
+import getDataReportByDateService from "./getDataReportByDateForUserService";
 import deleteReportByCodeService from "./deleteReportByCodeService";
-import getReportForGraficService from "./getReportForGraficService";
+import getDataReportByDateForAdminService from "./getDataReportByDateForAdminService";
 import getReportsForAdminService from "./getReportsForAdminService";
 
 export = {
@@ -14,8 +14,8 @@ export = {
     getReportByUserCodeService,
     getReportByCodeService,
     getReportsService,
-    getReportByDateService,
+    getDataReportByDateService,
     deleteReportByCodeService,
-    getReportForGraficService,
+    getDataReportByDateForAdminService,
     getReportsForAdminService
 }

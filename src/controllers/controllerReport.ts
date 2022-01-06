@@ -7,9 +7,9 @@ const {
     getReportByUserCodeService,
     getReportByCodeService,
     getReportsService,
-    getReportByDateService,
+    getDataReportByDateService,
     deleteReportByCodeService,
-    getReportForGraficService,
+    getDataReportByDateForAdminService,
     getReportsForAdminService
 } = require('../services/reportService')
 
@@ -94,12 +94,19 @@ class ControllerReport {
                     message: 'fechas invalidas para buscar reportes'
                 })
             }
+
+            if(start_date === NaN || final_date === NaN){
+                console.log(typeof(start_date.valueOf()))
+                return res.json({
+                    status:400
+                })
+            }
             let response: object | undefined;
 
             if (pro_code.pro_name == configCompany.pro_name){
-                response = await getReportForGraficService({start_date, final_date});
+                response = await getDataReportByDateForAdminService({start_date, final_date});
             }else{
-                response = await getReportByDateService({start_date, final_date});
+                response = await getDataReportByDateService({start_date, final_date});
             }
             return res.json(response);
         } catch (error) {

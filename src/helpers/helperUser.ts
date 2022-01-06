@@ -1,3 +1,4 @@
+import ReportInterface from "../interfaces/reportInterface";
 import UserProfileInterface from "../interfaces/userProfileInterface";
 import modelUserProfile from "../models/modelUserProfile";
 
@@ -47,6 +48,25 @@ class HelperUser{
         return model.map((datos:any) => {
             return datos._id;
         })
+    }
+
+    dataReportsUser = (reports: ReportInterface[]) => {
+        let dataList: object[] = [];
+        
+        reports.forEach( (report: ReportInterface) => {
+            const user_name = report.user_code.user_name;
+            const rep_code = report.rep_code;
+            const rep_create_date = report.rep_create_date;
+            const dataReport = {
+                user_name,
+                rep_create_date,
+                rep_code
+            }
+            dataList.push(dataReport);
+        })
+        
+        return dataList
+
     }
 
 }

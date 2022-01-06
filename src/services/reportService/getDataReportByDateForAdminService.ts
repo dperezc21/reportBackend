@@ -4,10 +4,10 @@ import Report from "../../models/modelReport";
 const {getAuthUser} = require( "../../middleware/verifyToken");
 import User from "../../models/modelUser";
 const {listIds} = require('../../helpers/helperUser');
-const {dataReports} = require('../../helpers/helperCompany');
+const {dataReportsAdmin} = require('../../helpers/helperCompany');
 
 
-const getReportByGraficRepository = async (dataReport: any) => {
+const getDataReportByDateForAdminRepository = async (dataReport: any) => {
     const {start_date, final_date} = dataReport;
     const {com_id} = getAuthUser();
     try {
@@ -16,11 +16,8 @@ const getReportByGraficRepository = async (dataReport: any) => {
         const ids_user:number[] = listIds(users);
         const reports: ReportInterface[] = await Report.find({
             user_code:ids_user,
-            $or: [
-                {rep_create_date: {$gte: start_date, $lte:final_date}},
-                {rep_create_date:start_date}
-            ],
-                rep_status:true})
+            rep_create_date: {$gte:start_date, $lte:final_date},
+                 rep_status:true})
                 .populate('cat_code', ['cat_name'])
                 .populate('user_code',['user_name']);
         if(reports.length == 0) {
@@ -29,7 +26,7 @@ const getReportByGraficRepository = async (dataReport: any) => {
                 message:"reporte no existe"
             };
         }
-        const data = dataReports(reports);
+        const data = dataReportsAdmin(reports);
         return {
             status:200,
             message:data
@@ -46,4 +43,4 @@ const getReportByGraficRepository = async (dataReport: any) => {
 
 }
 
-export = getReportByGraficRepository;
+export = getDataReportByDateForAdminRepository;
