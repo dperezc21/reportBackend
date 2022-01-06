@@ -84,14 +84,22 @@ class ControllerReport {
     //controlador para consultar reportes por fecha
     getReportByDate = async(req:Request, res:Response) => {
         const {_id, pro_code, com_id } = getAuthUser();
-        const body: object = req.query;//fechas obtenidas de la request
+        const {start_date = 0, final_date = 0} = req.query; //fechas obtenidas de la request
+        
         try {
+
+            if(start_date > final_date){
+                return res.json({
+                    status: 400,
+                    message: 'fechas invalidas para buscar reportes'
+                })
+            }
             let response: object | undefined;
 
             if (pro_code.pro_name == configCompany.pro_name){
-                response = await getReportForGraficService(body);
+                response = await getReportForGraficService({start_date, final_date});
             }else{
-                response = await getReportByDateService(body);
+                response = await getReportByDateService({start_date, final_date});
             }
             return res.json(response);
         } catch (error) {
