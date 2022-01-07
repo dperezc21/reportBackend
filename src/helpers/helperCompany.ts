@@ -2,6 +2,14 @@ import ReportInterface from "../interfaces/reportInterface";
 
 class HelperCompany{
 
+    orderReports = (data: object[]) => {
+        let ordered_list: object[] = [];
+
+        ordered_list = data.sort( (element1: any, element2: any) => 
+            ( element1.num_reports > element2.num_reports)? -1: 1)
+        return ordered_list.slice(0,3);
+    }
+
     dataReportsAdmin = (reports:ReportInterface[]) => {
         let data: any = {};
         reports.forEach((report: ReportInterface) => {
@@ -13,10 +21,8 @@ class HelperCompany{
             }   
         })
         
-        console.log(data)
         let data_list: object[] = [];
         for (const key in data) {
-            if(data_list.length == 3) break;
             if(data[key] < 10) {
                 continue;
             }
@@ -27,7 +33,8 @@ class HelperCompany{
                 num_reports
             });
         }
-        return data_list;
+        const orderedReports: object[] = this.orderReports(data_list);
+        return orderedReports;
     }
     
 }
