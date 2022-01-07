@@ -13,7 +13,7 @@ interface ReportInterface {
         latitude:number,
         longitude:number
     }
-    rep_create_date: Date,
+    rep_create_date: number,
     rep_status: boolean,
     save: any
 }

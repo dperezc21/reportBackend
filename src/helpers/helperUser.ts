@@ -1,3 +1,4 @@
+import moment from "moment";
 import ReportInterface from "../interfaces/reportInterface";
 import UserProfileInterface from "../interfaces/userProfileInterface";
 import modelUserProfile from "../models/modelUserProfile";
@@ -50,22 +51,50 @@ class HelperUser{
         })
     }
 
+    orderReports = (data: object[]) => {
+        let ordered_list: object[] = [];
+
+        ordered_list = data.sort( (element1: any, element2: any) => 
+            ( element1.date > element2.date)? 1: -1)
+        return ordered_list;
+    }
+
     dataReportsUser = (reports: ReportInterface[]) => {
-        let dataList: object[] = [];
+        let data_list: object[] = [];
+        let data: any = {};
+        reports.forEach((report: ReportInterface) => {
+            const date = new Date(report.rep_create_date)
+            const d = moment(date).format("YYYY-M");
+            
+            if(Object.keys(data).includes(d)){
+                data[d] +=1;
+            }else{
+                data[d] = 1;
+            }   
+        });
         
-        reports.forEach( (report: ReportInterface) => {
-            const user_name = report.user_code.user_name;
-            const rep_code = report.rep_code;
-            const rep_create_date = report.rep_create_date;
-            const dataReport = {
-                user_name,
-                rep_create_date,
-                rep_code
-            }
-            dataList.push(dataReport);
-        })
+        for (const key in data) {
+            const date = key
+            const num_reports = data[key];
+            data_list.push({
+                date,
+                num_reports
+            });
+        }
         
-        return dataList
+        // reports.forEach( (report: ReportInterface) => {
+        //     const user_name = report.user_code.user_name;
+        //     const rep_code = report.rep_code;
+        //     const rep_create_date = report.rep_create_date;
+        //     const dataReport = {
+        //         user_name,
+        //         rep_create_date,
+        //         rep_code
+        //     }
+        //     dataList.push(dataReport);
+        // })
+        const orderedReports: object[] = this.orderReports(data_list);
+        return orderedReports;
 
     }
 
