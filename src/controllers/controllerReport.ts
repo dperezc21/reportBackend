@@ -87,20 +87,7 @@ class ControllerReport {
         const {start_date = 0, final_date = 0} = req.query; //fechas obtenidas de la request
         
         try {
-
-            if(start_date > final_date){
-                return res.json({
-                    status: 400,
-                    message: 'fechas invalidas para buscar reportes'
-                })
-            }
-
-            if(start_date === NaN || final_date === NaN){
-                console.log(typeof(start_date.valueOf()))
-                return res.json({
-                    status:400
-                })
-            }
+            
             let response: object | undefined;
 
             if (pro_code.pro_name == configCompany.pro_name){

@@ -14,7 +14,7 @@ class Server{
         this.connetionDB();
     }
     
-    routers = () => {
+    private routers = () => {
         //routers de la api
         this.app.use(require('../routers/routerCompany'));
         this.app.use(require('../routers/routerUser'));
@@ -24,18 +24,18 @@ class Server{
         this.app.use(require('../routers/routerFile'));
     }
 
-    connetionDB = async() => {
+    private connetionDB = async() => {
         //connection a la base de datos en mongodb
         await connectionToDB();
     }
 
-    middleware = () => {
+    private middleware = () => {
         //uso de middlewares
         this.app.use(express.json())
         this.app.use(cors());
     }
 
-    configuracion = () => {
+    private configuracion = () => {
         //asignando puerto 
         this.app.set('port', process.env.PORT || 3000);
     }
