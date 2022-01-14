@@ -81,18 +81,6 @@ class HelperUser{
                 num_reports
             });
         }
-        
-        // reports.forEach( (report: ReportInterface) => {
-        //     const user_name = report.user_code.user_name;
-        //     const rep_code = report.rep_code;
-        //     const rep_create_date = report.rep_create_date;
-        //     const dataReport = {
-        //         user_name,
-        //         rep_create_date,
-        //         rep_code
-        //     }
-        //     dataList.push(dataReport);
-        // })
         const orderedReports: object[] = this.orderReports(data_list);
         return orderedReports;
 
