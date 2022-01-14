@@ -1,11 +1,12 @@
 
 const validNumberUser = require("../middleware/validNumUser");
-const {validUserName, validPassword, validRol} = require( "../middleware/validateFields");
+const {validUserName, validPassword, validRol, validFieldUpdateUser} = require( "../middleware/validateFields");
 const {insertUser,
     loginUser,
     getCompanyUser,
     deleteCompanyUser,
-    updateCompanyUser} = require('../controllers/controllerUser');
+    updateCompanyUser
+} = require('../controllers/controllerUser');
 
 const {verifiyJWT} = require( "../middleware/verifyToken");
 
@@ -17,5 +18,5 @@ router.post('/insertUser',[validUserName, validPassword, validNumberUser], inser
 router.post('/loginUser', validPassword, loginUser);
 router.get('/companyUser', [verifiyJWT, validRol], getCompanyUser);
 router.delete('/deleteCompanyUser', [verifiyJWT,validRol] , deleteCompanyUser);
-router.put('/updateUser',[verifiyJWT,validRol], updateCompanyUser);
+router.put('/updateUser',[verifiyJWT,validRol, validFieldUpdateUser], updateCompanyUser);
 export = router;

@@ -79,6 +79,19 @@ class ValidFiels {
         next();
     }
 
+    validFieldUpdateUser(req:Request, res:Response, next:any){
+        const data = req.body;
+        for (const key in data) {
+            if(data[key] == "") {
+                return res.json({
+                    status:400,
+                    message:"hay campos vacios"
+                })
+            }
+        }
+        next();
+    }
+
     
 }
 
