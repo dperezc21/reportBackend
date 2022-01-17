@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-const { configCompany } = require( "../helpers/dataConfig");
+const { configUser } = require( "../helpers/dataConfig");
 import CompanyInterface from "../interfaces/companyInterface";
 import modelCompany from "../models/modelCompany";
 import modelUser from "../models/modelUser";
@@ -15,7 +15,7 @@ const validNumberUser = async(req:Request, res:Response, next:any) => {
         }
         const user =await modelUser.find({com_id:company._id,user_status:true}).count();
         //console.log("Numero de usuarios",user)
-        if(user > configCompany.num_max_users){
+        if(user > configUser.number_users){
             return res.json({status:705,message:`usuario no insertado... maxima cantidad de usuarios por compañia permitidos 5`});
         } 
         req.body.com_id = company._id

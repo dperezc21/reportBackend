@@ -9,7 +9,7 @@ class ValidFiles {
         const { files, rep_code } = req.body;
         try {
             let numImages = await numberFiles(files, rep_code, configFile.video_format);
-            if (numImages > configFile.number_images_allowed) {
+            if (numImages > configFile.number_images) {
                 return res.json({
                     status: 400,
                     message: "numero de imagenes exedidias"
@@ -31,7 +31,7 @@ class ValidFiles {
         const { files, rep_code } = req.body;
         try {
             const numVideos = await numberFiles(files, rep_code, configFile.video_format);
-            if (numVideos > configFile.number_videos_allowed) {
+            if (numVideos > configFile.number_videos) {
                 return res.json({
                     status: 400,
                     message: "numero de videos exedidios"
@@ -52,7 +52,7 @@ class ValidFiles {
         const { files, rep_code } = req.body;
         try {
             const numAudios = await numberFiles(files, rep_code, configFile.video_format)
-            if (numAudios > configFile.number_audios_allowed) {
+            if (numAudios > configFile.number_audios) {
                 return res.json({
                     status: 400,
                     message: "numero de audios exedidos"
