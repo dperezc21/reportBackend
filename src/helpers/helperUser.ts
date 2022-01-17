@@ -47,7 +47,7 @@ class HelperUser{
 
     listIds = ( model: object[] ) => {
         return model.map((datos:any) => {
-            return datos._id;
+            return datos._id || datos.rep_code;
         })
     }
 

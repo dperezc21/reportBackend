@@ -2,6 +2,8 @@ import { Request, Response } from "express"
 const generateCompanyCodeService = require( "../services/companyServices/generateCompanyCodeService");
 const insertCompanyService =require( "../services/companyServices/insertCompanyService");
 const getCompanyCodeService = require("../services/companyServices/getCompanyCodeService");
+import getPercentajeChartService from "../services/companyServices/percentageChartService";
+
 class ControllerCompany {
 
     //controlador para insertar compañia
@@ -45,6 +47,19 @@ class ControllerCompany {
             return res.json({
                 status:500,
                 message: error
+            })
+        }
+    }
+
+    getPercentajeChart = async(req:Request, res:Response) =>{
+        const {com_id} = req.query;
+        try {
+            const response: object = await getPercentajeChartService(com_id);
+            return res.json(response);
+        } catch (error:any) {
+            return res.json({
+                status:500,
+                message: error.message
             })
         }
     }
