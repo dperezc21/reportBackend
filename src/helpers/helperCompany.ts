@@ -1,5 +1,4 @@
 import ReportInterface from "../interfaces/reportInterface";
-const { configReport } =require( "./dataConfig");
 
 class HelperCompany{
 
@@ -24,9 +23,6 @@ class HelperCompany{
         
         let data_list: object[] = [];
         for (const key in data) {
-            if(data[key] < configReport.min_users_reports_to_display) {
-                continue;
-            }
             const user_name = key
             const num_reports = data[key];
             data_list.push({
