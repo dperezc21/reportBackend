@@ -52,9 +52,9 @@ class ControllerCompany {
     }
 
     getPercentajeChart = async(req:Request, res:Response) =>{
-        const {com_id} = req.query;
+        const {com_name} = req.query;
         try {
-            const response: object = await getPercentajeChartService(com_id);
+            const response: object = await getPercentajeChartService(com_name);
             return res.json(response);
         } catch (error:any) {
             return res.json({

@@ -7,22 +7,19 @@ import modelCompany from "../../models/modelCompany";
 import modelFile from "../../models/modelFile";
 import modelReport from "../../models/modelReport";
 import modelUser from "../../models/modelUser";
-const { configFile } =require( "../../helpers/dataConfig");
 const {configReport } = require( "../../helpers/dataConfig");
 const {listIds} = require('../../helpers/helperUser');
 
 
-const grafic = async(com_id:any) => {
-
+const grafic = async(com_name:any) => {
     try {
-        const company: CompanyInterface = await modelCompany.findById({_id:com_id, com_status:true});
+        const company: CompanyInterface = await modelCompany.findOne({com_name, com_status:true});
         if (!company){
             return {
                 status: 605,
                 message:"compañia no existe"
             }
         }
-        console.log("company", company)
         const users: UserInterface[] = await modelUser.find({com_id:company._id, user_status:true});
         if(users.length == 0){
             return {status:602, message:"usuarios de compañia no encontrado"}
