@@ -1,11 +1,12 @@
 import CompanyInterface from "../../interfaces/companyInterface";
+import UserInterface from "../../interfaces/userInterface";
 const {getAuthUser} = require( "../../middleware/verifyToken");
 const Company = require('../../models/modelCompany')
 const User = require('../../models/modelUser')
 
 const deleteCompanyUserRepository = async(ids:number[]) =>{
     
-    const userAuth = getAuthUser();
+    const userAuth:UserInterface = getAuthUser();
     
     try {
         const company: CompanyInterface = await Company.findOne({_id: userAuth.com_id, com_status:true});
@@ -18,7 +19,7 @@ const deleteCompanyUserRepository = async(ids:number[]) =>{
         let deleted:any;
                 
         if(ids){
-            deleted = await User.updateMany({_id:ids, com_id:company._id, user_status:true}, {user_status:false})
+            deleted = await User.updateMany({_id:{ids, $ne:userAuth._id}, com_id:company._id, user_status:true}, {user_status:false})
         }
         if (company && deleted.modifiedCount>0){
             return {

@@ -7,11 +7,13 @@ import modelCompany from "../../models/modelCompany";
 import modelFile from "../../models/modelFile";
 import modelReport from "../../models/modelReport";
 import modelUser from "../../models/modelUser";
+const { configFile } =require( "../../helpers/dataConfig");
 const {configReport } = require( "../../helpers/dataConfig");
 const {listIds} = require('../../helpers/helperUser');
 
 
 const grafic = async(com_name:any) => {
+
     try {
         const company: CompanyInterface = await modelCompany.findOne({com_name, com_status:true});
         if (!company){

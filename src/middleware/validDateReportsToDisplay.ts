@@ -6,7 +6,6 @@ class ValidDateReport {
     private days_of_date_range(start_date: any, final_date: any) {
         const result = start_date/(1000 * 60 * 60 * 24)
         const result2 = final_date/(1000 * 60 * 60 * 24)
-        console.log(result2-result)
         return result2- result;
     }
 

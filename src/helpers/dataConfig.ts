@@ -1,3 +1,4 @@
+import moment from "moment"
 
 
 const configFile: any = {
@@ -16,6 +17,8 @@ const configUser: object = {
 
 const configCompany:object = {
     pro_name: "admin",
+    work_start_time: 8,
+    work_final_time: 18
 }
 
 const configReport: object = {

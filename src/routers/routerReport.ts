@@ -3,7 +3,8 @@ const { insertReport,
         getReports, 
         getReportByUserCode, 
         getReportByDate,
-        deleteReportByCode 
+        deleteReportByCode,
+        getNumberReportsByDay
     } = require("../controllers/controllerReport");
 const {validRol} =require("../middleware/validateFields");
 const {verifiyJWT} = require( "../middleware/verifyToken");
@@ -18,5 +19,6 @@ router.get('/getReportByCode', verifiyJWT, getReportByCode);
 router.get('/getReports',verifiyJWT, getReports);
 router.get('/getReportUserCode', verifiyJWT, getReportByUserCode);
 router.get('/getReportByDate',[verifiyJWT, valid_date_reports_to_display], getReportByDate);
-router.delete('/deleteReportByCode',[verifiyJWT, validRol], deleteReportByCode)
+router.delete('/deleteReportByCode',[verifiyJWT, validRol], deleteReportByCode);
+router.get('/getNumberReportsByDay',[verifiyJWT, validRol, valid_date_reports_to_display], getNumberReportsByDay);
 export = router;

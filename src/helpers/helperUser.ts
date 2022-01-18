@@ -47,17 +47,10 @@ class HelperUser{
 
     listIds = ( model: object[] ) => {
         return model.map((datos:any) => {
-            return datos._id || datos.rep_code;
+            return datos._id
         })
     }
 
-    orderReports = (data: object[]) => {
-        let ordered_list: object[] = [];
-
-        ordered_list = data.sort( (element1: any, element2: any) => 
-            ( element1.date > element2.date)? 1: -1)
-        return ordered_list;
-    }
 
     dataReportsUser = (reports: ReportInterface[]) => {
         let data_list: object[] = [];
@@ -81,8 +74,7 @@ class HelperUser{
                 num_reports
             });
         }
-        const orderedReports: object[] = this.orderReports(data_list);
-        return orderedReports;
+        return data_list;
 
     }
 

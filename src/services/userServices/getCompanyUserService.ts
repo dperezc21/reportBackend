@@ -6,14 +6,14 @@ const User = require('../../models/modelUser')
 
 const getCompanyUserRepository = async(user_id:number) =>{
 
-    const {com_id, _id } = getAuthUser();
+    const {com_id} = getAuthUser();
     
     try {
         let users:UserInterface | UserInterface[];
         if(!user_id){
-            users = await User.find({com_id, _id:{$ne:_id},user_status:true}).populate('pro_code');
+            users = await User.find({com_id}).populate('pro_code');
         }else{
-            users = await User.findOne({com_id, _id:{$eq:user_id, $ne:_id}, user_status:true}).populate('pro_code')
+            users = await User.findOne({com_id, _id:{$eq:user_id}}).populate('pro_code')
         }
         if (users){
             return {status:200, message:users}
