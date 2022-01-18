@@ -13,7 +13,8 @@ const {
     deleteReportByCodeService,
     getDataReportByDateForAdminService,
     getReportsForAdminService,
-    getNumberReportsByDay
+    getNumberReportsByDay,
+    getNumberReportsByTable
 } = require('../services/reportService')
 
 class ControllerReport {
@@ -139,6 +140,18 @@ class ControllerReport {
             return res.json({
                 status: 500,
                 message: error.message
+            })
+        }
+    }
+
+    getNumberReportsByTable = async(req: Request, res: Response) =>{
+        try {
+            const response:object = await getNumberReportsByTable();
+            return res.json(response)
+        } catch (error:any) {
+            res.json({
+                status:500,
+                message:error.mesaage
             })
         }
     }

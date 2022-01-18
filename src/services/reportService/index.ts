@@ -9,6 +9,7 @@ import deleteReportByCodeService from "./deleteReportByCodeService";
 import getDataReportByDateForAdminService from "./getDataReportByDateForAdminService";
 import getReportsForAdminService from "./getReportsForAdminService";
 import getNumberReportsByDay from "./getNumberReportsByDay";
+import getNumberReportsByTable from "./getNumberReportsByTable";
 
 export = {
     insertReportService,
@@ -19,5 +20,6 @@ export = {
     deleteReportByCodeService,
     getDataReportByDateForAdminService,
     getReportsForAdminService,
-    getNumberReportsByDay
+    getNumberReportsByDay,
+    getNumberReportsByTable
 }

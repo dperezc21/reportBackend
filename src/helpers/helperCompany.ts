@@ -60,9 +60,9 @@ class HelperCompany {
         // let day_start_date = new Date(parseInt(start_date.toString()))
         // let day_start = moment(day_start_date).format("YYYY-MM-DD")
         // let day = moment(new Date()).format("YYYY-MM-DD")
-
-        let final_date: any = new Date(parseInt(start_date));
-        final_date.setHours(configCompany.work_final_time);
+        console.log(typeof(start_date))
+        let final_date: any = new Date(parseInt(start_date))
+        final_date.setHours(19);
         final_date.setMinutes(0);
         final_date.setSeconds(0);
         final_date = new Date(moment(final_date).format("YYYY-MM-DD HH:mm:ss")).getTime()

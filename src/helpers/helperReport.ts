@@ -6,7 +6,7 @@ class HelperReport {
 
         ordered_list = data.sort( (element1: any, element2: any) => 
             ( element1.num_reports > element2.num_reports)? -1: 1)
-        return ordered_list.slice(0,3);
+        return ordered_list;
     }
 
 }
