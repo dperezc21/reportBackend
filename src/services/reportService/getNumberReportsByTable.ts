@@ -1,4 +1,5 @@
 
+import moment from "moment";
 import ReportInterface from "../../interfaces/reportInterface";
 import UserInterface from "../../interfaces/userInterface";
 import modelReport from "../../models/modelReport";
@@ -16,6 +17,8 @@ const getNumberReportsByTable = async () => {
     try {
         const date = new Date().getTime();
         const {start_date, final_date} = dayDateRange(date);
+        console.log(moment(start_date).format("YYYY-MM-DD HH:mm:ss"), moment(final_date).format("YYYY-MM-DD HH:mm:ss"))
+        //console.log(moment(1642579200000).format("YYYY-MM-DD HH:mm:ss"), moment(1642615200000).format("YYYY-MM-DD HH:mm:ss"))
         const users: UserInterface[] = await modelUser.find({
             com_id,
             user_status: true
@@ -26,12 +29,12 @@ const getNumberReportsByTable = async () => {
         }
 
         const idsUser: number[] = listIds(users);
-      
+        console.log(idsUser)
         const reports: ReportInterface[] = await modelReport.find({user_code:idsUser, 
             rep_create_date: { $gte: start_date, $lte: final_date },
             rep_status:true}).populate('cat_code', ['cat_name'])
             .populate('user_code',['user_name']);
-            console.log(reports)
+            console.log(reports.length)
             const data = dataReportsAdmin(reports);
             return {
                 status:200,
