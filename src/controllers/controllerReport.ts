@@ -143,7 +143,8 @@ class ControllerReport {
 
     getNumberReportsByTable = async(req: Request, res: Response) =>{
         try {
-            const response:object = await getNumberReportsByTable();
+            const {date} = req.query;
+            const response:object = await getNumberReportsByTable(date);
             return res.json(response)
         } catch (error:any) {
             res.json({

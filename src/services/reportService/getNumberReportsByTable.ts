@@ -10,12 +10,11 @@ const {dataReportsAdmin} = require('../../helpers/helperCompany');
 
 const { getAuthUser } = require("../../middleware/verifyToken");
 
-const getNumberReportsByTable = async () => {
+const getNumberReportsByTable = async (date: any) => {
     
     const { com_id } = getAuthUser();
 
     try {
-        const date = new Date().getTime();
         const {start_date, final_date} = dayDateRange(date);
         console.log(moment(start_date).format("YYYY-MM-DD HH:mm:ss"), moment(final_date).format("YYYY-MM-DD HH:mm:ss"))
         //console.log(moment(1642579200000).format("YYYY-MM-DD HH:mm:ss"), moment(1642615200000).format("YYYY-MM-DD HH:mm:ss"))
