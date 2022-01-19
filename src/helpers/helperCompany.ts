@@ -65,15 +65,14 @@ class HelperCompany {
         final_date.setHours(19);
         final_date.setMinutes(0);
         final_date.setSeconds(0);
-        final_date = new Date(moment(final_date).format("YYYY-MM-DD HH:mm:ss")).getTime()
+        final_date = new Date(moment(final_date).format("YYYY-MM-DD HH:mm:ss")).getTime().toString()
 
         let working_hour = new Date(parseInt(start_date));
         working_hour.setHours(configCompany.work_start_time)
         working_hour.setMinutes(0);
         working_hour.setSeconds(0)
-        start_date = new Date(moment(working_hour).format("YYYY-MM-DD HH:mm:ss")).getTime()
-        console.log(moment(start_date).format("YYYY-MM-DD HH:mm:ss"))
-        console.log(moment(final_date).format("YYYY-MM-DD HH:mm:ss"))
+        start_date = new Date(moment(working_hour).format("YYYY-MM-DD HH:mm:ss")).getTime().toString()
+        console.log( typeof(final_date), final_date)
 
         return { start_date, final_date }
 
