@@ -58,28 +58,16 @@ class HelperCompany {
 
 
     dayDateRange = (date: any) => {
-        // let day_start_date = new Date(parseInt(start_date.toString()))
-        // let day_start = moment(day_start_date).format("YYYY-MM-DD")
-        // let day = moment(new Date()).format("YYYY-MM-DD")
-        console.log(typeof(date))
+    
         let final_date: any = new Date(parseInt(date))
         final_date.setHours(configCompany.work_final_time);
         final_date.setMinutes(0);
-        final_date.setSeconds(0);
-        final_date = new Date(moment(final_date).format("YYYY-MM-DD HH:mm:ss")).getTime()
+        final_date = new Date(moment(final_date).format("YYYY-MM-DD HH:mm")).getTime()
 
         let working_hour = new Date(parseInt(date));
         working_hour.setHours(configCompany.work_start_time)
         working_hour.setMinutes(0);
-        working_hour.setSeconds(0)
-        let start_date = new Date(moment(working_hour).format("YYYY-MM-DD HH:mm:ss")).getTime()
-        
-        console.log( typeof(final_date), moment(final_date).format("YYYY-MM-DD"))
-        
-        console.log(moment(parseInt(date)).format("YYYY-MM-DD"))
-        console.log(new Date("2022-01-19").getTime())
-        console.log("dd",moment(new Date("2022-01-19").getTime()).format("YYYY-MM-DD"))
-       
+        let start_date = new Date(moment(working_hour).format("YYYY-MM-DD HH:mm")).getTime()
 
         return { start_date, final_date }
 
