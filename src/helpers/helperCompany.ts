@@ -1,6 +1,6 @@
 import moment from "moment";
 import ReportInterface from "../interfaces/reportInterface";
-const { orderReportsByNumReports } = require("./helperReport");
+const { orderReportsByNumReports, orderReportsByDate } = require("./helperReport");
 const { configCompany } = require('./dataConfig');
 
 class HelperCompany {
@@ -51,6 +51,7 @@ class HelperCompany {
                 num_reports
             });
         }
+        const ordered_list = orderReportsByDate(data_list);
         return data_list;
 
     }
