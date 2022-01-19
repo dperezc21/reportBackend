@@ -132,10 +132,7 @@ class ControllerReport {
         const dataReport = req.query; //fechas obtenidas de la request
         try {
             const response: object = await getNumberReportsByDay(dataReport);
-            return res.json({
-                status: 200,
-                message: response
-            })
+            return res.json(response)
         } catch (error: any) {
             return res.json({
                 status: 500,
