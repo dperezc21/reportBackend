@@ -15,7 +15,7 @@ const validNumberUser = async(req:Request, res:Response, next:any) => {
         }
         const user =await modelUser.find({com_id:company._id,user_status:true}).count();
         //console.log("Numero de usuarios",user)
-        if(user > configUser.number_users){
+        if(user == configUser.number_users){
             return res.json({status:705,message:`usuario no insertado... maxima cantidad de usuarios por compañia permitidos 5`});
         } 
         req.body.com_id = company._id

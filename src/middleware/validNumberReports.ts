@@ -1,9 +1,52 @@
-import { Request, Response } from "express";
-const { configUser } = require( "../helpers/dataConfig");
-import CompanyInterface from "../interfaces/companyInterface";
-import modelCompany from "../models/modelCompany";
-import modelUser from "../models/modelUser";
 
-const validNumberReports = (req:Request, res:Response, next:any) => {
+const { configReport } = require( "../helpers/dataConfig");
+import { Request, Response } from "express";
+import ReportInterface from "../interfaces/reportInterface";
+import UserInterface from "../interfaces/userInterface";
+import modelReport from "../models/modelReport";
+import modelUser from "../models/modelUser";
+const { listIds } = require('../helpers/helperUser')
+
+const { getAuthUser } = require("./verifyToken");
+
+const validNumberReports = async(req:Request, res:Response, next:any) => {
     
+    try {
+        const { com_id } = getAuthUser();
+        const users: UserInterface[] = await modelUser.find({
+            com_id,
+            user_status: true
+        });
+        
+        if(users.length == 0) {
+            return {
+                status:805,
+                message:"reporte no existe"
+            };
+        }
+
+        const idsUser: number[] = listIds(users);
+        console.log(idsUser)
+      
+        const reports: ReportInterface[] = await modelReport.find({user_code:idsUser, 
+            rep_status:true})
+        console.log(reports.length)
+        if(reports.length == configReport.number_reports){
+            return res.json({
+                status:400,
+                message: "limite de reportes alcanzado"
+            })
+            
+        }
+        next()  
+
+        
+    } catch (error:any) {
+        return res.json({
+            status:500,
+            message: error.message
+        })
+    }
 }
+
+export = validNumberReports

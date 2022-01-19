@@ -1,5 +1,3 @@
-import moment from "moment"
-
 
 const configFile: any = {
     image_format: 'imeage/jpeg',
@@ -22,7 +20,7 @@ const configCompany:object = {
 }
 
 const configReport: object = {
-    number_reports: 100,
+    number_reports: 40,
     max_days_to_display_reports: 90,
     number_files_repots: configFile.number_images + configFile.number_videos + configFile.number_audios
 }

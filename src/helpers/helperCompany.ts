@@ -73,7 +73,13 @@ class HelperCompany {
         working_hour.setMinutes(0);
         working_hour.setSeconds(0)
         let start_date = new Date(moment(working_hour).format("YYYY-MM-DD HH:mm:ss")).getTime()
-        console.log( typeof(final_date), final_date)
+        
+        console.log( typeof(final_date), moment(final_date).format("YYYY-MM-DD"))
+        
+        console.log(moment(parseInt(date)).format("YYYY-MM-DD"))
+        console.log(new Date("2022-01-19").getTime())
+        console.log("dd",moment(new Date("2022-01-19").getTime()).format("YYYY-MM-DD"))
+       
 
         return { start_date, final_date }
 

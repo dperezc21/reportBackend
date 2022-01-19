@@ -10,12 +10,12 @@ const { insertReport,
 const {validRol} =require("../middleware/validateFields");
 const {verifiyJWT} = require( "../middleware/verifyToken");
 const {valid_date_reports_to_display} = require("../middleware/validDateReportsToDisplay")
-
+const validNumberReports = require("../middleware/validNumberReports")
 const {Router} = require('express');
 
 const router = Router();
 
-router.post('/insertReport',verifiyJWT, insertReport);
+router.post('/insertReport',[verifiyJWT,validNumberReports ], insertReport);
 router.get('/getReportByCode', verifiyJWT, getReportByCode);
 router.get('/getReports',verifiyJWT, getReports);
 router.get('/getReportUserCode', verifiyJWT, getReportByUserCode);

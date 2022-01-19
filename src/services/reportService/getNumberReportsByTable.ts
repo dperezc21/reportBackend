@@ -18,20 +18,16 @@ const getNumberReportsByTable = async () => {
         const {start_date, final_date} = dayDateRange(date);
         const users: UserInterface[] = await modelUser.find({
             com_id,
-            
             user_status: true
         });
         
         if(users.length == 0) {
-            return {
-                status:805,
-                message:"reporte no existe"
-            };
+            return {status:602, message:"usuarios de compañia no encontrado"}
         }
 
         const idsUser: number[] = listIds(users);
       
-        const reports: ReportInterface = await modelReport.find({user_code:idsUser, 
+        const reports: ReportInterface[] = await modelReport.find({user_code:idsUser, 
             rep_create_date: { $gte: start_date, $lte: final_date },
             rep_status:true}).populate('cat_code', ['cat_name'])
             .populate('user_code',['user_name']);
