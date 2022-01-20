@@ -7,10 +7,7 @@ const {validNumberVideos,
 
 const router = Router();
 router.post('/insertFiles',[
-    verifiyJWT, 
-    validNumberVideos, 
-    validNumberImages,
-    validNumberAudios], insertFiles);
+    verifiyJWT], insertFiles);
 router.put('/updateFiles',verifiyJWT, updateStatusFiles);
 router.get('/getFilesByCodeReport', verifiyJWT, getFilesByCodeReport)
 
