@@ -5,7 +5,7 @@ class HelperReport {
         let ordered_list: object[] = [];
 
         ordered_list = data.sort( (element1: any, element2: any) => 
-            ( element1.num_reports > element2.num_reports)? -1: 1)
+            ( element1.num_reports > element2.num_reports)? 1: -1)
         return ordered_list;
     }
 
@@ -14,7 +14,7 @@ class HelperReport {
         let ordered_list: object[] = [];
 
         ordered_list = data.sort( (element1: any, element2: any) => 
-            ( element1.day > element2.day)? -1: 1)
+            ( element1.day > element2.day)? 1: -1)
         return ordered_list;
     }
 
