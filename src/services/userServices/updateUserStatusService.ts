@@ -16,18 +16,22 @@ const updateUserStatusService = async(data:any) => {
                 message:"compañia no existe"
             };
         }
-        let numberUsersUpdated:number = 0;
-        for (const key in data) {
-            const userUpdated = await modelUser.updateOne({
-                $and:[{_id:parseInt(key)}, {_id:{$ne:userAuth._id}}],
-                com_id:company._id
-            },
-            {user_status:data[key]})
-            if (userUpdated.modifiedCount>0) numberUsersUpdated+=1;
-        }
+       
+        
+        
+            data.forEach(async(element:any) => {
+                await modelUser.findOneAndUpdate({
+                    $and:[{_id:element.id}, {_id:{$ne:userAuth._id}}],
+                    com_id:company._id
+                },
+                {user_status:element.status}, {new:true})
+                
+            })
+        
+       
+        
         return {
-            status:200,
-            message:`usuarios actualizados ${numberUsersUpdated}`
+            status:200
         }
         
     } catch (error:any) {

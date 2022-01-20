@@ -95,7 +95,7 @@ class ControllerUser{
 
     updateUserStatus = async(req:Request, res:Response) => {
         try {
-            const data = req.body;
+            const {data} = req.body;
             const response:object = await updateUserStatusService(data)
             return res.json(response)
         } catch (error:any) {
