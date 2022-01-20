@@ -8,7 +8,7 @@ class ValidFiles {
     validNumberImages = async (req: Request, res: Response, next: any) => {
         const { files, rep_code } = req.body;
         try {
-            let numImages = await numberFiles(files, rep_code, configFile.video_format);
+            let numImages = await numberFiles(files, rep_code, configFile.image_format);
             if (numImages > configFile.number_images) {
                 return res.json({
                     status: 400,
@@ -51,7 +51,7 @@ class ValidFiles {
     validNumberAudios = async (req: Request, res: Response, next: any) => {
         const { files, rep_code } = req.body;
         try {
-            const numAudios = await numberFiles(files, rep_code, configFile.video_format)
+            const numAudios = await numberFiles(files, rep_code, configFile.audio_format)
             if (numAudios > configFile.number_audios) {
                 return res.json({
                     status: 400,

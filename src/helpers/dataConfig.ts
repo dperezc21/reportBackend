@@ -1,6 +1,6 @@
 
 const configFile: any = {
-    image_format: 'imeage/jpeg',
+    image_format: 'image/jpeg',
     video_format:'video/mp4',
     audio_format: 'audio/mp4',
     number_images: 3,
