@@ -5,6 +5,7 @@ const {getAuthUser} = require( "../../middleware/verifyToken");
 import User from "../../models/modelUser";
 const {listIds} = require('../../helpers/helperUser');
 const {dataReportsAdmin} = require('../../helpers/helperCompany');
+const { orderReportsByNumReports } = require("../../helpers/helperReport");
 
 
 const getDataReportByDateForAdminRepository = async (dataReport: any) => {
@@ -26,7 +27,8 @@ const getDataReportByDateForAdminRepository = async (dataReport: any) => {
                 message:"reporte no existe"
             };
         }
-        const data = dataReportsAdmin(reports);
+        let data = dataReportsAdmin(reports);
+        data = orderReportsByNumReports(data)
         return {
             status:200,
             message:data
