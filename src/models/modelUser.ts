@@ -37,6 +37,7 @@ modelUser.plugin(autoIncrement.plugin, {model:'user', startAt:1});
 
 modelUser.methods.toJSON = function(){
     const {__v, user_password, _id, pro_code, com_id, ...user} = this.toObject();
+    user.company = com_id;
     user.profile = pro_code;
     user.user_id = _id;
     return user;
