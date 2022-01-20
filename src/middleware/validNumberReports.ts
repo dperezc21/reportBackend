@@ -31,14 +31,15 @@ const validNumberReports = async(req:Request, res:Response, next:any) => {
         const reports: ReportInterface[] = await modelReport.find({user_code:idsUser, 
             rep_status:true})
         console.log(reports.length)
-        if(reports.length == configReport.number_reports){
-            return res.json({
-                status:400,
-                message: "limite de reportes alcanzado"
-            })
+        if(reports.length <= configReport.number_reports-1){
+            next()
+            return;  
             
         }
-        next()  
+        return res.json({
+            status:400,
+            message: "limite de reportes alcanzado"
+        })
 
         
     } catch (error:any) {

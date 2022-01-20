@@ -13,14 +13,15 @@ const validNumberUser = async(req:Request, res:Response, next:any) => {
                 status:604,
                 message:"codigo de compañia invalido"});
         }
-        const user =await modelUser.find({com_id:company._id}).count();
-        console.log("Numero de usuarios",user, "usuarios permitidos",configUser.number_users)
-        if(configUser.number_users == user){
+        const user =await modelUser.find({com_id:company._id});
+        console.log("Numero de usuarios",user.length, "usuarios permitidos",configUser.number_users)
+        if(user.length <= configUser.number_users-1 ){
             
-            return res.json({status:705,message:`usuario no insertado... maxima cantidad de usuarios por compañia permitidos 5`});
+            req.body.com_id = company._id
+            next();
+            return;
         } 
-        req.body.com_id = company._id
-        next();
+        return res.json({status:705,message:`usuario no insertado... maxima cantidad de usuarios por compañia permitidos 5`});
     } catch (error) {
         console.log(error)
         return res.json({status:500, message:error});
