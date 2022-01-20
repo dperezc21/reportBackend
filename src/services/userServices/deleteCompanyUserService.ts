@@ -19,7 +19,13 @@ const deleteCompanyUserRepository = async(ids:number[]) =>{
         let deleted:any;
                 
         if(ids){
-            deleted = await User.updateMany({_id:{ids, $ne:userAuth._id}, com_id:company._id, user_status:true}, {user_status:false})
+            deleted = await User.updateMany({
+                $and:[
+                    {_id:{ $ne:userAuth._id}},
+                    {_id:ids}
+                ],
+                com_id:company._id, user_status:true}, 
+                {user_status:false})
         }
         if (company && deleted.modifiedCount>0){
             return {
