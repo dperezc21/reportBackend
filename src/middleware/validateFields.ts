@@ -18,9 +18,9 @@ class ValidFiels {
     }
     
     validCompanyName = async(req:Request, res:Response, next:any) =>{
-        const {com_name} = req.body;
+        let {com_name} = req.body;
+        com_name = com_name.toLowerCase()
         try {
-            req.body.com_name = com_name.toLowerCase();
             if (com_name.length<3 || !com_name){
                 return res.json({
                     status:606, 
@@ -32,6 +32,7 @@ class ValidFiels {
                     status:603,
                     message:"compañia existe en la base de datos"});
             }
+            req.body.com_name = com_name;
             next();
             
         } catch (error) {
@@ -44,8 +45,8 @@ class ValidFiels {
     
     validUserName = async(req:Request, res:Response, next:any) =>{
         let {user_name} = req.body;
+        user_name = user_name.toLowerCase();
         try {
-            req.body.user_name = user_name.toLowerCase();
             if (!user_name){
                 return res.json({
                     status:423,
@@ -59,6 +60,7 @@ class ValidFiels {
                     status:701,
                     message:"nombre de usuario ya existe"});
             }
+            req.body.user_name = user_name
             next();
             
         } catch (error) {
