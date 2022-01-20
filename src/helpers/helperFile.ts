@@ -11,6 +11,7 @@ class HelperFile {
             files.forEach((file: FileInterface) => {
                 if (file.file_type == type_file) {
                     numFiles += 1;
+                    console.log(file.file_type)
                 }
             });
             return numFiles;
