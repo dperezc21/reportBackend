@@ -5,7 +5,8 @@ const {
     getCompanyUserService,
     updateCompanyUserService,
     insertUserService,
-    login
+    login,
+    updateUserStatusService
 } = require('../services/userServices')
 const {validIdsDelete} = require('../helpers/helperUser');
 
@@ -88,6 +89,19 @@ class ControllerUser{
             return res.json({
                 status:500,
                 message:error
+            })
+        }
+    }
+
+    updateUserStatus = async(req:Request, res:Response) => {
+        try {
+            const data = req.body;
+            const response:object = await updateUserStatusService(data)
+            return res.json(response)
+        } catch (error:any) {
+            return res.json({
+                status:500,
+                message:error.message
             })
         }
     }

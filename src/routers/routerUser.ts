@@ -5,7 +5,8 @@ const {insertUser,
     loginUser,
     getCompanyUser,
     deleteCompanyUser,
-    updateCompanyUser
+    updateCompanyUser,
+    updateUserStatus
 } = require('../controllers/controllerUser');
 
 const {verifiyJWT} = require( "../middleware/verifyToken");
@@ -19,4 +20,5 @@ router.post('/loginUser', validPassword, loginUser);
 router.get('/companyUser', [verifiyJWT, validRol], getCompanyUser);
 router.delete('/deleteCompanyUser', [verifiyJWT,validRol] , deleteCompanyUser);
 router.put('/updateUser',[verifiyJWT,validRol, validFieldUpdateUser], updateCompanyUser);
+router.put('/updateUserStatus',[verifiyJWT,validRol], updateUserStatus);
 export = router;
