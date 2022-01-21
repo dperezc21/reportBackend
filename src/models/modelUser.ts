@@ -27,7 +27,7 @@ const modelUser = Schema({
     //     type:String,
     //     required:true
     // },
-    // user_identify:{
+    // user_id:{
     //     type:String,
     //     require:true,
     //     unique:true
@@ -46,7 +46,7 @@ const modelUser = Schema({
     // user_land_line:{
     //     type:Number
     // },
-    // user_cell_phone:{
+    // user_cell:{
     //     type:Number
     // },
     user_create_date:{
