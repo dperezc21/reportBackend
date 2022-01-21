@@ -6,58 +6,67 @@ const { numberFiles } = require('../helpers/helperFile')
 
 
 class ValidFiles {
-    numberImages: number;
-    numberVideos: number;
-    numberAudios: number;
+
 
     constructor() {
-        this.numberImages = 0
-        this.numberVideos = 0
-        this.numberAudios = 0
+
     }
 
     validNumberFiles = async (req: Request, res: Response, next: any) => {
         const { files, rep_code } = req.body;
+        console.log("archivos", files)
         try {
-            files.forEach(async (file: FileInterface) => {
-
+            let numberImages: number;
+            let numberAudios: number;
+            let numberVideos: number;
+            for (const file of files) {
                 if (file.file_type == configFile.image_format) {
-                    this.numberImages = await modelFile.find({ rep_code, type_file:file.file_type}).count()
-                    this.numberImages += 1;
-                    if (this.numberImages > configFile.number_images) {
+                    numberImages = await modelFile.find({ rep_code, type_file: configFile.image_format }).count()
+                    console.log("numero de imagenes", numberImages)
+                    numberImages += 1;
+                    if (numberImages > configFile.number_images) {
                         return res.json({
                             status: 400,
                             message: "numero de imagenes excedidias"
                         })
                     }
-                    console.log(file.file_type)
+                    console.log("tipo de archivo", file.file_type)
+                    next();
+                    return;
                 }
 
                 if (file.file_type == configFile.video_format) {
-                    this.numberVideos = await modelFile.find(files, rep_code, configFile.video_format).count()
-                    this.numberVideos += 1;
-                    if (this.numberVideos > configFile.number_videos) {
+                    numberVideos = await modelFile.find({ rep_code, type_file: configFile.video_format }).count()
+                    console.log("numero de videos", numberVideos)
+                    numberVideos += 1;
+                    if (numberVideos > configFile.number_videos) {
                         return res.json({
                             status: 400,
                             message: "numero de videos excedidos"
                         })
                     }
-                    console.log(file.file_type)
+                    console.log("tipo de archivo", file.file_type)
+                    next();
+                    return;
                 }
 
                 if (file.file_type == configFile.audio_format) {
-                    this.numberAudios = await modelFile.find(files, rep_code, configFile.audio_format).count()
-                    this.numberAudios += 1;
-                    console.log(file.file_type)
-                    if (this.numberAudios > configFile.number_audios) {
+                    numberAudios = await modelFile.find({ rep_code, type_file: configFile.audio_format }).count()
+                    console.log("numero de audios", numberAudios)
+                    numberAudios += 1;
+                    if (numberAudios > configFile.number_audios) {
                         return res.json({
                             status: 400,
                             message: "numero de audios excedidos"
                         })
                     }
+                    console.log("tipo de archivo", file.file_type)
+                    next();
+                    return;
                 }
+            }
 
-            });
+
             next();
 
         } catch (error: any) {
