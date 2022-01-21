@@ -1,17 +1,15 @@
 import { Request, Response } from "express";
 import modelToken from "../models/modelToken";
-import getTokenService from "../services/tokenService/getTokenService";
+import verifyTokenService from "../services/tokenService/verifyTokenService";
 
 
 class ControllerToken {
 
     verifyToken = async(req: Request, res: Response) => {
-        const token = req.body.token
+        const token = req.headers.authorization?.split(' ')[1] || req.header('token');
         try {
-            const getToken: any = await getTokenService(token);
-            if( getToken.token){
-                
-            }
+            const getToken: any = await verifyTokenService(token);
+            return res.json(getToken)
         } catch (error:any) {
             return res.json({
                 status:500,

@@ -22,6 +22,7 @@ class Server{
         this.app.use(require('../routers/routerUserProfile'));
         this.app.use(require('../routers/routerCategory'));
         this.app.use(require('../routers/routerFile'));
+        this.app.use(require('../routers/routerToken'));
     }
 
     private connetionDB = async() => {

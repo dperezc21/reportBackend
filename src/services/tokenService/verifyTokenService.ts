@@ -1,26 +1,35 @@
+import TokenInterface from "../../interfaces/tokenInterface";
 import UserInterface from "../../interfaces/userInterface";
-const User = require("../models/modelUser");
+import modelToken from "../../models/modelToken";
+const User = require("../../models/modelUser");
 const jwt = require('jsonwebtoken');
+const {getAuthUser} = require( "../../middleware/verifyToken");
 
-const validToken = (token:string) => {
+const verifyTokenService = async(token:any) => {
+    const {_id}:UserInterface = getAuthUser();
     try {
-
-        jwt.verify(token, process.env.JSON_WEB_TOKEN_KEY, async(err:any, payload:any ) =>{
-            if(err){
-                return {
-                    status:401,
-                    message:err.message};
+        console.log(token)
+        const userLogin: UserInterface = await User.findOne({_id});
+        const getToken:TokenInterface = await modelToken.findOne({
+            token,
+            user_code:userLogin._id,
+            token_status:true
+            })
+            console.log(getToken)
+            
+            if (getToken){
+                return {status:200,message:true};
+            }else{
+                
+                return {status:400,message:false};
             }
-            
-                return {status:200,message:'token valido'};
-            
-        })
         
     } catch (error:any) {
+        console.log(error)
         return {
             status:500, message:error.message 
         }
     }
 }
 
-export = validToken
+export = verifyTokenService

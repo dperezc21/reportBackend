@@ -1,5 +1,6 @@
 const {configUser} = require('../../helpers/dataConfig');
 import Userinterface from "../../interfaces/userInterface";
+import insertTokenService from "../tokenService/insertTokenService";
 
 const generate_token = require("../../helpers/createToken");
 const encript = require('bcryptjs')
@@ -33,6 +34,7 @@ const loginUserRepository = async(data:any) =>{
             }
             
             const token: string = await generate_token(user._id, data.user_name);
+            await insertTokenService(token, user._id);
             return {
                 status:200, message:user, token
             };
