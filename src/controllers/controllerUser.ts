@@ -60,10 +60,10 @@ class ControllerUser{
 
     // controlador para eliminar un usuario
     deleteCompanyUser = async(req:Request, res:Response) => {
-        let {ids} = req.body;//lista de identicadores de usuarios obtenidos de la request
+        let {ids, status} = req.body;//lista de identicadores de usuarios obtenidos de la request
         try {
             ids = validIdsDelete(ids);//metodo para ignorar el tipo de dato diferente a entero
-            const response: object =  await deleteCompanyUserService(ids);
+            const response: object =  await deleteCompanyUserService(ids, status);
             return res.json(response);
         } catch (error) {
             console.log(error);

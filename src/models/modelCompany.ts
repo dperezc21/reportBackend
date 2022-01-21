@@ -4,6 +4,7 @@ const connection = createConnection(process.env.URL_MONGODB);
 autoIncrement.initialize(connection)
 
 const modelCompany = Schema({
+
     com_code:{
         type:String,
         require:true,
@@ -17,6 +18,24 @@ const modelCompany = Schema({
     com_description:{
         type:String,
         default:""
+    },
+    com_nit:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    com_email:{
+        type:String,
+        unique:true
+    },
+    com_address:{
+        type:String
+    },
+    com_land_line:{
+        type:Number
+    },
+    com_cell_phone:{
+        type:Number
     },
     com_status:{
         type:Boolean,
