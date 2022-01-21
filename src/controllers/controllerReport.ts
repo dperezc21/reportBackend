@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import moment from "moment";
+import ReportInterface from "../interfaces/reportInterface";
 import UserInterface from "../interfaces/userInterface";
+const {dataReportsAdmin} = require("../helpers/helperCompany")
 const { configCompany } = require('../helpers/dataConfig');
 const { getAuthUser } = require("../middleware/verifyToken");
 const { dayDateRange } = require('../helpers/helperCompany')
@@ -157,7 +159,19 @@ class ControllerReport {
     getNumberReportsByTable = async(req: Request, res: Response) =>{
         try {
             const {date} = req.query;
-            const response = await getNumberReportsByTable(date);
+
+            const {pro_code} = getAuthUser();
+            let response:object={};
+            if(pro_code.pro_name == "admin") {
+
+                response = await getNumberReportsByTable(date);
+            }else{
+                const responseReports: any= await getReportsService();
+                if(responseReports.reports.length > 0){
+                    const reports = responseReports.reports
+                    response = dataReportsAdmin(reports)
+                }
+            }
            
             return res.json(response)
         } catch (error:any) {
