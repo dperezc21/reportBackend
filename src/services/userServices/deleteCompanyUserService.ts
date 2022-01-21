@@ -4,7 +4,7 @@ const {getAuthUser} = require( "../../middleware/verifyToken");
 const Company = require('../../models/modelCompany')
 const User = require('../../models/modelUser')
 
-const deleteCompanyUserRepository = async(ids:number[]) =>{
+const deleteCompanyUserRepository = async(ids:number[], status:boolean) =>{
     
     const userAuth:UserInterface = getAuthUser();
     
@@ -19,6 +19,15 @@ const deleteCompanyUserRepository = async(ids:number[]) =>{
         let deleted:any;
                 
         if(ids){
+            if (status != undefined){
+                deleted = await User.updateMany({
+                    $and:[
+                        {_id:{ $ne:userAuth._id}},
+                        {_id:ids}
+                    ],
+                    com_id:company._id}, 
+                    {user_status:status})
+            }else
             deleted = await User.updateMany({
                 $and:[
                     {_id:{ $ne:userAuth._id}},

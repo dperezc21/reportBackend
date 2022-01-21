@@ -23,6 +23,27 @@ const modelUser = Schema({
         type: String,
         required: true
     },
+    id_type:{
+        type:String
+    },
+    identify_number:{
+        type:String
+    },
+    name:{
+        type:String
+    },
+    address:{
+        type:String
+    },
+    email:{
+        type:String
+    },
+    land_line:{
+        type:Number
+    },
+    cell_phone:{
+        type:Number
+    },
     user_create_date:{
         type: Number,
         default:Date.now
