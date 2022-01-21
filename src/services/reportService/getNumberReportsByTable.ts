@@ -31,8 +31,7 @@ const getNumberReportsByTable = async (date: any) => {
         console.log(idsUser)
         const reports: ReportInterface[] = await modelReport.find({user_code:idsUser, 
             rep_create_date: { $gte: start_date, $lte: final_date },
-            rep_status:true}).populate('cat_code', ['cat_name'])
-            .populate('user_code',['user_name']);
+            }).populate('user_code',['user_name']);
             console.log(reports.length)
             const data = dataReportsAdmin(reports);
             return {

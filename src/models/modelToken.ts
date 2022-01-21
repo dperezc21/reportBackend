@@ -20,7 +20,7 @@ const modelToken = Schema({
         default: new Date().getTime()
     },
     token_status:{
-        type:String,
+        type:Boolean,
         default:true
     }
     

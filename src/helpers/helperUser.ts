@@ -52,12 +52,12 @@ class HelperUser{
     }
 
 
-    dataReportsUser = (reports: ReportInterface[]) => {
+    dataReportsUser = (reports: ReportInterface[], format_date:string ="YYYY-M") => {
         let data_list: object[] = [];
         let data: any = {};
         reports.forEach((report: ReportInterface) => {
             const date = new Date(report.rep_create_date)
-            const d = moment(date).format("YYYY-M");
+            const d = moment(date).format(format_date);
             
             if(Object.keys(data).includes(d)){
                 data[d] +=1;

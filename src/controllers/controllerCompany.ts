@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 const generateCompanyCodeService = require( "../services/companyServices/generateCompanyCodeService");
 const insertCompanyService =require( "../services/companyServices/insertCompanyService");
 const getCompanyCodeService = require("../services/companyServices/getCompanyCodeService");
-import getPercentajeChartService from "../services/companyServices/percentageChartService";
+
 
 class ControllerCompany {
 
@@ -51,18 +51,7 @@ class ControllerCompany {
         }
     }
 
-    getPercentajeChart = async(req:Request, res:Response) =>{
-        const {com_name} = req.query;
-        try {
-            const response: object = await getPercentajeChartService(com_name);
-            return res.json(response);
-        } catch (error:any) {
-            return res.json({
-                status:500,
-                message: error.message
-            })
-        }
-    }
+    
     
        
 }

@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import moment from "moment";
+import UserInterface from "../interfaces/userInterface";
 const { configCompany } = require('../helpers/dataConfig');
 const { getAuthUser } = require("../middleware/verifyToken");
 const { dayDateRange } = require('../helpers/helperCompany')
+import getPercentajeChartService from "../services/reportService/percentageChartService";
 
 const {
     insertReportService,
@@ -14,7 +16,8 @@ const {
     getDataReportByDateForAdminService,
     getReportsForAdminService,
     getNumberReportsByDay,
-    getNumberReportsByTable
+    getNumberReportsByTable,
+    getNumberReportsByDateForUser
 } = require('../services/reportService')
 
 class ControllerReport {
@@ -88,7 +91,7 @@ class ControllerReport {
     //controlador para consultar reportes por fecha
     getReportByDate = async (req: Request, res: Response) => {
         const { _id, pro_code, com_id } = getAuthUser();
-        let { start_date = 0, final_date } = req.query; //fechas obtenidas de la request
+        let { start_date, final_date } = req.query; //fechas obtenidas de la request
 
         try {
             let dataReport: object = req.query;
@@ -130,8 +133,18 @@ class ControllerReport {
 
     getNumberReportsByDay = async (req: Request, res: Response) => {
         const dataReport = req.query; //fechas obtenidas de la request
+        const {pro_code} = getAuthUser();
         try {
-            const response: object = await getNumberReportsByDay(dataReport);
+            
+            let response:object;
+            if(pro_code.pro_name == "admin"){
+                console.log("hola2")
+            response = await getNumberReportsByDay(dataReport);
+
+            }else{
+                console.log("hola")
+                response = await getNumberReportsByDateForUser(dataReport)
+            }
             return res.json(response)
         } catch (error: any) {
             return res.json({
@@ -144,12 +157,27 @@ class ControllerReport {
     getNumberReportsByTable = async(req: Request, res: Response) =>{
         try {
             const {date} = req.query;
-            const response:object = await getNumberReportsByTable(date);
+            const response = await getNumberReportsByTable(date);
+           
             return res.json(response)
         } catch (error:any) {
             res.json({
                 status:500,
                 message:error.mesaage
+            })
+        }
+        
+    }
+
+    getPercentajeChart = async(req:Request, res:Response) =>{
+        const {com_name} = req.query;
+        try {
+            const response: object = await getPercentajeChartService(com_name);
+            return res.json(response);
+        } catch (error:any) {
+            return res.json({
+                status:500,
+                message: error.message
             })
         }
     }

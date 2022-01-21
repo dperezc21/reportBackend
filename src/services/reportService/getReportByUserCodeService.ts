@@ -6,14 +6,14 @@ import User from "../../models/modelUser";
 const getReportByUserCodeRepository = async(user_code:any) => {
     
     try {
-        const user: UserInterface = await User.findById({_id:user_code, user_status:true})
+        const user: UserInterface = await User.findById({_id:user_code})
         if(!user){
             return {
                 status:602, message:"usuario no existe"
             };
         }
 
-        const reports: ReportInterface[] = await Report.find({user_code, rep_status:true})
+        const reports: ReportInterface[] = await Report.find({user_code})
                                     .populate('cat_code', ['cat_name'])
         if(!reports){
             return {

@@ -16,6 +16,6 @@ const router = Router();
 router.post('/insertCompany',[validCompanyName, validUserName, validPassword], insertCompany);
 router.put('/newCode',[verifiyJWT,validRol], generateCode);
 router.get('/getCompanyCode',[verifiyJWT,validRol], getCompanyCode )
-router.get('/getDataForGrafic', [verifiyJWT, validRol], getPercentajeChart)
+
 
 export = router;

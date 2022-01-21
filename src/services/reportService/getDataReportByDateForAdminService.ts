@@ -12,13 +12,12 @@ const getDataReportByDateForAdminRepository = async (dataReport: any) => {
     const {start_date, final_date} = dataReport;
     const {com_id} = getAuthUser();
     try {
-        const users: UserInterface[] = await User.find({com_id, user_status:true});
+        const users: UserInterface[] = await User.find({com_id});
         //mapea los usuarios y devuelve una lista de id de usuarios
         const ids_user:number[] = listIds(users);
         const reports: ReportInterface[] = await Report.find({
             user_code:ids_user,
-            rep_create_date: {$gte:start_date, $lte:final_date},
-                 rep_status:true})
+            rep_create_date: {$gte:start_date, $lte:final_date}})
                 .populate('cat_code', ['cat_name'])
                 .populate('user_code',['user_name']);
         if(reports.length == 0) {

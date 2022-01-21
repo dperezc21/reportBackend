@@ -18,9 +18,7 @@ const getNumberReportsByDay = async(dataReport:any) => {
         const reports: ReportInterface[] = await Report.find({
             user_code:ids_user,
             rep_create_date: {$gte:start_date, $lte:final_date},
-                 rep_status:true})
-                .populate('cat_code', ['cat_name'])
-                .populate('user_code',['user_name']);
+                 })
         if(reports.length == 0) {
             return {
                 status:805,

@@ -5,7 +5,7 @@ import Report from "../../models/modelReport";
 
 const getReportByCodeRepository = async(rep_code:any) =>{
     try {
-        const report: ReportInterface = await Report.findOne({rep_code, rep_status:true})
+        const report: ReportInterface = await Report.findOne({rep_code})
                                    .populate('cat_code', ['cat_name'])
                                    .populate('user_code',['user_name', 'pro_code'])
         if(!report){

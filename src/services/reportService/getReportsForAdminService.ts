@@ -8,10 +8,10 @@ const {listIds} = require('../../helpers/helperUser');
 //metodo para realizar consultas reportes de usuarios para un administrador
 const getInquiryForAdminRepository = async(com_id:Number) => {
     try {
-        const users: UserInterface[] = await User.find({com_id, user_status:true});
+        const users: UserInterface[] = await User.find({com_id});
         //mapea los usuarios y devuelve una lista de id de usuarios
         const ids_user:number[] = listIds(users);
-        const reports:ReportInterface = await Report.find({user_code:ids_user, rep_status:true})
+        const reports:ReportInterface = await Report.find({user_code:ids_user})
                                                 .populate('user_code',['user_name', 'pro_code'])
                                                 .populate('cat_code', ['cat_name']);
         if(!reports){
