@@ -19,24 +19,24 @@ const modelCompany = Schema({
         type:String,
         default:""
     },
-    com_nit:{
-        type:String,
-        required:true,
-        unique:true
-    },
-    com_email:{
-        type:String,
-        unique:true
-    },
-    com_address:{
-        type:String
-    },
-    com_land_line:{
-        type:Number
-    },
-    com_cell_phone:{
-        type:Number
-    },
+    // com_nit:{
+    //     type:String,
+    //     required:true,
+    //     unique:true
+    // },
+    // com_email:{
+    //     type:String,
+    //     unique:true
+    // },
+    // com_address:{
+    //     type:String
+    // },
+    // com_land_line:{
+    //     type:Number
+    // },
+    // com_cell_phone:{
+    //     type:Number
+    // },
     com_status:{
         type:Boolean,
         default:true
