@@ -16,6 +16,11 @@ class Server{
     
     private routers = () => {
         //routers de la api
+        this.app.get('/', (req:Request,res: Response) => {
+            return res.json({
+                status:200
+            })
+        })
         this.app.use(require('../routers/routerCompany'));
         this.app.use(require('../routers/routerUser'));
         this.app.use(require('../routers/routerReport'));
