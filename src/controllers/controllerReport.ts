@@ -139,14 +139,14 @@ class ControllerReport {
         try {
             
             let response:object;
-            if(pro_code.pro_name == "admin"){
-                console.log("hola2")
+            // if(pro_code.pro_name == "admin"){
+            
             response = await getNumberReportsByDay(dataReport);
 
-            }else{
-                console.log("hola")
-                response = await getNumberReportsByDateForUser(dataReport)
-            }
+            // }else{
+            //     console.log("hola")
+            //     response = await getNumberReportsByDateForUser(dataReport)
+            // }
             return res.json(response)
         } catch (error: any) {
             return res.json({
@@ -159,19 +159,22 @@ class ControllerReport {
     getNumberReportsByTable = async(req: Request, res: Response) =>{
         try {
             const {date} = req.query;
-
             const {pro_code} = getAuthUser();
             let response:object={};
-            if(pro_code.pro_name == "admin") {
+            // if(pro_code.pro_name == configCompany.pro_name) {
 
                 response = await getNumberReportsByTable(date);
-            }else{
-                const responseReports: any= await getReportsService();
-                if(responseReports.reports.length > 0){
-                    const reports = responseReports.reports
-                    response = dataReportsAdmin(reports)
-                }
-            }
+            // }else{
+            //     const responseReports: any= await getReportsService();
+            //     if(responseReports.reports.length > 0){
+            //         const reports: ReportInterface[] = responseReports.reports
+            //         console.log(moment(1642791900000))
+            //         response = {
+            //             status:200,
+            //             num_reportes:reports.length
+            //         }
+            //     }
+            // }
            
             return res.json(response)
         } catch (error:any) {

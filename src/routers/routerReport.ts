@@ -24,5 +24,5 @@ router.get('/getReportByDate',[verifiyJWT, valid_date_reports_to_display], getRe
 router.delete('/deleteReportByCode',[verifiyJWT, validRol], deleteReportByCode);
 router.get('/getNumberReportsByDay',[verifiyJWT, valid_date_reports_to_display], getNumberReportsByDay);
 router.get('/getNumberReportsByTable', verifiyJWT, getNumberReportsByTable)
-router.get('/getDataForGrafic', getPercentajeChart)
+router.get('/getDataForGrafic',verifiyJWT, getPercentajeChart)
 export = router;

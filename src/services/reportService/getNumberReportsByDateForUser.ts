@@ -10,6 +10,7 @@ const { getAuthUser } = require("../../middleware/verifyToken");
 
 const getNumberReportsByDateForUser = async (date: any) => {
     const {start_date, final_date} = date;
+    console.log(moment(start_date), moment(start_date))
     const { _id } = getAuthUser();
     try {
       
@@ -27,7 +28,7 @@ const getNumberReportsByDateForUser = async (date: any) => {
             rep_create_date: { $gte: start_date, $lte: final_date },
             }).populate('user_code',['user_name']);
             console.log(reports.length)
-            const data = dataReportsUser(reports, "YYYY-MM-DD");
+            const data = dataReportsUser(reports, "YYYY-MM-DD  HH:mm");
             return {
                 status:200,
                 message:data

@@ -1,4 +1,4 @@
-
+const { configUser } = require("../../helpers/dataConfig");
 import CompanyInterface from "../../interfaces/companyInterface";
 import FileInterface from "../../interfaces/fileInterface";
 import ReportInterface from "../../interfaces/reportInterface";
@@ -10,10 +10,10 @@ import modelUser from "../../models/modelUser";
 const { configFile } =require( "../../helpers/dataConfig");
 const {configReport } = require( "../../helpers/dataConfig");
 const {listIds} = require('../../helpers/helperUser');
-
+const { getAuthUser } = require("../../middleware/verifyToken");
 
 const grafic = async(com_name:any) => {
-
+    const { pro_code, _id } = getAuthUser();
     try {
         const company: CompanyInterface = await modelCompany.findOne({com_name, com_status:true});
         if (!company){
@@ -22,11 +22,19 @@ const grafic = async(com_name:any) => {
                 message:"compañia no existe"
             }
         }
-        const users: UserInterface[] = await modelUser.find({com_id:company._id, user_status:true});
-        if(users.length == 0){
-            return {status:602, message:"usuarios de compañia no encontrado"}
+
+        let users: UserInterface[] | UserInterface;
+        if (pro_code.pro_name == configUser.pro_name){
+            users = await modelUser.find({com_id:company._id, _id, user_status:true});
+        }else{
+
+            users = await modelUser.find({com_id:company._id, user_status:true});
         }
 
+        if(!users){
+            return {status:602, message:"usuarios de compañia no encontrado"}
+        }
+        
         const ids_users: number[] = listIds(users);
         const reports: ReportInterface[] = await modelReport.find({user_code:ids_users, rep_status:true});
         if(reports.length == 0){

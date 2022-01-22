@@ -4,8 +4,8 @@
   "description": "app service para realizar solicitudes para app de reportes",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node dist/app.js",
-    "dev": "tsc && nodemon dist/app.js"
+    "start": "tsc && node dist/src/app.js",
+    "dev": "tsc && nodemon dist/src/app.js"
   },
   "author": "davier perez",
   "license": "ISC",

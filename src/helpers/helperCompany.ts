@@ -30,12 +30,12 @@ class HelperCompany {
     }
 
 
-    dataReportByGrafic = (reports: ReportInterface[]) => {
+    dataReportByGrafic = (reports: ReportInterface[], format_date ="YY-MM-DD" ) => {
         let data_list: object[] = [];
         let data: any = {};
         reports.forEach((report: ReportInterface) => {
             const date = new Date(report.rep_create_date)
-            const d = moment(date).format("YY-MM-DD");
+            const d = moment(date).format(format_date);
             if (Object.keys(data).includes(d)) {
                 data[d] += 1;
             } else {
