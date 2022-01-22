@@ -39,11 +39,9 @@ const getNumberReportsByTable = async (date: any) => {
         }
 
         const idsUser: number[] = listIds(users);
-        console.log(idsUser)
         const reports: ReportInterface[] = await modelReport.find({user_code:idsUser, 
             rep_create_date: { $gte: start_date, $lte: final_date },
             }).populate('user_code',['user_name']);
-            console.log(reports.length)
             if(reports.length == 0){
                 return {
                     status:805,
@@ -51,8 +49,11 @@ const getNumberReportsByTable = async (date: any) => {
                 }
             }
 
-        
-            const data = dataReportsAdmin(reports);
+            let data = dataReportsAdmin(reports);
+            if(pro_code.pro_name == configUser.pro_name){
+                console.log(data)
+                data = data[0].num_reports
+            }
             return {
                 status:200,
                 message:data
