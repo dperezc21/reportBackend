@@ -1,8 +1,4 @@
 import { Request, Response } from "express";
-import moment from "moment";
-import ReportInterface from "../interfaces/reportInterface";
-import UserInterface from "../interfaces/userInterface";
-const {dataReportsAdmin} = require("../helpers/helperCompany")
 const { configCompany } = require('../helpers/dataConfig');
 const { getAuthUser } = require("../middleware/verifyToken");
 const { dayDateRange } = require('../helpers/helperCompany')
@@ -18,8 +14,7 @@ const {
     getDataReportByDateForAdminService,
     getReportsForAdminService,
     getNumberReportsByDay,
-    getNumberReportsByTable,
-    getNumberReportsByDateForUser
+    getNumberReportsByTable
 } = require('../services/reportService')
 
 class ControllerReport {
@@ -135,12 +130,12 @@ class ControllerReport {
 
     getNumberReportsByDay = async (req: Request, res: Response) => {
         const dataReport = req.query; //fechas obtenidas de la request
-        const {pro_code} = getAuthUser();
+        const { pro_code } = getAuthUser();
         try {
-            
-            let response:object;
+
+            let response: object;
             // if(pro_code.pro_name == "admin"){
-            
+
             response = await getNumberReportsByDay(dataReport);
 
             // }else{
@@ -156,44 +151,28 @@ class ControllerReport {
         }
     }
 
-    getNumberReportsByTable = async(req: Request, res: Response) =>{
+    getNumberReportsByTable = async (req: Request, res: Response) => {
         try {
-            const {date} = req.query;
-            const {pro_code} = getAuthUser();
-            let response:object={};
-            // if(pro_code.pro_name == configCompany.pro_name) {
-
-                response = await getNumberReportsByTable(date);
-            // }else{
-            //     const responseReports: any= await getReportsService();
-            //     if(responseReports.reports.length > 0){
-            //         const reports: ReportInterface[] = responseReports.reports
-            //         console.log(moment(1642791900000))
-            //         response = {
-            //             status:200,
-            //             num_reportes:reports.length
-            //         }
-            //     }
-            // }
-           
+            const { date } = req.query;
+            let response: object = await getNumberReportsByTable(date);
             return res.json(response)
-        } catch (error:any) {
+        } catch (error: any) {
             res.json({
-                status:500,
-                message:error.mesaage
+                status: 500,
+                message: error.mesaage
             })
         }
-        
+
     }
 
-    getPercentajeChart = async(req:Request, res:Response) =>{
-        const {com_name} = req.query;
+    getPercentajeChart = async (req: Request, res: Response) => {
+        const { com_name } = req.query;
         try {
             const response: object = await getPercentajeChartService(com_name);
             return res.json(response);
-        } catch (error:any) {
+        } catch (error: any) {
             return res.json({
-                status:500,
+                status: 500,
                 message: error.message
             })
         }
