@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+const { JSON_WEB_TOKEN_KEY } =require( "../../config");
 import UserInterface from "../interfaces/userInterface";
 const User = require("../models/modelUser");
 const jwt = require('jsonwebtoken');
@@ -17,7 +18,7 @@ class JWT {
             return res.json({status:401,message:"required token"});
         }
     
-        jwt.verify(token, process.env.JSON_WEB_TOKEN_KEY, async(err:any, payload:any ) =>{
+        jwt.verify(token, JSON_WEB_TOKEN_KEY, async(err:any, payload:any ) =>{
             if(err){
                 return res.json({
                     status:401,
