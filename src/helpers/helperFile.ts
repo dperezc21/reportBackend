@@ -1,9 +1,10 @@
 
 import FileInterface from "../interfaces/fileInterface";
 import modelFile from "../models/modelFile";
+const { configFile } = require("./dataConfig");
 
 class HelperFile {
-
+    
     numberFiles = async(files:FileInterface[], rep_code:string, file_type:string) => {
         
         try {
@@ -21,6 +22,21 @@ class HelperFile {
             return new Error(error.message);
         }
     }
+
+    verifyFileTypes = (files:FileInterface[], files_type:string[]) => {
+        
+        let file_type: null | string = null; 
+        for (const file of files) {
+            if(files_type.includes(file.file_type)){
+                return file.file_type
+            }
+            
+        }
+        
+        return file_type;
+    }
+
+    
 }
 
 export =new HelperFile
