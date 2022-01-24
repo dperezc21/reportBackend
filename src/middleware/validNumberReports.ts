@@ -28,8 +28,7 @@ const validNumberReports = async(req:Request, res:Response, next:any) => {
         const idsUser: number[] = listIds(users);
         console.log(idsUser)
       
-        const reports: ReportInterface[] = await modelReport.find({user_code:idsUser, 
-            rep_status:true})
+        const reports: ReportInterface[] = await modelReport.find({user_code:idsUser})
         console.log(reports.length)
         if(reports.length <= configReport.number_reports-1){
             next()

@@ -36,7 +36,7 @@ const grafic = async(com_name:any) => {
         }
         
         const ids_users: number[] = listIds(users);
-        const reports: ReportInterface[] = await modelReport.find({user_code:ids_users, rep_status:true});
+        const reports: ReportInterface[] = await modelReport.find({user_code:ids_users});
         if(reports.length == 0){
             return {
                 status:805,
