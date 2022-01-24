@@ -50,10 +50,6 @@ const getNumberReportsByTable = async (date: any) => {
             }
 
             let data = dataReportsAdmin(reports);
-            if(pro_code.pro_name == configUser.pro_name){
-                console.log(data)
-                data = data[0].num_reports
-            }
             return {
                 status:200,
                 message:data
