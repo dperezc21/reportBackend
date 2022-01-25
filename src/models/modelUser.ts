@@ -24,32 +24,28 @@ const modelUser = Schema({
         type: String,
         required: true
     },
-    // user_id_type:{
-    //     type:String,
-    //     required:true
-    // },
-    // user_id:{
-    //     type:String,
-    //     require:true,
-    //     unique:true
-    // },
-    // user_full_name:{
-    //     type:String,
-    //     required:true
-    // },
-    // user_address:{
-    //     type:String
-    // },
-    // user_email:{
-    //     type:String, 
-    //     unique:true
-    // },
-    // user_land_line:{
-    //     type:Number
-    // },
-    // user_cell:{
-    //     type:Number
-    // },
+    user_id_type:{
+        type:String,
+        required:true
+    },
+    user_id:{
+        type:String,
+        require:true,
+        unique:true
+    },
+    names_user:{
+        type:String,
+        required:true
+    },
+    user_last_name:{
+        type:String
+    },
+    user_email:{
+        type:String
+    },
+    user_cell:{
+        type:String
+    },
     user_create_date:{
         type: Number,
         default:Date.now

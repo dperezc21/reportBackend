@@ -18,8 +18,8 @@ class ValidFiels {
     }
     
     validCompanyName = async(req:Request, res:Response, next:any) =>{
-        let {com_name} = req.body;
-        com_name = com_name.toLowerCase()
+        let {company} = req.body;
+        const com_name = company.com_name.toLowerCase()
         try {
             if (com_name.length<3 || !com_name){
                 return res.json({
@@ -32,7 +32,7 @@ class ValidFiels {
                     status:603,
                     message:"compañia existe en la base de datos"});
             }
-            req.body.com_name = com_name;
+            req.body.company.com_name = com_name;
             next();
             
         } catch (error) {
@@ -44,10 +44,10 @@ class ValidFiels {
     }
     
     validUserName = async(req:Request, res:Response, next:any) =>{
-        let {user_name} = req.body;
-        user_name = user_name.toLowerCase();
+        let {user} = req.body;
+        const user_name = user.user_name.toLowerCase();
         try {
-            if (!user_name){
+            if (!user_name ){
                 return res.json({
                     status:423,
                     message:"nombre de usuario requerido"})
@@ -60,7 +60,7 @@ class ValidFiels {
                     status:701,
                     message:"nombre de usuario ya existe"});
             }
-            req.body.user_name = user_name
+            req.body.user.user_name = user_name.toLowerCase()
             next();
             
         } catch (error) {
@@ -72,8 +72,9 @@ class ValidFiels {
     }
     
     validPassword = (req:Request, res:Response, next:any) => {
-        const {user_password} = req.body;
-        if (!user_password){
+        const {user, user_password} = req.body;
+        
+        if (!user?.user_password && !user_password){
             return res.json({
                 status:424,
                 message:"contraseña de usuario requerido"});

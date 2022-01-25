@@ -6,6 +6,10 @@ interface CompanyInterface {
     com_description: string,
     com_status: boolean,
     com_create_date: Date,
+    com_nit: string,
+    com_email: string,
+    com_cell_phone: string,
+    com_addres:string,
     save: any
 }
 

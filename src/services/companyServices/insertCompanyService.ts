@@ -9,17 +9,20 @@ const User = require('../../models/modelUser')
 const {configCompany} = require('../../helpers/dataConfig');
 
 
-const insertCompanyRepository = async(dataCampany: any) =>{
+const insertCompanyRepository = async(dataCompany: any) =>{
     
-    let com_code: string | Error = await companyCode(dataCampany.com_name);
-    dataCampany.com_code = com_code; 
-    
-    let {user_name, user_password, pro_name=configCompany.pro_name, ...companyData} = dataCampany
+    let {user, company} = dataCompany;
+    let com_code: string | Error = await companyCode(company.com_name);
+    company.com_code = com_code; 
+    // let {user_name, user_password, pro_name=configCompany.pro_name, ...companyData} = dataCampany
 
     try { 
-        const company: CompanyInterface = await Company(companyData);
+        const insertCompany: CompanyInterface = await Company(company);
+        // const company: CompanyInterface = await Company(companyData);
         
-        const profile: UserProfileInterface = await UserProfile.findOne({pro_name, pro_status:true});
+        const profile: UserProfileInterface = await UserProfile.findOne({
+            pro_name:configCompany.pro_name, pro_status:true
+        });
         const idProfile = profile._id;
         if (!idProfile){
             return {
@@ -27,23 +30,21 @@ const insertCompanyRepository = async(dataCampany: any) =>{
                 message:"perfil de usuario no existe"
             }
         }
-        company.save(async(err:any, product:any, numAffected:number) =>{
+        insertCompany.save(async(err:any, product:any, numAffected:number) =>{
             if (err) {
                 return {
                     status:500,
                     message: err.message
                 };
             } else if(product) {
-                
-                user_password = encriptPassword(user_password);
-                const data = {
-                    user_name,
-                    user_password,
-                    com_id:product._id,
-                    pro_code: idProfile
-                } 
-                const user = await User(data)
-                user.save((err:any, user:any) =>{
+                console.log(product)
+                user.user_password = encriptPassword(user.user_password);
+                user.com_id = product._id;
+                user.pro_code = idProfile;
+            
+                const insertUser = await User(user)
+                insertUser.save((err:any, user:any) =>{
+                    console.log(user)
                     if (err) {
                         return {
                             status:500,
