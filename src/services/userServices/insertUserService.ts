@@ -6,9 +6,9 @@ const UserProfile = require('../../models/modelUserProfile');
 const encript = require('bcryptjs');
 const {configUser} = require('../../helpers/dataConfig');
 
-const insertUserRepository = async(dataUser: UserInterface) => {
+const insertUserRepository = async(dataUser: any) => {
     console.log(dataUser)
-    let {com_id, user_name, user_password} = dataUser;
+    let {com_id, user_name, user_password, ...data} = dataUser;
   
     try {
         const profile:UserProfileInterface = await UserProfile.findOne({pro_name:configUser.pro_name, pro_status:true});
@@ -18,11 +18,13 @@ const insertUserRepository = async(dataUser: UserInterface) => {
                 message:"perfil de usuario no existe"
             };
         }
-
+        
         const salt: string = encript.genSaltSync();
-        user_password = encript.hashSync(user_password, salt); 
-        const pro_code = profile._id;
-        const user: UserInterface = await User({com_id, user_name, user_password, pro_code});
+        data.user_password = encript.hashSync(user_password, salt); 
+        data.pro_code = profile._id;
+        data.user_name = user_name
+        data.com_id = com_id
+        const user: UserInterface = await User(data);
         user.save((error:any, product:UserInterface) => {
             if(error){
                 return {
