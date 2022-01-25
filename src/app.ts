@@ -1,4 +1,4 @@
-const {listening} = require('./models/server');
+const {listening} = require('./server');
 listening();
 
 

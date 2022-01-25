@@ -1,9 +1,9 @@
-require('dotenv').config();
+
 import {connect} from 'mongoose';
 const { URL_MONGODB } = require('../../config');
 
 //url de conexion obtenido de las variables de entorno
-const URL:any = process.env.URL_MONGODB;
+const URL:any = URL_MONGODB;
 
 const connectionToDB = async() =>{
     try {

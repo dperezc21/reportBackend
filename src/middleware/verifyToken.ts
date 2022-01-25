@@ -18,7 +18,7 @@ class JWT {
             return res.json({status:401,message:"required token"});
         }
     
-        jwt.verify(token, process.env.JSON_WEB_TOKEN_KEY, async(err:any, payload:any ) =>{
+        jwt.verify(token, JSON_WEB_TOKEN_KEY, async(err:any, payload:any ) =>{
             if(err){
                 return res.json({
                     status:401,

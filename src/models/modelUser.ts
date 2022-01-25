@@ -1,6 +1,7 @@
+const { URL_MONGODB } = require( "../../config");
 const {Schema, model, createConnection} = require('mongoose');
 const autoIncrement = require('mongoose-auto-increment')
-const connection = createConnection(process.env.URL_MONGODB);
+const connection = createConnection(URL_MONGODB);
 autoIncrement.initialize(connection)
 
 const modelUser = Schema({
