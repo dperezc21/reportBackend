@@ -1,4 +1,4 @@
-const { validRol } =require("../middleware/validateFields");
+const { validRol } =require( "../middleware/validFieldsCompany");
 
 const { getCategories,
     deleteCategory, 

@@ -8,7 +8,7 @@ const { insertReport,
         getNumberReportsByTable,
         getPercentajeChart
     } = require("../controllers/controllerReport");
-const {validRol} =require("../middleware/validateFields");
+const {validRol} = require( "../middleware/validFieldsCompany");
 const {verifiyJWT} = require( "../middleware/verifyToken");
 const {valid_date_reports_to_display} = require("../middleware/validDateReportsToDisplay")
 const validNumberReports = require("../middleware/validNumberReports")

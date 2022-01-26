@@ -5,7 +5,7 @@ const getCategoriesService = async() => {
     try {
         const categories: CategoryInterface[] = await Category.find({cat_status:true});
         
-        if (!categories){
+        if (categories.length ==0){
             return {
                 status:803,
                 message:"categoria no existe"

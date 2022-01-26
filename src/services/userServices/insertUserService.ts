@@ -1,5 +1,9 @@
+import GardeInterface from "../../interfaces/gardeInterface";
+import IdTypeInterface from "../../interfaces/idTypeInterface";
 import UserInterface from "../../interfaces/userInterface";
 import UserProfileInterface from "../../interfaces/userProfileInterface";
+import modelGarde from "../../models/modelGarde";
+import modelIdType from "../../models/modelIdType";
 
 const User = require('../../models/modelUser');
 const UserProfile = require('../../models/modelUserProfile');
@@ -8,7 +12,7 @@ const {configUser} = require('../../helpers/dataConfig');
 
 const insertUserRepository = async(dataUser: any) => {
     console.log(dataUser)
-    let {com_id, user_name, user_password, ...data} = dataUser;
+    let {com_id, user_name, user_password, user_id_type, user_sexo, ...data} = dataUser;
   
     try {
         const profile:UserProfileInterface = await UserProfile.findOne({pro_name:configUser.pro_name, pro_status:true});
@@ -18,12 +22,28 @@ const insertUserRepository = async(dataUser: any) => {
                 message:"perfil de usuario no existe"
             };
         }
-        
+        const idType: IdTypeInterface = await modelIdType.findOne({id_type:user_id_type})
+        if(!idType){
+            return {
+                status:400,
+                message:"no existe tipo de identificacion"
+            }
+        }
+
+        const garde: GardeInterface = await modelGarde.findOne({garde:user_sexo})
+        if(!garde){
+            return {
+                status:400,
+                message:"genero no existe"
+            }
+        }
         const salt: string = encript.genSaltSync();
         data.user_password = encript.hashSync(user_password, salt); 
         data.pro_code = profile._id;
         data.user_name = user_name
         data.com_id = com_id
+        data.user_id_type = idType._id;
+        data.user_sexo = garde._id
         const user: UserInterface = await User(data);
         user.save((error:any, product:UserInterface) => {
             if(error){
@@ -35,7 +55,7 @@ const insertUserRepository = async(dataUser: any) => {
         });
         return {
             status:200,
-            message:"user inserted"
+            message:"usuario insertado"
         };
     } catch (error) {
         console.log(error);

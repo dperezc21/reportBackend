@@ -25,8 +25,9 @@ const modelUser = Schema({
         required: true
     },
     user_id_type:{
-        type:String,
-        required:true
+        type:Number,
+        required: true,
+        ref:'idType'
     },
     user_id:{
         type:String,
@@ -47,6 +48,15 @@ const modelUser = Schema({
     user_cell:{
         type:String
     },
+    user_sexo:{
+        type:Number,
+        required: true,
+        ref:'garde'
+    },
+    user_age:{
+        type:Number,
+        
+    },
     user_create_date:{
         type: Number,
         default:Date.now
@@ -60,10 +70,12 @@ const modelUser = Schema({
 modelUser.plugin(autoIncrement.plugin, {model:'user', startAt:1});
 
 modelUser.methods.toJSON = function(){
-    const {__v, user_password, _id, pro_code, com_id, ...user} = this.toObject();
+    const {__v, user_password, _id, pro_code, com_id,user_id, user_id_type,...user} = this.toObject();
     user.company = com_id;
     user.profile = pro_code;
     user.user_id = _id;
+    user.identificacion = user_id
+    user.id_type = user_id_type
     return user;
 }
 export = model('user', modelUser);

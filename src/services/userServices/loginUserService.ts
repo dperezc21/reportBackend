@@ -15,7 +15,9 @@ const loginUserRepository = async(data:any) =>{
         try {
             let user: Userinterface = await User.findOne({user_name:data.user_name, user_status:true})
                                    .populate('pro_code')
-                                   .populate('com_id',['com_name']);
+                                   .populate('com_id',['com_name'])
+                                   .populate('user_id_type')
+                                   .populate('user_sexo');
             if (!user){
                return {
                    status:423, message:"usuario incorrecto"
@@ -25,7 +27,9 @@ const loginUserRepository = async(data:any) =>{
             if(user.pro_code.pro_name != configUser.pro_name){
                 user = await User.findOne({user_name:data.user_name, user_status:true})
                                    .populate('pro_code')
-                                   .populate('com_id',['com_name', 'com_code']);
+                                   .populate('com_id',['com_name', 'com_code'])
+                                   .populate('user_id_type')
+                                   .populate('user_sexo');
             }
             const validPassword: string = encript.compareSync(data.user_password, user.user_password);
             if (!validPassword){
