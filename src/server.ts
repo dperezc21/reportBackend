@@ -1,15 +1,24 @@
 import express, { Request, Response } from 'express';
 import connectionToDB from './dataBase/connectionToMongoDb';
 const cors = require('cors');
+const https = require('https')
+const fs = require('fs')
+const path = require('path')
 const { PORT } = require('../config');
 
 
 class Server{
     
     app = express();
+    rootCert = path.join(__dirname,'/ludyorder_com.crt')
+    rootkey = path.join(__dirname,'/ludyorder_com.key')
+    sllServer:any;
      
     constructor(){ 
-
+        this.sllServer = https.createServer({
+            cert: fs.readFileSync(this.rootCert),
+            key: fs.readFileSync(this.rootkey)
+        }, this.app)
         this.middleware();
         this.routers();
         this.connetionDB();
@@ -45,7 +54,7 @@ class Server{
 
     listening = () => {
         //listening
-        this.app.listen(PORT, () => {
+        this.sllServer.listen(PORT, () => {
             console.log(`server is listening on 5000`)
         });
     }
