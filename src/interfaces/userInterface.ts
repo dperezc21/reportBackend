@@ -11,6 +11,13 @@ interface UserInterface {
     user_password: string,
     usuer_status: boolean,
     user_create_date: Date,
+    user_id_type :string,
+    String :string,
+    user_id :string,
+    names_user :string,
+    user_last_name :string,
+    user_email :string,
+    user_cell :string,
     save: any,
     map: any
 }

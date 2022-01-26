@@ -41,7 +41,8 @@ const modelUser = Schema({
         type:String
     },
     user_email:{
-        type:String
+        type:String,
+        unique:true
     },
     user_cell:{
         type:String
