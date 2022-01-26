@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-const getIdTypeService = require('../services/IdTypeService/getIdTypesServices')
+const getIdTypeService = require('../services/idTypeService/getIdTypesServices')
 const insertIdTypeService = require('../services/idTypeService/insertIdTypeService')
 
 class ControllerIdType {
