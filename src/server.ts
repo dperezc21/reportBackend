@@ -10,15 +10,13 @@ const { PORT } = require('../config');
 class Server{
     
     app = express();
-    rootCert = path.join(__dirname,'/ludyorder_com.crt')
-    rootkey = path.join(__dirname,'/ludyorder_com.key')
     sllServer:any;
      
     constructor(){ 
-        this.sllServer = https.createServer({
-            cert: fs.readFileSync(this.rootCert),
-            key: fs.readFileSync(this.rootkey)
-        }, this.app)
+        // this.sllServer = https.createServer({
+        //     cert: fs.readFileSync(path.join(__dirname,'/ludyorder_com.crt')),
+        //     key: fs.readFileSync(path.join(__dirname,'/ludyorder_com.key'))
+        // }, this.app)
         this.middleware();
         this.routers();
         this.connetionDB();
@@ -54,8 +52,8 @@ class Server{
 
     listening = () => {
         //listening
-        this.sllServer.listen(PORT, () => {
-            console.log(`server is listening on 5000`)
+        this.app.listen(PORT, () => {
+            console.log(`server is listening on ${PORT}`)
         });
     }
 
