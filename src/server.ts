@@ -13,10 +13,10 @@ class Server{
     sllServer:any;
      
     constructor(){ 
-        this.sllServer = https.createServer({
-            cert: fs.readFileSync(path.join(__dirname,'/ludyorder_com.crt')),
-            key: fs.readFileSync(path.join(__dirname,'/ludyorder_com.key'))
-        }, this.app)
+        // this.sllServer = https.createServer({
+        //     cert: fs.readFileSync(path.join(__dirname,'/ludyorder_com.crt')),
+        //     key: fs.readFileSync(path.join(__dirname,'/ludyorder_com.key'))
+        // }, this.app)
         this.middleware();
         this.routers();
         this.connetionDB();
@@ -56,7 +56,7 @@ class Server{
 
     listening = () => {
         //listening
-        this.sllServer.listen(PORT, () => {
+        this.app.listen(PORT, () => {
             console.log(`server is listening on ${PORT}`)
         });
     }
