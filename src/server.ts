@@ -13,10 +13,7 @@ class Server{
     sllServer:any;
      
     constructor(){ 
-        this.sllServer = https.createServer({
-            cert: fs.readFileSync(path.join(__dirname,'/ludyorder_com.crt')),
-            key: fs.readFileSync(path.join(__dirname,'/ludyorder_com.key'))
-        }, this.app)
+        this.sslHttps();
         this.middleware();
         this.routers();
         this.connetionDB();
@@ -39,7 +36,12 @@ class Server{
         this.app.use(require('./routers/routerIdType'));
         this.app.use(require('./routers/routerGender'));
     }
-
+    private sslHttps = () =>{
+        this.sllServer = https.createServer({
+            cert: fs.readFileSync(path.join(__dirname,'/ludyorder_com.crt')),
+            key: fs.readFileSync(path.join(__dirname,'/ludyorder_com.key'))
+        }, this.app)
+    }
     
     private connetionDB = async() => {
         //connection a la base de datos en mongodb
