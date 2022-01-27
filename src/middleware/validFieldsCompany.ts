@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { validationResult } from "express-validator";
 import CompanyInterface from "../interfaces/companyInterface";
 import modelCompany from "../models/modelCompany";
 const Company = require('../models/modelCompany')
@@ -72,6 +73,32 @@ class ValidFieldsCompany {
             })
         }
 
+        next();
+    }
+
+    validAddressCompany = (req: Request, res: Response, next: any) => {
+        const { company } = req.body;
+
+        if (!company.com_address) {
+            return res.json({
+                status: 424,
+                message: "direccion de la compañia es requerida"
+            });
+        }
+        next();
+
+    }
+
+
+    validChecks = (req: Request, res: Response, next: any) => {
+        const error:any = validationResult(req);
+        if (!error.isEmpty()){
+            let errores:string[] = [];
+            error["errors"].forEach((element:any) => {
+                errores.push(element.msg)
+            });
+            return res.json({status:400, errores});
+        }
         next();
     }
 

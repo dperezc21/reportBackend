@@ -93,7 +93,11 @@ class ValidFieldsUser {
             next();
             
         } catch (error) {
-            
+            console.log(error);
+            return res.json({
+                status: 500,
+                message: error
+            });
         }
     }
 
@@ -123,18 +127,6 @@ class ValidFieldsUser {
 
     }
 
-    validUserEmail = (req: Request, res: Response, next: any) => {
-        const { user, user_email } = req.body;
-
-        if (!user?.user_email && !user_email) {
-            return res.json({
-                status: 424,
-                message: "correo de usuario requerido"
-            });
-        }
-        next();
-
-    }
 
     validFieldUpdateUser(req: Request, res: Response, next: any) {
         const data = req.body;
