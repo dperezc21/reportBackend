@@ -30,7 +30,7 @@ const modelUser = Schema({
         ref:'idType'
     },
     user_id:{
-        type:String,
+        type:Number,
         require:true,
         unique:true
     },
