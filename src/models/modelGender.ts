@@ -6,23 +6,23 @@ const connection = createConnection(URL_MONGODB);
 autoIncrement.initialize(connection)
 
 
-const modelGarde = Schema({
-    garde:{
+const modelGender = Schema({
+    gender:{
         type:String,
         required:true,
         unique:true
     },
-    garde_status:{
+    gender_status:{
         type:Boolean,
         default:true
     }
     
 });
 
-modelGarde.plugin(autoIncrement.plugin, {model:'garde', startAt:1});
-modelGarde.methods.toJSON = function(){
-    const {__v, garde_status, ...garde} = this.toObject();
+modelGender.plugin(autoIncrement.plugin, {model:'gender', startAt:1});
+modelGender.methods.toJSON = function(){
+    const {__v, gender_status, ...gender} = this.toObject();
     
-    return garde;
+    return gender;
 }
-export = model('garde', modelGarde);
+export = model('gender', modelGender);

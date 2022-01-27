@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import CompanyInterface from "../interfaces/companyInterface";
+import modelCompany from "../models/modelCompany";
 const Company = require('../models/modelCompany')
 const { getAuthUser } = require('../middleware/verifyToken')
 
@@ -43,6 +45,34 @@ class ValidFieldsCompany {
                 message: error
             });
         }
+    }
+
+    validNitCompany = async(req: Request, res: Response, next: any) => {
+        const { company } = req.body;
+        if (!company.com_nit) {
+            return res.json({
+                status: 424,
+                message: "contraseña de usuario requerido"
+            });
+        }
+        try {
+
+            const getCompany: CompanyInterface = await modelCompany.findOne({com_nit:company.com_nit})
+            if(getCompany) {
+                return res.json({
+                    status:400,
+                    message:"nit de empresa ya existe"
+                })
+            }
+            next();
+        } catch (error:any) {
+            return res.json({
+                status:500,
+                message:error.message
+            })
+        }
+
+        next();
     }
 
 

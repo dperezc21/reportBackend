@@ -16,8 +16,8 @@ const loginUserRepository = async(data:any) =>{
             let user: Userinterface = await User.findOne({user_name:data.user_name, user_status:true})
                                    .populate('pro_code')
                                    .populate('com_id',['com_name'])
-                                   .populate('user_id_type')
-                                   .populate('user_sexo');
+                                   .populate('user_id_type',['_id', 'id_type'])
+                                   .populate('user_sexo',['_id', 'gender']);
             if (!user){
                return {
                    status:423, message:"usuario incorrecto"

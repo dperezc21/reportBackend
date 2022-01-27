@@ -51,7 +51,7 @@ const modelUser = Schema({
     user_sexo:{
         type:Number,
         required: true,
-        ref:'garde'
+        ref:'gender'
     },
     user_age:{
         type:Number,

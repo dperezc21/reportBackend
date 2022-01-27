@@ -1,18 +1,19 @@
+import GenderInterface from "../../interfaces/genderInterface"
 import IdTypeInterface from "../../interfaces/idTypeInterface"
-import modelGarde from "../../models/modelGarde"
+import modelGarde from "../../models/modelGender"
 
 
-const insertGardeService = async(param:any) => {
+const insertGenderService = async(param:any) => {
     try {
-        const getGarde: IdTypeInterface = await modelGarde.findOne({garde:param})
+        const getGarde: IdTypeInterface = await modelGarde.findOne({gender:param})
         if(getGarde) {
             return {
                 status:400,
                 message:"existe genero en base de datos"
             }
         }
-        const garde = await modelGarde({garde:param});
-        garde.save((error:any, cat:any) =>{
+        const gender:GenderInterface = await modelGarde({gender:param});
+        gender.save((error:any, cat:any) =>{
         if (error){
             console.log(error);
             return {
@@ -35,4 +36,4 @@ const insertGardeService = async(param:any) => {
     }
 }
 
-export = insertGardeService
+export = insertGenderService

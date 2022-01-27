@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-const getGardeService = require('../services/gardeService/getGardeServices')
-const insertGardeService = require('../services/gardeService/insertGardeService')
+const getGenderService = require('../services/genderService/getGenderServices')
+const insertGenderService = require('../services/genderService/insertGenderService')
 
 class ControllerIdType {
 
-    getGarde = async(req:Request, res:Response, next:any) =>{
+    getGender = async(req:Request, res:Response, next:any) =>{
 
         try {
-            const response: object = await getGardeService();
+            const response: object = await getGenderService();
             return res.json(response)
         } catch (error:any) {
             return res.json({
@@ -18,10 +18,10 @@ class ControllerIdType {
 
     }
 
-    insertGarde = async(req:Request, res:Response, next:any) =>{
+    insertGender = async(req:Request, res:Response, next:any) =>{
         const paramtro:any = req.params.garde
         try {
-            const response: object = await insertGardeService(paramtro);
+            const response: object = await insertGenderService(paramtro);
             return res.json(response)
         } catch (error:any) {
             return res.json({

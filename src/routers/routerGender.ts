@@ -2,11 +2,11 @@ const {verifiyJWT} = require("../middleware/verifyToken");
 
 const {Router} = require('express');
 const router = Router();
-const {getGarde,insertGarde} =  require('../controllers/controllerGarde')
+const {getGender,insertGender} =  require('../controllers/controllerGender')
 const {validRol} =  require('../middleware/validFieldsCompany')
 
 
-router.get('/getGarde',getGarde)
-router.post('/insertGarde/:garde',[verifiyJWT, validRol],insertGarde)
+router.get('/getGender',getGender)
+router.post('/insertGender/:garde',[verifiyJWT, validRol],insertGender)
 
 export = router

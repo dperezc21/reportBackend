@@ -1,8 +1,9 @@
-import GardeInterface from "../../interfaces/gardeInterface";
+
+import GenderInterface from "../../interfaces/genderInterface";
 import IdTypeInterface from "../../interfaces/idTypeInterface";
 import UserInterface from "../../interfaces/userInterface";
 import UserProfileInterface from "../../interfaces/userProfileInterface";
-import modelGarde from "../../models/modelGarde";
+import modelGarde from "../../models/modelGender";
 import modelIdType from "../../models/modelIdType";
 
 const User = require('../../models/modelUser');
@@ -12,7 +13,7 @@ const {configUser} = require('../../helpers/dataConfig');
 
 const insertUserRepository = async(dataUser: any) => {
     console.log(dataUser)
-    let {com_id, user_name, user_password, user_id_type, user_sexo, ...data} = dataUser;
+    let {com_id, user_name, user_password, user_id_type, gender_id, ...data} = dataUser;
   
     try {
         const profile:UserProfileInterface = await UserProfile.findOne({pro_name:configUser.pro_name, pro_status:true});
@@ -22,7 +23,7 @@ const insertUserRepository = async(dataUser: any) => {
                 message:"perfil de usuario no existe"
             };
         }
-        const idType: IdTypeInterface = await modelIdType.findOne({id_type:user_id_type})
+        const idType: IdTypeInterface = await modelIdType.findOne({_id:user_id_type})
         if(!idType){
             return {
                 status:400,
@@ -30,8 +31,8 @@ const insertUserRepository = async(dataUser: any) => {
             }
         }
 
-        const garde: GardeInterface = await modelGarde.findOne({garde:user_sexo})
-        if(!garde){
+        const gender: GenderInterface = await modelGarde.findOne({_id:gender_id})
+        if(!gender){
             return {
                 status:400,
                 message:"genero no existe"
@@ -43,7 +44,7 @@ const insertUserRepository = async(dataUser: any) => {
         data.user_name = user_name
         data.com_id = com_id
         data.user_id_type = idType._id;
-        data.user_sexo = garde._id
+        data.user_sexo = gender._id
         const user: UserInterface = await User(data);
         user.save((error:any, product:UserInterface) => {
             if(error){

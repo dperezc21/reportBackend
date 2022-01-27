@@ -37,7 +37,7 @@ class Server{
         this.app.use(require('./routers/routerFile'));
         this.app.use(require('./routers/routerToken'));
         this.app.use(require('./routers/routerIdType'));
-        this.app.use(require('./routers/routerGarde'));
+        this.app.use(require('./routers/routerGender'));
     }
 
     

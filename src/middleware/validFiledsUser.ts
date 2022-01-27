@@ -15,8 +15,10 @@ class ValidFieldsUser {
             }
             if (user?.user_name) {
                 name = user.user_name.toLowerCase()
+                req.body.user.user_name = name
             } else {
                 name = user_name.toLowerCase()
+                req.body.user_name = name
             }
 
             const searchUser = await User.findOne({ user_name: name });
@@ -27,6 +29,7 @@ class ValidFieldsUser {
                     message: "nombre de usuario ya existe"
                 });
             }
+            
             next();
 
         } catch (error) {
