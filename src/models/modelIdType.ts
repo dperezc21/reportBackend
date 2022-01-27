@@ -7,7 +7,7 @@ autoIncrement.initialize(connection)
 
 const modelIdType = Schema({
     id_type:{
-        type:String,
+        type:Number,
         required:true,
         unique:true
     },
