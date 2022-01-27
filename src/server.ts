@@ -14,8 +14,8 @@ class Server{
      
     constructor(){ 
         this.sllServer = https.createServer({
-            cert: fs.readFileSync(path.join(__dirname,'/certificado.crt')),
-            key: fs.readFileSync(path.join(__dirname,'/llave.key'))
+            cert: fs.readFileSync(path.join(__dirname,'/ludyorder_com.crt')),
+            key: fs.readFileSync(path.join(__dirname,'/ludyorder_com.key'))
         }, this.app)
         this.middleware();
         this.routers();
