@@ -14,7 +14,7 @@ class ControllerCompany {
             return res.json(response);
             
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             return res.json({
                 status:500,
                 message:error

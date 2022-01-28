@@ -53,7 +53,7 @@ class ValidFieldsCompany {
         if (!company.com_nit) {
             return res.json({
                 status: 424,
-                message: "contraseña de usuario requerido"
+                message: "nit de compañia requerido"
             });
         }
         try {
@@ -73,7 +73,7 @@ class ValidFieldsCompany {
             })
         }
 
-        next();
+        
     }
 
     validAddressCompany = (req: Request, res: Response, next: any) => {
