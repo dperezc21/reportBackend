@@ -57,7 +57,7 @@ class ValidFieldsUser {
 
         if (!user?.user_id_type && !user_id_type) {
             return res.json({
-                status: 424,
+                status: 702,
                 message: "tipo de identificacion de usuario requerido"
             });
         }
@@ -70,7 +70,7 @@ class ValidFieldsUser {
 
         if (!user?.user_id && !user_id) {
             return res.json({
-                status: 424,
+                status: 703,
                 message: "numero de identificacion de usuario requerido"
             });
         }
@@ -86,7 +86,7 @@ class ValidFieldsUser {
     
             if (searchUser) {
                 return res.json({
-                    status: 701,
+                    status: 704,
                     message: "identificacion de usuario ya existe"
                 });
             }
@@ -106,7 +106,7 @@ class ValidFieldsUser {
 
         if (!user?.names_user && !names_user) {
             return res.json({
-                status: 424,
+                status: 705,
                 message: "nombre de pila de usuario requerido"
             });
         }
@@ -119,7 +119,7 @@ class ValidFieldsUser {
 
         if (!user?.user_last_name && !user_last_name) {
             return res.json({
-                status: 424,
+                status: 706,
                 message: "apellidos de usuario requerido"
             });
         }

@@ -52,7 +52,7 @@ class ValidFieldsCompany {
         const { company } = req.body;
         if (!company.com_nit) {
             return res.json({
-                status: 424,
+                status: 607,
                 message: "nit de compañia requerido"
             });
         }
@@ -61,7 +61,7 @@ class ValidFieldsCompany {
             const getCompany: CompanyInterface = await modelCompany.findOne({com_nit:company.com_nit})
             if(getCompany) {
                 return res.json({
-                    status:400,
+                    status:608,
                     message:"nit de empresa ya existe"
                 })
             }
@@ -81,7 +81,7 @@ class ValidFieldsCompany {
 
         if (!company.com_address) {
             return res.json({
-                status: 424,
+                status: 609,
                 message: "direccion de la compañia es requerida"
             });
         }
@@ -97,7 +97,7 @@ class ValidFieldsCompany {
             error["errors"].forEach((element:any) => {
                 errores.push(element.msg)
             });
-            return res.json({status:400, errores});
+            return res.json({status:610, errores});
         }
         next();
     }
