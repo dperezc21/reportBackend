@@ -24,7 +24,7 @@ const {Router} = require('express');
 
 const router = Router();
 router.post('/insertUser',[
-    check('company.com_email', 'email de usuario es requerido').isEmail(),
+    check('user_email', 'email de usuario es requerido').isEmail(),
     validUserName, 
     validPassword,
     validIdType,
