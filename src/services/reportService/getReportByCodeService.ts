@@ -7,7 +7,7 @@ const getReportByCodeRepository = async(rep_code:any) =>{
     try {
         const report: ReportInterface = await Report.findOne({rep_code})
                                    .populate('cat_code', ['cat_name'])
-                                   .populate('user_code',['user_name', 'pro_code'])
+                                   .populate('user_code',['-user_password','-__v'])
         if(!report){
             return {
                 status:805,
@@ -15,6 +15,7 @@ const getReportByCodeRepository = async(rep_code:any) =>{
             }
         }
         const archivos: FileInterface[] = await File.find({rep_code});
+        console.log(report)
         return {
             report, archivos
         }
