@@ -106,7 +106,7 @@ class ValidFieldsUser {
 
         if (!user?.names_user && !names_user) {
             return res.json({
-                status: 705,
+                status: 707,
                 message: "nombre de pila de usuario requerido"
             });
         }
