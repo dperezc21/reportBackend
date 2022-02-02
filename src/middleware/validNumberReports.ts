@@ -35,14 +35,14 @@ const validNumberReports = async(req:Request, res:Response, next:any) => {
             return;  
             
         }
-        return res.json({
+        return res.status(400).json({
             status:400,
             message: "limite de reportes alcanzado"
         })
 
         
     } catch (error:any) {
-        return res.json({
+        return res.status(500).json({
             status:500,
             message: error.message
         })

@@ -11,7 +11,7 @@ class ValidFieldsCompany {
         const rol = pro_code["pro_name"];
 
         if (rol != 'admin') {
-            return res.json({
+            return res.status(401).json({
                 status: 401,
                 message: "rol no permitido"
             });
@@ -24,14 +24,14 @@ class ValidFieldsCompany {
         const com_name = company.com_name.toLowerCase()
         try {
             if (com_name.length < 3 || !com_name) {
-                return res.json({
+                return res.status(400).json({
                     status: 606,
                     message: "nombre de la compañia muy corto"
                 });
             }
             const consultCompanyByName = await Company.findOne({ com_name });
             if (consultCompanyByName) {
-                return res.json({
+                return res.status(400).json({
                     status: 603,
                     message: "compañia existe en la base de datos"
                 });
@@ -41,7 +41,7 @@ class ValidFieldsCompany {
 
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error
             });
@@ -51,7 +51,7 @@ class ValidFieldsCompany {
     validNitCompany = async(req: Request, res: Response, next: any) => {
         const { company } = req.body;
         if (!company.com_nit) {
-            return res.json({
+            return res.status(400).json({
                 status: 607,
                 message: "nit de compañia requerido"
             });
@@ -60,14 +60,14 @@ class ValidFieldsCompany {
 
             const getCompany: CompanyInterface = await modelCompany.findOne({com_nit:company.com_nit})
             if(getCompany) {
-                return res.json({
+                return res.status(400).json({
                     status:608,
                     message:"nit de empresa ya existe"
                 })
             }
             next();
         } catch (error:any) {
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error.message
             })
@@ -80,7 +80,7 @@ class ValidFieldsCompany {
         const { company } = req.body;
 
         if (!company.com_address) {
-            return res.json({
+            return res.status(400).json({
                 status: 609,
                 message: "direccion de la compañia es requerida"
             });
@@ -97,7 +97,7 @@ class ValidFieldsCompany {
             error["errors"].forEach((element:any) => {
                 errores.push(element.msg)
             });
-            return res.json({status:610, errores});
+            return res.status(400).json({status:610, errores});
         }
         next();
     }

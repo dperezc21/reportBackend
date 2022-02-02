@@ -8,7 +8,7 @@ class ValidFieldsUser {
         let name: string
         try {
             if (!user?.user_name && !user_name) {
-                return res.json({
+                return res.status(400).json({
                     status: 423,
                     message: "nombre de usuario requerido"
                 })
@@ -24,7 +24,7 @@ class ValidFieldsUser {
             const searchUser = await User.findOne({ user_name: name });
 
             if (searchUser) {
-                return res.json({
+                return res.status(400).json({
                     status: 701,
                     message: "nombre de usuario ya existe"
                 });
@@ -34,7 +34,7 @@ class ValidFieldsUser {
 
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error
             });
@@ -44,7 +44,7 @@ class ValidFieldsUser {
     validPassword = (req: Request, res: Response, next: any) => {
         const { user, user_password } = req.body;
         if (!user?.user_password && !user_password) {
-            return res.json({
+            return res.status(400).json({
                 status: 424,
                 message: "contraseña de usuario requerido"
             });
@@ -56,7 +56,7 @@ class ValidFieldsUser {
         const { user, user_id_type } = req.body;
 
         if (!user?.user_id_type && !user_id_type) {
-            return res.json({
+            return res.status(400).json({
                 status: 702,
                 message: "tipo de identificacion de usuario requerido"
             });
@@ -69,7 +69,7 @@ class ValidFieldsUser {
         const { user, user_id } = req.body;
 
         if (!user?.user_id && !user_id) {
-            return res.json({
+            return res.status(400).json({
                 status: 703,
                 message: "numero de identificacion de usuario requerido"
             });
@@ -85,7 +85,7 @@ class ValidFieldsUser {
             const searchUser = await User.findOne({ user_id: id });
     
             if (searchUser) {
-                return res.json({
+                return res.status(400).json({
                     status: 704,
                     message: "identificacion de usuario ya existe"
                 });
@@ -94,7 +94,7 @@ class ValidFieldsUser {
             
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error
             });
@@ -105,7 +105,7 @@ class ValidFieldsUser {
         const { user, names_user } = req.body;
 
         if (!user?.names_user && !names_user) {
-            return res.json({
+            return res.status(400).json({
                 status: 707,
                 message: "nombre de pila de usuario requerido"
             });
@@ -118,7 +118,7 @@ class ValidFieldsUser {
         const { user, user_last_name } = req.body;
 
         if (!user?.user_last_name && !user_last_name) {
-            return res.json({
+            return res.status(400).json({
                 status: 706,
                 message: "apellidos de usuario requerido"
             });
@@ -132,7 +132,7 @@ class ValidFieldsUser {
         const data = req.body;
         for (const key in data) {
             if (data[key] == "") {
-                return res.json({
+                return res.status(400).json({
                     status: 400,
                     message: "hay campos vacios"
                 })

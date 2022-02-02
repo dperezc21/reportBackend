@@ -8,9 +8,9 @@ class ControllerIdType {
 
         try {
             const response: object = await getIdTypeService();
-            return res.json(response)
+            return res.status(200).json(response)
         } catch (error:any) {
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error.message
             })
@@ -22,9 +22,9 @@ class ControllerIdType {
         const paramtro:any = req.params.idType
         try {
             const response: object = await insertIdTypeService(paramtro);
-            return res.json(response)
+            return res.status(200).json(response)
         } catch (error:any) {
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error.message
             })

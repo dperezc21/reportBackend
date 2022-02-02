@@ -12,19 +12,19 @@ class ValidDateReport {
     valid_date_reports_to_display = (req: Request, res: Response, next: any) => {
         const { start_date = 0, final_date = 0 } = req.query;
         if (start_date > final_date) {
-            return res.json({
+            return res.status(400).json({
                 status: 400,
                 message: 'fechas invalidas para buscar reportes'
             })
         }
         if (start_date === NaN || final_date === NaN) {
-            return res.json({
+            return res.status(400).json({
                 status: 400,
                 message: "Rango de fecha no definida"
             })
         }
         if (this.days_of_date_range(start_date, final_date) > configReport.max_days_to_display_reports){
-            return res.json({
+            return res.status(400).json({
                 status:400,
                 message: "rango de fecha no permitido"
             })

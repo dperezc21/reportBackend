@@ -11,11 +11,11 @@ class ControllerCompany {
         let data: object = req.body;//datos para insertar obtenidos de la request
         try {
             const response: object = await insertCompanyService(data);
-            return res.json(response);
+            return res.status(200).json(response);
             
         } catch (error) {
             //console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error
             })
@@ -28,9 +28,9 @@ class ControllerCompany {
         
         try {
             const response: object = await generateCompanyCodeService();
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error
             })
@@ -41,10 +41,10 @@ class ControllerCompany {
     getCompanyCode = async(req:Request, res:Response) => {
         try {
             const response: object = await getCompanyCodeService();
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message: error
             })

@@ -25,7 +25,7 @@ class Server{
     private routers = () => {
         //routers de la api
         this.app.get('/', (req:Request,res: Response) => {
-            return res.json({
+            return res.status(200).json({
                 status:200
             })
         })

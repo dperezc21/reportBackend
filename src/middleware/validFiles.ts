@@ -12,7 +12,7 @@ class ValidFiles {
             let numImages = await numberFiles(files, rep_code, configFile.image_format);
             // console.log("imagenes", numImages)
             if (numImages > configFile.number_images) {
-                return res.json({
+                return res.status(400).json({
                     status: 400,
                     message: "numero de imagenes excedidias"
                 })
@@ -22,7 +22,7 @@ class ValidFiles {
 
         } catch (error) {
             console.log(error)
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error
             })
@@ -36,7 +36,7 @@ class ValidFiles {
             
             const numVideos = await numberFiles(files, rep_code, configFile.video_format);
             if (numVideos > configFile.number_videos) {
-                return res.json({
+                return res.status(400).json({
                     status: 400,
                     message: "numero de videos excedidios"
                 })
@@ -45,7 +45,7 @@ class ValidFiles {
 
         } catch (error) {
             console.log(error)
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error
             })
@@ -58,7 +58,7 @@ class ValidFiles {
             
             const numAudios = await numberFiles(files, rep_code, configFile.audio_format)
             if (numAudios > configFile.number_audios) {
-                return res.json({
+                return res.status(400).json({
                     status: 400,
                     message: "numero de audios excedidos"
                 })
@@ -67,7 +67,7 @@ class ValidFiles {
 
         } catch (error) {
             console.log(error)
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error
             })

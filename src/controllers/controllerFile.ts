@@ -10,10 +10,10 @@ class ControllerFile {
         const data: object = req.body;//lista de archivos obtenidos de la request
         try {
             const response: object = await insertFilesService(data);
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error
             })
@@ -25,10 +25,10 @@ class ControllerFile {
         const body: object = req.body;//datos de los archivos listo para utilizar
         try {
             const response: object = await updateStatusFileService(body);
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error
             })
@@ -40,10 +40,10 @@ class ControllerFile {
         try {
             const {rep_code} = req.query;//codigo de reporte obtenido de la request
             const response:object = await getFilesByCodeReportService(rep_code)
-            return res.json(response)
+            return res.status(200).json(response)
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error
             })

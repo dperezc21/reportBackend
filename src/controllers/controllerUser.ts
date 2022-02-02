@@ -18,10 +18,10 @@ class ControllerUser{
             let Uobject: UserInterface = req.body;//datos del usuario obtenidos de la request
             let response: object = await insertUserService(Uobject);
             console.log("log", response)
-            return res.json(response);
+            return res.status(200).json(response);
             
         } catch (error) {
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error
             })
@@ -34,9 +34,9 @@ class ControllerUser{
         const data: object = req.body;//datos de inicio de seseion obtenidos de la request
         try {
             const response: object = await login(data);
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error
             })
@@ -48,10 +48,10 @@ class ControllerUser{
         const {user_id} = req.query;//identificador de usuario obtenido de la request
         try {
             const response: object = await getCompanyUserService(user_id);
-            return res.json(response);
+            return res.status(200).json(response);
             
         } catch (error) {
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error
             })
@@ -64,10 +64,10 @@ class ControllerUser{
         try {
             ids = validIdsDelete(ids);//metodo para ignorar el tipo de dato diferente a entero
             const response: object =  await deleteCompanyUserService(ids, status);
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error
             })
@@ -83,10 +83,10 @@ class ControllerUser{
 
         try {
             const response = await updateCompanyUserService({user_id, data});
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error
             })
@@ -97,9 +97,9 @@ class ControllerUser{
         try {
             const {data} = req.body;
             const response:object = await updateUserStatusService(data)
-            return res.json(response)
+            return res.status(200).json(response)
         } catch (error:any) {
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error.message
             })

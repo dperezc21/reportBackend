@@ -24,10 +24,10 @@ class ControllerReport {
         const body: object = req.body;//datos obtenidos de la request
         try {
             const response: object = await insertReportService(body);
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error
             })
@@ -39,10 +39,10 @@ class ControllerReport {
         const { user_code } = req.query;//codigo usuario obtenido de la request
         try {
             const response: object = await getReportByUserCodeService(user_code);
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error
             })
@@ -54,10 +54,10 @@ class ControllerReport {
         const { rep_code } = req.query;//codigod del reporte obtenido de la request
         try {
             const response: object = await getReportByCodeService(rep_code);
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error
             })
@@ -75,10 +75,10 @@ class ControllerReport {
                 response = await getReportsService();
             }
 
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error
             })
@@ -103,10 +103,10 @@ class ControllerReport {
             } else {
                 response = await getDataReportByDateService(dataReport);
             }
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error: any) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error.message
             })
@@ -118,10 +118,10 @@ class ControllerReport {
         let { ids } = req.body;//lista de reportes obtenidos de la request
         try {
             const response: object = await deleteReportByCodeService(ids);
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 mesaage: error
             })
@@ -142,9 +142,9 @@ class ControllerReport {
             //     console.log("hola")
             //     response = await getNumberReportsByDateForUser(dataReport)
             // }
-            return res.json(response)
+            return res.status(200).json(response)
         } catch (error: any) {
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error.message
             })
@@ -155,9 +155,9 @@ class ControllerReport {
         try {
             const { date } = req.query;
             let response: object = await getNumberReportsByTable(date);
-            return res.json(response)
+            return res.status(200).json(response)
         } catch (error: any) {
-            res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error.mesaage
             })
@@ -169,9 +169,9 @@ class ControllerReport {
         const { com_name } = req.query;
         try {
             const response: object = await getPercentajeChartService(com_name);
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error: any) {
-            return res.json({
+            return res.status(500).json({
                 status: 500,
                 message: error.message
             })

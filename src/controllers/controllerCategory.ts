@@ -1,4 +1,4 @@
-import { Request, response, Response } from "express";
+import { Request, Response } from "express";
 import insertCategoryRepositpory from '../services/categoryService/insertCategoryService';
 import getCategoriesService from '../services/categoryService/getCategoriesServices';
 import deleteCategoryService from '../services/categoryService/deleteCategoryService';
@@ -11,10 +11,10 @@ class ControllerCategory {
         const {cat_name} = req.body;//nombre de la categoria obtenido de la request
         try {
             const response: object = await insertCategoryRepositpory(cat_name);
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error
             })
@@ -25,10 +25,10 @@ class ControllerCategory {
     getCategories = async(req: Request, res:Response) => {
         try {
             const response: object = await getCategoriesService();
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return response.json({
+            return res.status(500).json({
                 status:500,
                 message:error
             })
@@ -40,10 +40,10 @@ class ControllerCategory {
         const {cat_name} =  req.query;//nombre categoria obtenido de la request
         try {
             const response = await deleteCategoryService(cat_name);
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return response.json({
+            return res.status(500).json({
                 status:500,
                 message:error
             })

@@ -8,10 +8,10 @@ class ControllerProfile {
     getProfiles = async(req:Request, res:Response) => {
         try {
             const response: object = await getProfileService();
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error
             })
@@ -23,10 +23,10 @@ class ControllerProfile {
         const {pro_name} = req.query;//nombre del perfil de usuario obtenido de la request
         try {
             const response: object = await insertProfileService(pro_name);
-            return res.json(response);
+            return res.status(200).json(response);
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error
             })

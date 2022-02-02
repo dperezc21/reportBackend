@@ -9,7 +9,7 @@ const validNumberUser = async(req:Request, res:Response, next:any) => {
         const {com_code} = req.body;
         const company: CompanyInterface = await modelCompany.findOne({com_code,com_status:true});
         if(!company){
-            return res.json({
+            return res.status(400).json({
                 status:604,
                 message:"codigo de compañia invalido"});
         }
@@ -21,10 +21,10 @@ const validNumberUser = async(req:Request, res:Response, next:any) => {
             next();
             return;
         } 
-        return res.json({status:705,message:`usuario no insertado... maxima cantidad de usuarios por compañia permitidos 5`});
+        return res.status(400).json({status:705,message:`usuario no insertado... maxima cantidad de usuarios por compañia permitidos 5`});
     } catch (error) {
         console.log(error)
-        return res.json({status:500, message:error});
+        return res.status(500).json({status:500, message:error});
     }
 }
 

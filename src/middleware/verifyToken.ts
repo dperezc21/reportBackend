@@ -15,7 +15,7 @@ class JWT {
 	    console.log("queries", req.query)
         
         if(!token){
-            return res.json({status:401,message:"required token"});
+            return res.status(400).json({status:401,message:"required token"});
         }
     
         jwt.verify(token, JSON_WEB_TOKEN_KEY, async(err:any, payload:any ) =>{
@@ -27,7 +27,7 @@ class JWT {
             const {uid, user_name} = payload;
             const userLogin: UserInterface = await User.findOne({_id:uid, user_name}).populate('pro_code');
             if (!userLogin){
-                return res.json({status:401,message:'access invalid'});
+                return res.status(401).json({status:401,message:'access invalid'});
             }
             this.user = userLogin;
             next();

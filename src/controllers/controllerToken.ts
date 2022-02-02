@@ -9,9 +9,9 @@ class ControllerToken {
         const token = req.headers.authorization?.split(' ')[1] || req.header('token');
         try {
             const getToken: any = await verifyTokenService(token);
-            return res.json(getToken)
+            return res.status(200).json(getToken)
         } catch (error:any) {
-            return res.json({
+            return res.status(500).json({
                 status:500,
                 message:error.message
             })
