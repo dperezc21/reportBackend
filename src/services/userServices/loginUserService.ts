@@ -13,6 +13,14 @@ const loginUserRepository = async(data:any) =>{
         console.log(data);
         data.user_name = data.user_name.toLowerCase();
         try {
+
+            const userDisable: Userinterface = await User.findOne({user_name:data.user_name, user_status:false});
+            if(userDisable){
+                return {
+                    status: 708,
+                    message:"usuario desabilitado"
+                }
+            } 
             let user: Userinterface = await User.findOne({user_name:data.user_name, user_status:true})
                                    .populate('pro_code')
                                    .populate('com_id',['com_name'])
