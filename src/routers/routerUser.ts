@@ -35,7 +35,7 @@ router.post('/insertUser',[
     validChecks], insertUser);
 router.post('/loginUser',validPassword, loginUser);
 router.get('/companyUser', [verifiyJWT, validRol], getCompanyUser);
-router.put('/updateCompanyUser', [verifiyJWT,validRol] , deleteCompanyUser);
+router.put('/updateUserStatus', [verifiyJWT,validRol] , deleteCompanyUser);
 router.put('/updateUser',[verifiyJWT,validRol, validFieldUpdateUser], updateCompanyUser);
-router.put('/updateUserStatus',[verifiyJWT,validRol], updateUserStatus);
+// router.put('/updateUserStatus',[verifiyJWT,validRol], updateUserStatus);
 export = router;

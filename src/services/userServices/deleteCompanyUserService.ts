@@ -16,26 +16,16 @@ const deleteCompanyUserRepository = async(ids:number[], status:any) =>{
                 message:"compañia no existe"
             };
         }
-        let deleted:any;
-                
-        if(ids){
-            if (status != undefined){
-                deleted = await User.updateMany({
+        let deleted:any = await User.updateMany({
                     $and:[
                         {_id:{ $ne:userAuth._id}},
                         {_id:ids}
                     ],
                     com_id:company._id}, 
                     {user_status:status})
-            }else
-            deleted = await User.updateMany({
-                $and:[
-                    {_id:{ $ne:userAuth._id}},
-                    {_id:ids}
-                ],
-                com_id:company._id, user_status:true}, 
-                {user_status:false})
-        }
+        
+        console.log(deleted)
+
         if (company && deleted.modifiedCount>0){
             return {
                 status:200,
@@ -43,8 +33,8 @@ const deleteCompanyUserRepository = async(ids:number[], status:any) =>{
             };
         }
         return {
-            status:602,
-            message:"usuario de compañia no existe"
+            status:200,
+            message:"usuario no actualizado"
         }
     } catch (error:any) {
         console.log(error.message);
