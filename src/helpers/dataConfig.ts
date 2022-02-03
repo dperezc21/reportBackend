@@ -15,8 +15,8 @@ const configUser: object = {
 
 const configCompany:object = {
     pro_name: "admin",
-    work_start_time: 6,
-    work_final_time: 20
+    work_start_time: 1,
+    work_final_time: 23
 }
 
 const configReport: object = {
