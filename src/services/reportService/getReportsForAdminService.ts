@@ -12,7 +12,7 @@ const getInquiryForAdminRepository = async(com_id:Number) => {
         //mapea los usuarios y devuelve una lista de id de usuarios
         const ids_user:number[] = listIds(users);
         const reports:ReportInterface = await Report.find({user_code:ids_user})
-                                                .populate('user_code',['user_name', 'pro_code'])
+                                                .populate('user_code',['-user_password','-__v'])
                                                 .populate('cat_code', ['cat_name']);
         if(!reports){
             return {

@@ -15,6 +15,7 @@ const getReportByUserCodeRepository = async(user_code:any) => {
 
         const reports: ReportInterface[] = await Report.find({user_code})
                                     .populate('cat_code', ['cat_name'])
+                                    .populate('user_code',['-user_password','-__v'])
         if(!reports){
             return {
                 status:805,

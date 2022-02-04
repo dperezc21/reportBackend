@@ -14,7 +14,7 @@ const getDataReportByDateRepository = async(dataReport:any) =>{
                 user_code:userAuth._id,
                 rep_create_date: {$gte:start_date, $lte:final_date}
         }).populate('cat_code', ['cat_name'])
-        .populate('user_code',['user_name']);
+        .populate('user_code',['-user_password','-__v']);
         if(reports.length == 0){
             return {
                 status:805,

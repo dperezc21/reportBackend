@@ -8,7 +8,7 @@ const getReportsRepository = async() =>{
         //console.log(getAuthUser())
         const {_id} = getAuthUser();
         const reports: reportInterface[] = await Report.find({user_code:_id})
-                                  .populate('user_code',['user_name', 'pro_code'])
+                                  .populate('user_code',['-user_password','-__v'])
                                   .populate('cat_code', ['cat_name'])
         if(!reports){
             return {
