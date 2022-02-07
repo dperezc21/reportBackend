@@ -7,13 +7,13 @@ const { insertCompany,
 const { verifiyJWT } = require("../middleware/verifyToken");
 const {
         validCompanyName,
-        validRol, validNitCompany, validAddressCompany, validChecks
+        validRol, validNitCompany, validAddressCompany, validChecks, validEmailCompany
 } = require("../middleware/validFieldsCompany");
 const { validUserName, validPassword,
         validIdType,
         validUserId,
         validnamesUser,
-        validLastName
+        validLastName,validUserEmail
 } = require("../middleware/validFiledsUser");
 const { Router } = require('express');
 
@@ -21,6 +21,8 @@ const router = Router();
 
 router.post('/insertCompany', [
         check('company.com_email', 'email de compañia es requerido').isEmail(),
+        validEmailCompany,
+        validUserEmail,
         validNitCompany,
         validCompanyName,
         validAddressCompany,

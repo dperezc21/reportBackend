@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import UserInterface from "../interfaces/userInterface";
+import modelUser from "../models/modelUser";
 const User = require('../models/modelUser');
 
 class ValidFieldsUser {
@@ -139,6 +141,34 @@ class ValidFieldsUser {
             }
         }
         next();
+    }
+
+    validUserEmail = async(req: Request, res: Response, next: any) => {
+        let { user, user_email } = req.body;
+        try {
+            
+            if (user?.user_email) {
+                user_email = user.user_email
+            } 
+            console.log("correo de usuario",user_email)
+            const User:UserInterface = await modelUser.findOne({
+               user_email
+            })
+            if(User){
+                return res.status(400).json({
+                    status:709,
+                    message: "correo de usuario ya existe en base de datos"
+                })
+            }
+            next();
+            
+        } catch (error:any) {
+            return res.status(500).json({
+                status:500,
+                message:error.message
+            })
+        }
+
     }
 }
 

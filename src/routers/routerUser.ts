@@ -15,7 +15,8 @@ const {validUserName,validPassword,
     validUserId,
     validnamesUser,
     validLastName,
-    validFieldUpdateUser} = require("../middleware/validFiledsUser");
+    validFieldUpdateUser,
+    validUserEmail} = require("../middleware/validFiledsUser");
 
 const {verifiyJWT} = require( "../middleware/verifyToken");
 
@@ -25,6 +26,7 @@ const {Router} = require('express');
 const router = Router();
 router.post('/insertUser',[
     check('user_email', 'email de usuario es requerido').isEmail(),
+    validUserEmail,
     validUserName, 
     validPassword,
     validIdType,

@@ -89,6 +89,29 @@ class ValidFieldsCompany {
 
     }
 
+    validEmailCompany = async(req: Request, res: Response, next: any) => {
+        let { company } = req.body;
+        try {
+        
+            const Company:CompanyInterface = await modelCompany.findOne({
+               com_email:company.com_email
+            })
+            if(Company){
+                return res.status(400).json({
+                    status:611,
+                    message: "correo de compañia ya existe en base de datos"
+                })
+            }
+            next();
+            
+        } catch (error:any) {
+            return res.status(500).json({
+                status:500,
+                message:error.message
+            })
+        }
+
+    }
 
     validChecks = (req: Request, res: Response, next: any) => {
         const error:any = validationResult(req);
