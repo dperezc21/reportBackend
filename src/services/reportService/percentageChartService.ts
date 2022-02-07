@@ -12,7 +12,7 @@ const {configReport } = require( "../../helpers/dataConfig");
 const {listIds} = require('../../helpers/helperUser');
 const { getAuthUser } = require("../../middleware/verifyToken");
 
-const grafic = async(com_name:any) => {
+const getPercentajeChartService = async(com_name:any) => {
     const { pro_code, _id } = getAuthUser();
     try {
         const company: CompanyInterface = await modelCompany.findOne({com_name, com_status:true});
@@ -66,4 +66,4 @@ const grafic = async(com_name:any) => {
 
 }
 
-export = grafic;
+export = getPercentajeChartService;
