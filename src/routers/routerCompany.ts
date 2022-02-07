@@ -26,7 +26,7 @@ router.post('/insertCompany', [
         validNitCompany,
         validCompanyName,
         validAddressCompany,
-        check('company.com_email', 'email de usuario es requerido').isEmail(),
+        check('user.user_email', 'email de usuario es requerido').isEmail(),
         validChecksEmail,
         validUserEmail,
         validUserName,
