@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 const { configCompany } = require('../helpers/dataConfig');
 const { getAuthUser } = require("../middleware/verifyToken");
-const { dayDateRange } = require('../helpers/helperCompany')
-import getPercentajeChartService from "../services/reportService/percentageChartService";
+const { dayDateRange } = require('../helpers/helperCompany');
 
 const {
     insertReportService,
@@ -14,7 +13,10 @@ const {
     getDataReportByDateForAdminService,
     getReportsForAdminService,
     getNumberReportsByDay,
-    getNumberReportsByTable
+    getNumberReportsByTable,
+    getPercentajeChartService,
+    filterReportsAdminService,
+    filterReportsUserService
 } = require('../services/reportService')
 
 class ControllerReport {
@@ -130,18 +132,10 @@ class ControllerReport {
 
     getNumberReportsByDay = async (req: Request, res: Response) => {
         const dataReport = req.query; //fechas obtenidas de la request
-        const { pro_code } = getAuthUser();
+        
         try {
+            const response = await getNumberReportsByDay(dataReport);
 
-            let response: object;
-            // if(pro_code.pro_name == "admin"){
-
-            response = await getNumberReportsByDay(dataReport);
-
-            // }else{
-            //     console.log("hola")
-            //     response = await getNumberReportsByDateForUser(dataReport)
-            // }
             return res.status(200).json(response)
         } catch (error: any) {
             return res.status(500).json({
@@ -174,6 +168,26 @@ class ControllerReport {
             return res.status(500).json({
                 status: 500,
                 message: error.message
+            })
+        }
+    }
+
+    filterReports = async(req: Request, res: Response) => {
+        const {key, value} = req.query
+        const { pro_code } = getAuthUser();
+        try {
+            let response:object = {}
+            if(pro_code.pro_name == configCompany.pro_name){
+
+                response = await filterReportsAdminService(key, value);
+            }else{
+                response = await filterReportsUserService(key, value)
+            }
+            return res.status(200).json(response)
+        } catch (error:any) {
+            return res.status(500).json({
+                status:500,
+                message:error.message
             })
         }
     }

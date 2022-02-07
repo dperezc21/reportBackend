@@ -6,7 +6,8 @@ const { insertReport,
         deleteReportByCode,
         getNumberReportsByDay,
         getNumberReportsByTable,
-        getPercentajeChart
+        getPercentajeChart,
+        filterReports
     } = require("../controllers/controllerReport");
 const {validRol} = require( "../middleware/validFieldsCompany");
 const {verifiyJWT} = require( "../middleware/verifyToken");
@@ -25,4 +26,5 @@ router.delete('/deleteReportByCode',[verifiyJWT, validRol], deleteReportByCode);
 router.get('/getNumberReportsByDay',[verifiyJWT, valid_date_reports_to_display], getNumberReportsByDay);
 router.get('/getNumberReportsByTable', verifiyJWT, getNumberReportsByTable)
 router.get('/getDataForGrafic',verifiyJWT, getPercentajeChart)
+router.get('/filterReports',verifiyJWT, filterReports)
 export = router;

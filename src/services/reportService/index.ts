@@ -10,6 +10,7 @@ import getDataReportByDateForAdminService from "./getDataReportByDateForAdminSer
 import getReportsForAdminService from "./getReportsForAdminService";
 import getNumberReportsByDay from "./getNumberReportsByDay";
 import getNumberReportsByTable from "./getNumberReportsByTable";
+const {filterReportsAdminService,filterReportsUserService} =require("./filterReportsService");
 
 
 export = {
@@ -22,5 +23,7 @@ export = {
     getDataReportByDateForAdminService,
     getReportsForAdminService,
     getNumberReportsByDay,
-    getNumberReportsByTable
+    getNumberReportsByTable,
+    filterReportsAdminService,
+    filterReportsUserService
 }
