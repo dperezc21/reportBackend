@@ -113,14 +113,15 @@ class ValidFieldsCompany {
 
     }
 
-    validChecks = (req: Request, res: Response, next: any) => {
+    validChecksEmail = (req: Request, res: Response, next: any) => {
         const error:any = validationResult(req);
         if (!error.isEmpty()){
-            let errores:string[] = [];
+            let error_message:string ="";
             error["errors"].forEach((element:any) => {
-                errores.push(element.msg)
+                error_message = element.msg
             });
-            return res.status(400).json({status:610, errores});
+            console.log(error_message)
+            return res.status(400).json({status:610, message:error_message});
         }
         next();
     }

@@ -1,13 +1,12 @@
 import { check } from "express-validator";
 
 const validNumberUser = require("../middleware/validNumUser");
-const {validRol, validChecks} = require( "../middleware/validFieldsCompany");
+const {validRol, validChecksEmail} = require( "../middleware/validFieldsCompany");
 const {insertUser,
     loginUser,
     getCompanyUser,
     deleteCompanyUser,
-    updateCompanyUser,
-    updateUserStatus
+    updateCompanyUser
 } = require('../controllers/controllerUser');
 
 const {validUserName,validPassword,
@@ -16,7 +15,8 @@ const {validUserName,validPassword,
     validnamesUser,
     validLastName,
     validFieldUpdateUser,
-    validUserEmail} = require("../middleware/validFiledsUser");
+    validUserEmail
+    } = require("../middleware/validFiledsUser");
 
 const {verifiyJWT} = require( "../middleware/verifyToken");
 
@@ -26,7 +26,7 @@ const {Router} = require('express');
 const router = Router();
 router.post('/insertUser',[
     check('user_email', 'email de usuario es requerido').isEmail(),
-    validUserEmail,
+    validChecksEmail,
     validUserName, 
     validPassword,
     validIdType,
@@ -34,7 +34,8 @@ router.post('/insertUser',[
     validnamesUser,
     validLastName,
     validNumberUser,
-    validChecks], insertUser);
+    validUserEmail
+    ], insertUser);
 router.post('/loginUser',validPassword, loginUser);
 router.get('/companyUser', [verifiyJWT, validRol], getCompanyUser);
 router.put('/updateUserStatus', [verifiyJWT,validRol] , deleteCompanyUser);
