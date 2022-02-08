@@ -12,7 +12,7 @@ const modelUser = Schema({
     },
     pro_code:{
         type:Number,
-        required: true,
+        //required: true,
         ref: 'userProfile'
     },
     user_name:{
@@ -26,12 +26,12 @@ const modelUser = Schema({
     },
     user_id_type:{
         type:Number,
-        required: true,
+        //required: true,
         ref:'idType'
     },
     user_id:{
         type:Number,
-        require:true,
+        //require:true,
         unique:true
     },
     names_user:{
@@ -39,18 +39,20 @@ const modelUser = Schema({
         required:true
     },
     user_last_name:{
-        type:String
+        type:String,
+        required:true
     },
     user_email:{
         type:String,
-        unique:true
+        unique:true,
+        required:true
     },
     user_cell:{
         type:String
     },
     user_sexo:{
         type:Number,
-        required: true,
+        //required: true,
         ref:'gender'
     },
     user_age:{

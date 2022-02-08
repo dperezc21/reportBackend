@@ -22,7 +22,7 @@ const modelCompany = Schema({
     },
     com_nit:{
         type:String,
-        required:true,
+        //required:true,
         unique:true
     },
     com_email:{
@@ -31,7 +31,7 @@ const modelCompany = Schema({
     },
     com_address:{
         type:String,
-        required:true
+        //required:true
     },
     com_cell_phone:{
         type:String

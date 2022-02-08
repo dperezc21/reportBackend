@@ -29,8 +29,6 @@ router.post('/insertUser',[
     validChecksEmail,
     validUserName, 
     validPassword,
-    validIdType,
-    validUserId,
     validnamesUser,
     validLastName,
     validNumberUser,

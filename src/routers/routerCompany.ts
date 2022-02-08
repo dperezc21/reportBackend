@@ -20,19 +20,15 @@ const { Router } = require('express');
 const router = Router();
 
 router.post('/insertCompany', [
-        check('company.com_email', 'email de compañia es requerido').isEmail(),
-        validChecksEmail,
-        validEmailCompany,
-        validNitCompany,
+        // check('company.com_email', 'email de compañia es requerido').isEmail(),
+        // validChecksEmail,
+        // validEmailCompany,
         validCompanyName,
-        validAddressCompany,
         check('user.user_email', 'email de usuario es requerido').isEmail(),
         validChecksEmail,
         validUserEmail,
         validUserName,
         validPassword,
-        validIdType,
-        validUserId,
         validnamesUser,
         validLastName
 ], insertCompany);
