@@ -1,8 +1,8 @@
 const { URL_MONGODB } = require("../../config");
 const {Schema, model, createConnection} = require('mongoose');
-const autoIncrement = require('mongoose-auto-increment')
+//const autoIncrement = require('mongoose-auto-increment')
 const connection = createConnection(URL_MONGODB);
-autoIncrement.initialize(connection)
+//autoIncrement.initialize(connection)
 
 
 const modelIdType = Schema({
@@ -18,7 +18,7 @@ const modelIdType = Schema({
     
 });
 
-modelIdType.plugin(autoIncrement.plugin, {model:'idType', startAt:1});
+//modelIdType.plugin(autoIncrement.plugin, {model:'idType', startAt:1});
 modelIdType.methods.toJSON = function(){
     const {__v, id_type_status, ...idType} = this.toObject();
     

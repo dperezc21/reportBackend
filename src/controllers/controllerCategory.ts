@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import insertCategoryRepositpory from '../services/categoryService/insertCategoryService';
+import insertCategoryRepository from '../services/categoryService/insertCategoryService';
 import getCategoriesService from '../services/categoryService/getCategoriesServices';
 import deleteCategoryService from '../services/categoryService/deleteCategoryService';
 
@@ -10,7 +10,7 @@ class ControllerCategory {
     insertCategory = async(req: Request, res:Response) =>{
         const {cat_name} = req.body;//nombre de la categoria obtenido de la request
         try {
-            const response: object = await insertCategoryRepositpory(cat_name);
+            const response: object = await insertCategoryRepository(cat_name);
             return res.status(200).json(response);
         } catch (error) {
             console.log(error);

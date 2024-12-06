@@ -1,7 +1,7 @@
 import {Schema, createConnection, model} from 'mongoose';
 //import autoIncrement from 'mongoose-auto-increment';
-const connection = createConnection("mongodb://127.0.0.1:27017/test");
-//autoIncrement.initialize(connection)
+const connection = createConnection("mongodb://127.0.0.1:27017/report");
+////autoIncrement.initialize(connection)
 
 const modelCategory = new Schema({
     cat_name: {

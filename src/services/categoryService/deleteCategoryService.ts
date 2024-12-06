@@ -3,7 +3,7 @@ import Category from '../../models/modelCategory';
 
 const deleteCategoryRepository = async (cat_name:any) => {
     try {
-        const category: CategoryInterface = await Category.findOneAndUpdate({cat_name, cat_status:true}, {cat_status:false}, {new:true});
+        const category: CategoryInterface = await Category.findOneAndUpdate({cat_name, cat_status:true}, {cat_status:false}, {new:true}) as CategoryInterface;
         if (!category){
             return {
                 status:803,

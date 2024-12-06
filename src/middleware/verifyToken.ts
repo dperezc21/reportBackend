@@ -40,4 +40,4 @@ class JWT {
 
  }
 
-export =new JWT;
+export = new JWT();

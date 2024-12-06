@@ -1,10 +1,10 @@
 import CategoryInterface from '../../interfaces/categoryInterface';
 import Category  from '../../models/modelCategory';
 
-const insertCategoryRepositpory = async(cat_name:string) =>{
+const insertCategoryRepository = async(cat_name:string) =>{
     try {
        
-    const searchCategory: CategoryInterface = await Category.findOne({cat_name, cat_status:true});
+    const searchCategory: CategoryInterface = await Category.findOne({cat_name, cat_status:true}) as CategoryInterface;
     
     if (searchCategory){
         return {
@@ -12,8 +12,13 @@ const insertCategoryRepositpory = async(cat_name:string) =>{
             message:"categoria existe en la base de datos"
         }    
     }
-    const c = await Category({cat_name});
-    c.save((error:any, cat:any) =>{
+    const c = await new Category({cat_name});
+    const save = await c.save();
+    if(save) return {
+        status:500,
+        message: "categoria no inserted"
+    };
+    /*c.save((error: any, cat:any) =>{
         if (error){
             console.log(error);
             return {
@@ -22,7 +27,7 @@ const insertCategoryRepositpory = async(cat_name:string) =>{
             };
         }
           
-    })
+    })*/
     return {
         status:200,
         message:"category inserted"
@@ -37,4 +42,4 @@ const insertCategoryRepositpory = async(cat_name:string) =>{
 }
 
 
-export = insertCategoryRepositpory;
+export = insertCategoryRepository;

@@ -80,7 +80,7 @@ const filterReportsUserService = async (key: string, value: string) => {
                 .populate('cat_code', ['cat_name']);
             console.log(reports)
         }else if(key == 'category'){
-            const category:CategoryInterface = await modelCategory.findOne({cat_name: eval("/" + value + "/")}) 
+            const category:CategoryInterface = await modelCategory.findOne({cat_name: eval("/" + value + "/")}) as CategoryInterface;
 
             reports = await modelReport.find({ user_code:_id, cat_code:category._id })
                 .populate('user_code', ['-user_password', '-__v'])
