@@ -1,9 +1,7 @@
 import Category  from '../../models/modelCategory';
 
-const insertCategoryRepositpory = async(cat_name:string) =>{
+const insertCategoryRepository = async(cat_name:string) =>{
     try {
-        console.log("nombre de categoria",cat_name);
-       
     const searchCategory = await Category.findOne({cat_name, cat_status:true});
     
     if (searchCategory){
@@ -35,4 +33,4 @@ const insertCategoryRepositpory = async(cat_name:string) =>{
 }
 
 
-export = insertCategoryRepositpory;
+export = insertCategoryRepository;

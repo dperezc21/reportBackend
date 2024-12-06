@@ -1,5 +1,5 @@
 import { Request, response, Response } from "express";
-import insertCategoryRepositpory from '../services/categoryService/insertCategoryService';
+import insertCategoryRepository from '../services/categoryService/insertCategoryService';
 import getCategoriesService from '../services/categoryService/getCategoriesServices';
 import deleteCategoryService from '../services/categoryService/deleteCategoryService';
 
@@ -9,7 +9,7 @@ class ControllerCategory {
     insertCategory = async(req: Request, res:Response) =>{
         try {
             const {cat_name} = req.body;
-            const response = await insertCategoryRepositpory(cat_name);
+            const response = await insertCategoryRepository(cat_name);
             return res.json(response);
         } catch (error) {
             return res.json({
