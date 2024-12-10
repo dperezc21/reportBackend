@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-const { JSON_WEB_TOKEN_KEY } =require( "../../config");
+import {JSON_WEB_TOKEN_KEY} from "../../config";
 import UserInterface from "../interfaces/userInterface";
 const User = require("../models/modelUser");
 const jwt = require('jsonwebtoken');

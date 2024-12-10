@@ -1,9 +1,6 @@
-const URL_MONGODB: string = "mongodb://localhost:27017/report" //"mongodb+srv://davierperez:e63EtEDOooZHBtlF@ludycomdev.3gvqs.mongodb.net/ludyReport?retryWrites=true&w=majority"
-const JSON_WEB_TOKEN_KEY: string ="llevaSecr3TaPaaraCrRearibalidarJsoNWEbToken";
-const PORT: number =5000;
+import dotnv from 'dotenv';
+dotnv.config();
 
-export ={
-    URL_MONGODB,
-    JSON_WEB_TOKEN_KEY,
-    PORT
-}
+export const URL_MONGODB: string = process.env.URL_MONGODB as string;
+export const JSON_WEB_TOKEN_KEY: string = process.env.JSON_WEB_TOKEN_KEY as string;
+export const PORT: number = Number(process.env.PORT);

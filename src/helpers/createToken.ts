@@ -1,4 +1,4 @@
-const { JSON_WEB_TOKEN_KEY } =require( "../../config");
+import {JSON_WEB_TOKEN_KEY} from "../../config";
 
 const jwt = require('jsonwebtoken');
 

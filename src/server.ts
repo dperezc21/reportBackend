@@ -1,16 +1,13 @@
 import express, { Request, Response } from 'express';
 import connectionToDB from './dataBase/connectionToMongoDb';
-const cors = require('cors');
-const https = require('https')
-const fs = require('fs')
-const path = require('path')
-const { PORT } = require('../config');
+import cors from 'cors';
+import {PORT} from '../config';
 
 
 class Server{
     
     app = express();
-    sllServer:any;
+    //sllServer:any;
      
     constructor(){ 
         // this.sllServer = https.createServer({
@@ -19,7 +16,7 @@ class Server{
         // }, this.app)
         this.middleware();
         this.routers();
-        this.connetionDB();
+        this.connectionDB().then();
     }
     
     private routers = () => {
@@ -40,7 +37,7 @@ class Server{
         this.app.use(require('./routers/routerGender'));
     }
    
-    private connetionDB = async() => {
+    private connectionDB = async() => {
         //connection a la base de datos en mongodb
         await connectionToDB();
     }
