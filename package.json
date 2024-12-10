@@ -25,6 +25,7 @@
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.1",
-    "mongoose": "^8.8.4"
+    "mongoose": "^8.8.4",
+    "mongoose-id-autoincrement": "^1.0.4"
   }
 }

@@ -1,8 +1,10 @@
 import express, { Request, Response } from 'express';
-import connectionToDB from './dataBase/connectionToMongoDb';
 import cors from 'cors';
 import {PORT} from '../config';
 
+import database from './dataBase/connectionToMongoDb';
+
+//const dataBase = new connectionToDB();
 
 class Server{
     
@@ -39,7 +41,7 @@ class Server{
    
     private connectionDB = async() => {
         //connection a la base de datos en mongodb
-        await connectionToDB();
+        await database.connectionToDB();
     }
 
     private middleware = () => {

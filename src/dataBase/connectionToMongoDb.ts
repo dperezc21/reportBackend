@@ -13,14 +13,14 @@ class ConnectionDB {
         return ConnectionDB.connection;
     }
 
-    connectionDB(): Promise<Mongoose> {
+    createConnection = (): Promise<Mongoose> => {
         return connect(this.URL_CONNECTION);
     }
 
-    async connectionToDB() {
+    connectionToDB = async()=> {
         try {
             //function de mongoose para establecer la conexion
-            await this.connectionDB();
+            await this.createConnection();
             console.log("connected to data base");
 
         } catch (error) {
@@ -30,7 +30,7 @@ class ConnectionDB {
     }
 }
 
-export default new ConnectionDB();
+export = new ConnectionDB();
 /*
 
 const connectionToDB = async() =>{
